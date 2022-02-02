@@ -1,0 +1,81 @@
+{
+  "name": "@dorbiren/blue_bird_ts",
+  "version": "1.1.0",
+  "description": "This setup compiles Typescript to ESM for the Node.js runtime.     It's super-fast.      it uses *`swc`* for the actual compiling. *`tsc`* is used for type checking only. nodemon allows us to re-compile and run from dist with every change during development.",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "./typings",
+  "scripts": {
+    "build": "rm -rf dist && swc src -d dist",
+    "build-dev": "npm run build && node dist/index.js",
+    "dev": "nodemon",
+    "start": "npm run build && NODE_ENV=production node dist/index.js",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier src/**/*.ts --write",
+    "prepare": "husky install",
+    "gen-d": "rm -rf typings && tsc",
+    "test": "SWC_NODE_PROJECT='./tsconfig.test.json' mocha",
+    "test-w": "SWC_NODE_PROJECT='./tsconfig.test.json' mocha --watch",
+    "coverage": "rm -rf coverage && SWC_NODE_PROJECT='./tsconfig.test.json' nyc mocha"
+  },
+  "keywords": [
+    "typescript",
+    "nodemon",
+    "swc",
+    "esm",
+    "node.js"
+  ],
+  "author": "Dor Birendorf <dorbiren@gmail.com> ",
+  "license": "ISC",
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@swc-node/register": "^1.4.2",
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.120",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.13",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "chai": "^4.3.4",
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.5",
+    "mocha": "^9.1.3",
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
+  },
+  "bin": {
+    "create-boilerplate": "./generate-app.js"
+  },
+  "dependencies": {
+    "@ajar/marker": "^1.3.3",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/morgan": "^1.9.3",
+    "@types/node-cron": "^3.0.1",
+    "@types/node-fetch": "^3.0.3",
+    "@types/uuid": "^8.3.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "node-cron": "^3.0.0",
+    "node-fetch": "^3.2.0",
+    "uuid": "^3.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://dorbiren@bitbucket.org/dorbiren/eslintdemo.git"
+  },
+  "homepage": "https://bitbucket.org/dorbiren/eslintdemo#readme"
+}
