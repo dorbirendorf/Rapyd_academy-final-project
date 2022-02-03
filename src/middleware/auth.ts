@@ -17,7 +17,6 @@
 //         // verifies secret and checks exp
 //         await jwt.verify(token as string, APP_SECRET);
 
-
 //         next();
 //     }
 // );
@@ -45,5 +44,3 @@
 //     });
 
 // });
-
-
