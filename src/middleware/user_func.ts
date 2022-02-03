@@ -8,7 +8,7 @@ export const addIdToReq: RequestHandler = (req, res, next) => {
     next();
 };
 
-export const logRequest = () => {
+export const logRequest: RequestHandler = () => {
     const requestsFileLogger = fs.createWriteStream("./src/log/http.log", {
         flags: "a",
     });
