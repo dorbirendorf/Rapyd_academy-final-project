@@ -1,6 +1,6 @@
 {
-  "name": "@dorbiren/blue_bird_ts",
-  "version": "1.1.0",
+  "name": "accademyFinalProject",
+  "version": "1.0.0",
   "description": "This setup compiles Typescript to ESM for the Node.js runtime.     It's super-fast.      it uses *`swc`* for the actual compiling. *`tsc`* is used for type checking only. nodemon allows us to re-compile and run from dist with every change during development.",
   "main": "dist/index.js",
   "type": "module",
