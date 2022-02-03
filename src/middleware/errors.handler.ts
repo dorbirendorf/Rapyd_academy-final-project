@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import log from "@ajar/marker";
-import { ErrorRequestHandler, RequestHandler } from "express";
+import {
+    ErrorRequestHandler,
+    NextFunction,
+    Request,
+    RequestHandler,
+    Response,
+} from "express";
 import fs from "fs/promises";
 import { getTimeString } from "../utils.js";
 
@@ -10,22 +16,37 @@ const { NODE_ENV } = process.env;
 
 const ERRLOGGERPATH = "./src/log/error.log";
 
-export const error_handler: ErrorRequestHandler = (err, req, res, next) => {
+export const error_handler: ErrorRequestHandler = (
+    err: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     log.error(err);
     next(err);
 };
 
 // check it
-export const logError: ErrorRequestHandler = (err, req, res, next) => {
-    fs.writeFile(
+export const logError: ErrorRequestHandler = async (
+    err: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    await fs.writeFile(
         ERRLOGGERPATH,
-        `${req.id} -- ${getTimeString()} \n --> ${err.stack}\n`,
+        `${req.id} -- ${getTimeString()} \n --> ${err.stack as string}\n`,
         { flag: "a" }
     );
     next(err);
 };
 
-export const error_handler2: ErrorRequestHandler = (err, req, res, next) => {
+export const error_handler2: ErrorRequestHandler = (
+    err: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     if (NODE_ENV !== "production")
         res.status(500).json({ status: err.message, stack: err.stack });
     else res.status(500).json({ status: "internal server error..." });
