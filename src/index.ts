@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-console */
 import express from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
 import cors from "cors";
+import config from "./config.js";
 import { connectDb } from "./db/sql/sql.connection.js";
 import individual_router from "./individual/individual.router.js";
 // import cron from "node-cron";
-// import {CONFIG} from './config.json';
+
 
 import {
     error_handler,
@@ -16,10 +19,10 @@ import {
 } from "./middleware/errors.handler.js";
 import {addIdToReq,logRequest} from "./middleware/user_func.js";
 
-const {
-    PORT = 3030,
-    HOST = "localhost",
-} = process.env;
+// const {
+//     config.PORT = 3030,
+//     HOST = "localhost",
+// } = process.env;
 
 class Api {
   
@@ -61,10 +64,10 @@ errorHanlers() {
         try {
             // connect to mySql
              await connectDb();
-            await this.app.listen(Number(PORT), HOST);
+            this.app.listen(Number(config.PORT), config.HOST as string);
             log.magenta(
                 "api is live on",
-                ` ✨ ⚡  http://${HOST}:${PORT} ✨ ⚡`
+                ` ✨ ⚡  http://${config.HOST}:${config.PORT} ✨ ⚡`
             );
         } catch (err) {
             console.log(err);
@@ -73,4 +76,5 @@ errorHanlers() {
 }
 
 const api = new Api();
-api.startServer();
+ 
+await api.startServer();

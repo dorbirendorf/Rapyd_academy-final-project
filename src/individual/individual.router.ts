@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
 // import * as artist_service from "./individual.services.js";
