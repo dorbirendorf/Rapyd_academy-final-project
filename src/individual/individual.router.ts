@@ -16,7 +16,6 @@ router.use(express.json());
 router.get(
     "/",
     raw(async (req: Request, res: Response) => {
-        console.log("working");
         res.status(200).json("artist");
     })
 );

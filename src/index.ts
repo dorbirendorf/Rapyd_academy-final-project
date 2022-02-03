@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
