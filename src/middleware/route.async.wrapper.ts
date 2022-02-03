@@ -1,9 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler} from "express";
 
-type f = (req: Request, res: Response, next: NextFunction) => Promise<any>;
+export default (fn:RequestHandler) => (req:Request, res:Response, next:NextFunction) =>Promise.resolve(fn(req, res, next)).catch(next);
 
-export default function raw(func: f) {
-    return async function (req: Request, res: Response, next: NextFunction) {
-        func(req, res, next).catch((err) => next(err));
-    };
-}

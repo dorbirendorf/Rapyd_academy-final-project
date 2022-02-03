@@ -1,12 +1,16 @@
+/* eslint-disable import/no-mutable-exports */
 import mysql from "mysql2/promise";
+import log      from "@ajar/marker";
 
-const { DB_HOST, DB_PORT, DB_NAME, DB_USER_NAME, DB_USER_PASSWORD } =process.env;
 
-export const sql_con =await mysql.createConnection({
-    host: DB_HOST,
-    port:Number(DB_PORT),
-    database: DB_NAME,
-    user: DB_USER_NAME,
-    password:DB_USER_PASSWORD,
-    rowsAsArray: true,
-});
+export let db : mysql.Connection;
+export async function connectDb(){
+    db = await mysql.createConnection({
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "qwerty",
+        database: "ebank"
+      });
+      log.magenta(" ✨  Connected to Mysql DB ✨ ");
+    };

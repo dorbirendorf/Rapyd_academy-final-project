@@ -1,0 +1,16 @@
+{
+    "NODE_ENV": "development",
+    "HOST": "localhost",
+    "PORT": 8080,
+
+    "DB_HOST": "localhost",
+    "DB_PORT":"3306",
+
+    "DB_USER": "root",
+    "DB_PASSWORD": "qwerty",
+    "DB_NAME": "ebank",
+    "APP_SECRET": "supercalifragilisticexpialidocious",
+
+    "ACCESS_TOKEN_EXPIRATION": "2h",
+    "REFRESH_TOKEN_EXPIRATION": "60d"
+}

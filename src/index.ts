@@ -2,13 +2,10 @@ import express from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
 import cors from "cors";
-import { connect_db } from "./db/mongo/mongoose.connection.js";
-import user_router from "./routers/user.router.js";
-import song_router from "./routers/song.router.js";
-import artist_router from "./routers/artist.router.js";
-import playlist_router from "./routers/playlist.router.js";
-import cron from "node-cron";
-
+import { connectDb } from "./db/sql/sql.connection.js";
+import individual_router from "./individual/individual.router.js";
+// import cron from "node-cron";
+// import {CONFIG} from './config.json';
 
 import {
     error_handler,
@@ -16,82 +13,63 @@ import {
     not_found,
     logError
 } from "./middleware/errors.handler.js";
-import {addIdToReq,logRequest} from "./middleware/reqPreProccesing.js";
-import { auth } from "./middleware/auth.js";
-import { backupDB } from "./utils.js";
+import {addIdToReq,logRequest} from "./middleware/user_func.js";
 
-class App {
-    DB_URI;
-    HOST;
-    PORT;
-    app;
+const {
+    PORT = 3030,
+    HOST = "localhost",
+} = process.env;
+
+class Api {
+  
+    private app: express.Application;
+
     constructor() {
-        const { PORT, HOST, DB_URI ,DB_TYPE } = process.env;
-
-        this.DB_URI = DB_URI;
-        this.HOST = HOST || "localhost";
-        this.PORT = PORT || 8080;
         this.app = express();
 
-        this.setMiddlewares();
-        this.setRoutes();
-        this.setErrorHandlers();
-        if(DB_TYPE==="mongo"){
-            this.connectMongoDB();
-        }
-        //backup db
-        //cron.schedule("* * * * *", ()=>backupDB());
-
+        this.applyGlobalMiddleware();
+        this.routing();
+        this.errorHanlers();
     }
 
-    setMiddlewares() {
+    applyGlobalMiddleware() {
         log.blue("setting Middlewares...");
         this.app.use(cors());
         this.app.use(morgan("dev"));
         this.app.use(addIdToReq);
-        this.app.use(logRequest);
+        this.app.use(logRequest());
     }
 
-    setRoutes() {
+    routing() {
         log.blue("setting routes...");
-
-        // this.app.use('/api/stories', story_router);
-        this.app.use("/api/users", user_router);
-        this.app.use("/api/songs", song_router);
-        this.app.use("/api/artists", artist_router);
-        this.app.use("/api/playlists", playlist_router);
-
+        this.app.use("/api/auth", individual_router);
     }
 
-    setErrorHandlers() {
-        log.blue("setting error handlers...");
-
-        this.app.use("*", not_found);
-        this.app.use(logError);
+errorHanlers() {
+    log.blue("setting error handlers...");
+        // central error handling
         this.app.use(error_handler);
+        this.app.use(logError);
         this.app.use(error_handler2);
-        //when no routes were matched...
-    }
-    connectMongoDB(){
-        connect_db(this.DB_URI as string);
+        // when no routes were matched...
+        this.app.use("*", not_found);
     }
 
-   
-
-
-    async run() {
+    // start the express api server
+    async startServer(){
         try {
-            await this.app.listen(Number(this.PORT), this.HOST);
+            // connect to mySql
+             await connectDb();
+            await this.app.listen(Number(PORT), HOST);
             log.magenta(
                 "api is live on",
-                ` ✨ ⚡  http://${this.HOST}:${this.PORT} ✨ ⚡`
+                ` ✨ ⚡  http://${HOST}:${PORT} ✨ ⚡`
             );
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
         }
     }
 }
 
-const myApp = new App();
-
-myApp.run();
+const api = new Api();
+api.startServer();
