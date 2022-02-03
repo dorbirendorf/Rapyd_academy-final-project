@@ -1,14 +1,15 @@
-import jwt from "jsonwebtoken";
+/* eslint-disable no-console */
+// import jwt from "jsonwebtoken";
 import uuid from "uuid";
-import { exec } from "child_process";
-import fetch from "node-fetch";
+// import { exec } from "child_process";
+// import fetch from "node-fetch";
 
-const {
-    ACCESS_TOKEN_EXPIRATION,
-    REFRESH_TOKEN_EXPIRATION,
-    APP_SECRET,
-    DB_NAME,
-} = process.env;
+// const {
+//     ACCESS_TOKEN_EXPIRATION,
+//     REFRESH_TOKEN_EXPIRATION,
+//     APP_SECRET,
+//     DB_NAME,
+// } = process.env;
 
 
 export function generateID() {
@@ -20,16 +21,16 @@ export function getTimeString() {
     return `${date.toDateString()} ${date.toTimeString()}`;
 }
 
-export async function backupDB() {
-        console.log("backing up...");
-        const p = exec(
-            `docker exec mysql-db mysqldump -u root --password=qwerty ${DB_NAME} `
-        );
+// export async function backupDB() {
+//         console.log("backing up...");
+//         const p = exec(
+//             `docker exec mysql-db mysqldump -u root --password=qwerty ${DB_NAME} `
+//         );
     
-        fetch("http://localhost:4040/backup", {
-            method: "POST",
-            body: p.stdout,
-        });
-}
+//         fetch("http://localhost:4040/backup", {
+//             method: "POST",
+//             body: p.stdout,
+//         });
+// }
     
 

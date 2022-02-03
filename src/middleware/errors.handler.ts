@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/naming-convention */
 import log from "@ajar/marker";
 import { ErrorRequestHandler, RequestHandler } from "express";
 import fs from "fs/promises";
@@ -5,20 +7,20 @@ import { getTimeString } from "../utils.js";
 
 const { White, Reset, Red } = log.constants;
 const { NODE_ENV } = process.env;
-const ERRLOGGERPATH = `${process.cwd()}/errorLog.log`;
+
+const ERRLOGGERPATH = "./src/log/error.log";
 
 export const error_handler: ErrorRequestHandler = (err, req, res, next) => {
     log.error(err);
     next(err);
 };
 
+// check it
 export const logError: ErrorRequestHandler = (err, req, res, next) => {
     fs.writeFile(
         ERRLOGGERPATH,
         `${req.id} -- ${getTimeString()} \n --> ${err.stack}\n`,
-        {
-            flag: "a",
-        }
+        { flag: "a" }
     );
     next(err);
 };
