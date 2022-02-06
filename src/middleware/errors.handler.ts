@@ -1,34 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import log from "@ajar/marker";
-import {
-    ErrorRequestHandler,
-    NextFunction,
-    Request,
-    RequestHandler,
-    Response,
-} from "express";
+import {ErrorRequestHandler,NextFunction,Request,RequestHandler,Response} from "express";
 import fs from "fs/promises";
+import { HttpError } from "../exceptions/httpError.js";
 import { getTimeString } from "../utils.js";
+import {httpResponseMessage} from "../types/types.js"
 
 const { White, Reset, Red } = log.constants;
 const { NODE_ENV } = process.env;
 
 const ERRLOGGERPATH = "./src/log/error.log";
 
-export const error_handler: ErrorRequestHandler = (
-    err: Error,
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    log.error(err);
-    next(err);
-};
-
-// check it
 export const logError: ErrorRequestHandler = async (
-    err: Error,
+    err: HttpError,
     req: Request,
     res: Response,
     next: NextFunction
@@ -41,18 +26,17 @@ export const logError: ErrorRequestHandler = async (
     next(err);
 };
 
-export const error_handler2: ErrorRequestHandler = (
-    err: Error,
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    if (NODE_ENV !== "production")
-        res.status(500).json({ status: err.message, stack: err.stack });
-    else res.status(500).json({ status: "internal server error..." });
-};
+export function sendErrorMessage(error: HttpError, req: Request, res: Response, next: NextFunction):void{
+    console.log({error});
+     const resMessage : httpResponseMessage ={
+         status: error.statusCode,
+         message: error.message,
+         data: error.description || ""};
+     res.status(error.statusCode).json(resMessage);
+ }
 
-export const not_found: RequestHandler = (req, res) => {
-    log.info(`url: ${White}${req.url}${Reset}${Red} not found...`);
-    res.status(404).json({ status: `url: ${req.url} not found...` });
-};
+
+// export const not_found: RequestHandler = (req, res) => {
+//     log.info(`url: ${White}${req.url}${Reset}${Red} not found...`);
+//     res.status(404).json({ status: `url: ${req.url} not found...` });
+// };
