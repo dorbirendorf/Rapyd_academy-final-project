@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import { Account } from "../account/account.interface.js";
-import errorFactory from "../exceptions/errorFactoryClass.js";
-//k
+
 const isASctivate: RequestHandler = (req,res,next) => {
   const accounts:Account[] = req.accounts;
   const allActive:boolean = accounts.every(acc=>acc.status === "Active");
@@ -10,7 +9,7 @@ const isASctivate: RequestHandler = (req,res,next) => {
   else{
     throw new Error("Invalid field - msg.. ")
   }
-  }
+}
 
 //   async function getRate(base:string, currency:string) {
 //     try{
