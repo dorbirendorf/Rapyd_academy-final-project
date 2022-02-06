@@ -19,7 +19,7 @@ router.post("/",raw( async (req:Request, res:Response) => {
 router.get("/:id",raw( async (req:Request, res:Response) => {
     const ans = await individual_service.getIndividualAccountById(req.params.id);
     if(ans === undefined){
-     throw errorFactory.createError("Invalid field - gfgfgf");
+     throw new Error("Invalid field - error message");
     }
     res.status(200).json(ans);
   }));

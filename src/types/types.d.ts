@@ -8,7 +8,7 @@ export interface httpResponseMessage {
 declare global {
     namespace Express {
         interface Request {
-            account:Account
+            accounts:Account[],
             id: string;
         }
     }
