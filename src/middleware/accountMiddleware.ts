@@ -1,9 +1,16 @@
-
-// export function isASctivate() : RequestHandler {
-//     ///// => service (req.id)=> accout db 
-//     ///it will return usert
-//     //check ans if activate
-//   }
+import { RequestHandler } from "express";
+import { Account } from "../account/account.interface.js";
+import errorFactory from "../exceptions/errorFactoryClass.js";
+//k
+const isASctivate: RequestHandler = (req,res,next) => {
+  const accounts:Account[] = req.accounts;
+  const allActive:boolean = accounts.every(acc=>acc.status === "Active");
+  if (allActive)
+  {next()}
+  else{
+    throw new Error("Invalid field - msg.. ")
+  }
+  }
 
 //   async function getRate(base:string, currency:string) {
 //     try{
