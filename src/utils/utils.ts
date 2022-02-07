@@ -12,11 +12,11 @@ import uuid from "uuid";
 // } = process.env;
 
 
-export function generateID() {
+export function generateID():string{
     // return Math.random().toString(32).slice(2);
     return uuid.v4();
 }
-export function getTimeString() {
+export function getTimeString():string {
     const date = new Date();
     return `${date.toDateString()} ${date.toTimeString()}`;
 }

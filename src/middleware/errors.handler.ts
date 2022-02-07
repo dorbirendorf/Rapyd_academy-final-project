@@ -4,7 +4,7 @@ import log from "@ajar/marker";
 import {ErrorRequestHandler,NextFunction,Request,RequestHandler,Response} from "express";
 import fs from "fs/promises";
 import { HttpError } from "../exceptions/httpError.js";
-import { getTimeString } from "../utils.js";
+import { getTimeString } from "../utils/utils.js";
 import {httpResponseMessage} from "../types/types.js"
 
 const { White, Reset, Red } = log.constants;
