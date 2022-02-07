@@ -1,4 +1,6 @@
-interface Address {
+import { Statuses, Types } from "../types/types.js";
+
+export interface Address {
     address_id: number;
     country_name: string;
     country_code: number;
@@ -9,11 +11,10 @@ interface Address {
     street_number: number;
 }
 export interface Account {    
-    account_id : number;
+    account_id? : number;
     currency: string;  
-    balance: number; 
-    status: "Active" | "Inactive";
-    address: Address;
-    type: "Individual" | "Business" | "Family";
+    balance?: number; 
+    status: Statuses;
+    type: Types;
 }
 

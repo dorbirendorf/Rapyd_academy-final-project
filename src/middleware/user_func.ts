@@ -1,7 +1,7 @@
 /* eslint-disable semi */
 import fs from "fs";
 import { NextFunction, RequestHandler, Request, Response } from "express";
-import { generateID, getTimeString } from "../utils.js";
+import { generateID, getTimeString } from "../utils/utils.js";
 
 
 export function addIdToReq(req:Request, res:Response, next:NextFunction):void {
