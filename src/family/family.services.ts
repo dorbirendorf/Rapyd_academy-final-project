@@ -1,9 +1,11 @@
 // import * as DB_FAMILY from "./family.db.js"
 // import { family } from "./family.interface.js";
 
-//   export async function createFamilyAccount(family:family):Promise<any>{
-//     return await DB_FAMILY.createFamilyAccount(family);
-//    }
+  export async function createFamilyAccount(family:family):Promise<any>{
+      //getallIndiviuals([accountid,int][])- > type :Iacount[]
+      //service validation(Iaccount,tupels);
+    return await DB_FAMILY.createFamilyAccount(family);
+   }
    
 //    export async function getFamilyAccountByIdShort(familyId:string):Promise<any>{
 //     return await DB_FAMILY.getFamilyAccountByIdShort(familyId);

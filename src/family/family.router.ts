@@ -9,10 +9,10 @@ const router = express.Router();
 router.use(express.json());
 
 // CREATES A NEW FAMILY_ACOUNT
-router.post("/",raw( async (req:Request, res:Response) => {
+router.post("/",validateFamilyModel,raw( async (req:Request, res:Response) => {
     const ans = await family_service.createFamilyAccount(req.body);
     res.status(200).json(ans);
-  }) );
+  }));
 
   // GET FULL FAMILY_ACOUNT BY ID
 router.get("/full/:id",raw( async (req:Request, res:Response) => {
