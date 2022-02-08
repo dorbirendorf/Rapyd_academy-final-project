@@ -12,6 +12,5 @@ export function validateAccountMandatoryFields(currency:string,balance:number):v
     if (balance < 0) {
         throw new Error(INVALID_FILED_VALUE);
     }
-    
  }
 
