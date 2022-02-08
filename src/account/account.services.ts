@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 //import * as DB_ACCOUNT from "./account.db.js";
 
    // export async function updateAccountStatus(payload:any):Promise<void>{
    //  return await DB_ACCOUNT.updateAccountStatus(payload);
    // }
-   // export async function transferB2B(payload:any):Promise<void>{
-   //    return await DB_ACCOUNT.transferB2B(payload);
-   //   }
+   export async function transferB2B(payload:any):Promise<void>{
+      console.log("servive here")
+      //let {sourceAccount, destAccount,  }
+      //return await DB_ACCOUNT.transferB2B(payload);
+     }
    //   export async function transferB2I(payload:any):Promise<void>{
    //      return await DB_ACCOUNT.transferB2I(payload)
    //   }
