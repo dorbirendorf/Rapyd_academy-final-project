@@ -2,7 +2,7 @@ import { Request, Response, NextFunction} from "express";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
 import {INVALID_FILED_VALUE,MISSING_REQUIRED_FIELD, COMPANY_ID_LENGTH, INVALID_FILED} from '../types/constants.js';
 import {IBusiness,Statuses } from "../types/types.js";
-import { checkDigit } from "../utils/validationFunc.js";
+import { validIndividualId } from "../utils/validationFunc.js";
 
 export function validateBusinessModel(req:Request,res:Response,next:NextFunction):void {
     const {company_id,company_name,context,currency,account_id,address,balance=0} = req.body;
@@ -15,9 +15,7 @@ export function validateBusinessModel(req:Request,res:Response,next:NextFunction
     if (account_id !== undefined) {
         throw new Error(INVALID_FILED);
     }  
-    if (!checkDigit(COMPANY_ID_LENGTH,company_id as number)){
-        throw new Error(`${INVALID_FILED_VALUE}`);
-    }
+    validIndividualId(COMPANY_ID_LENGTH,company_id as number);
     
     const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:Statuses.Active};
     req.accounts.push(account);

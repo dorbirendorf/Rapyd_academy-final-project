@@ -25,14 +25,3 @@ export async function addAddressToAccount(account:Business|Individual):Promise<B
     return account;
 }
 
-<<<<<<< HEAD
-
-=======
-export async function createBusinessAccount(business:business):Promise<void>{
-   //implementation
-   }
-
- export async function getBusinessAccountById(businessId:string){
-    //implementation
-   }
->>>>>>> upstream/main

@@ -3,7 +3,7 @@ import { Request, Response, NextFunction,RequestHandler } from "express";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
 import {INVALID_FILED_VALUE,INDIVIDUAL_ID_LENGTH,MISSING_REQUIRED_FIELD, INVALID_FILED, ACCOUNT_ALREADY_EXIST} from '../types/constants.js';
 import { IAccount, IIndividual, Statuses } from "../types/types.js";
-import { checkDigit as validIndividualId } from "../utils/validationFunc.js";
+import { validIndividualId } from "../utils/validationFunc.js";
 
 
 export function validateIndividualModel(req:Request,res:Response,next:NextFunction):void {
@@ -21,9 +21,7 @@ export function validateIndividualModel(req:Request,res:Response,next:NextFuncti
         throw new Error(INVALID_FILED);
     }    
 
-    if (!validIndividualId(INDIVIDUAL_ID_LENGTH,individual_id as number)){
-        throw new Error(`${INVALID_FILED_VALUE} - individual id should be 7 digits length..`);
-    }
+    validIndividualId(INDIVIDUAL_ID_LENGTH,individual_id as number);
 
     const account:Partial <IIndividual> = {first_name,last_name,currency,individual_id,email,address,balance,status:Statuses.Active};
     req.accounts.push(account);

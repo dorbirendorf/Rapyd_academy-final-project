@@ -1,7 +1,7 @@
+import { IBusiness } from "../types/types.js";
 import * as DB_BUSINESS from "./business.db.js"
-import { Business } from "./business.interface.js";
 
-  export async function createBusinessAccount(business:Business):Promise<any>{
+  export async function createBusinessAccount(business:IBusiness):Promise<any>{
     return await DB_BUSINESS.createBusinessAccount(business);
    }
    
