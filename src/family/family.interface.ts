@@ -1,7 +1,6 @@
 import { Account } from "../account/account.interface.js";
-import { Individual } from "../individual/individual.interface.js";
-
 export interface Family extends Account {
+<<<<<<< HEAD
     currenct : number;
     context: string;
     owners: Individual[];
@@ -9,3 +8,9 @@ export interface Family extends Account {
 }
 
 export type pFamily = Partial<Family>
+=======
+    context?: string;
+    owners:[number,number][];
+}
+//family create
+>>>>>>> origin/main
