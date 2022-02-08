@@ -1,0 +1,72 @@
+d59c3ebf-0702-4166-9cc4-774f933ae2f4 -- Tue Feb 08 2022 17:26:51 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:16:15)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/body-parser/lib/read.js:130:5
+2fcc248c-c9fd-4b96-843c-a703b5f40bbd -- Tue Feb 08 2022 17:27:18 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:16:15)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/body-parser/lib/read.js:130:5
+4963d2d5-0756-4919-a066-2365bb84cc47 -- Tue Feb 08 2022 17:31:18 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value - msg.. 
+    at amountPositive (file:///Users/ellabenatia/Desktop/project/finalproject/dist/utils/validationFunc.js:14:15)
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:19:5)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+f4572f3a-3dd5-4752-9bff-26c85e065698 -- Tue Feb 08 2022 17:35:51 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value - msg.. 
+    at amountPositive (file:///Users/ellabenatia/Desktop/project/finalproject/dist/utils/validationFunc.js:14:15)
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:19:5)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+c8bac632-1706-4db6-a258-dd7c90fd95cf -- Tue Feb 08 2022 17:35:55 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value - msg.. 
+    at amountPositive (file:///Users/ellabenatia/Desktop/project/finalproject/dist/utils/validationFunc.js:14:15)
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:19:5)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+50206770-f371-4736-8092-d84594e2cbc6 -- Tue Feb 08 2022 17:35:59 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:17:15)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/body-parser/lib/read.js:130:5

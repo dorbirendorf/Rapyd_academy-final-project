@@ -13,7 +13,7 @@ export function checkBalance(minimalBalance:number,balance:number):void{
 }
 
 export function amountPositive(amount:number):void{
-   if(amount<0){
+   if(typeof amount !== "number"|| (amount)<0){
       throw new Error(`${INVALID_FILED_VALUE} - msg.. `)
    }
 }
