@@ -11,7 +11,9 @@ export function validateIndividualModel(req:Request,res:Response,next:NextFuncti
     const {first_name,last_name,currency,account_id,individual_id,email,address,balance=0} = req.body;
     //const {city,street_name,street_number,region,country_name,country_code} = address;
 
+
     validateAccountMandatoryFields(currency as string,balance as number);
+  
 
     if(!(first_name && last_name && currency && individual_id)){
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
@@ -24,7 +26,7 @@ export function validateIndividualModel(req:Request,res:Response,next:NextFuncti
     validIndividualId(INDIVIDUAL_ID_LENGTH,individual_id as number);
 
     const account:Partial <IIndividual> = {first_name,last_name,currency,individual_id,email,address,balance,status:Statuses.Active};
-    req.accounts.push(account);
     console.log("Iaccount valid!",account);
+    req.accounts=[account];
     next()
 }

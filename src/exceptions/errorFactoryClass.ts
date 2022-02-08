@@ -11,7 +11,7 @@ class httpErrorFactoryClass{
     createError(message:string):HttpError{
         const spliteMessage = message.split("-");
         const type = spliteMessage[0].trim();
-        const description = spliteMessage[1].trim();
+        const description = spliteMessage[1]?.trim()||"";
 
         switch(type) { 
             case "Invalid field": { 
