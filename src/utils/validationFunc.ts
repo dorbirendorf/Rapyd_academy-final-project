@@ -25,3 +25,12 @@ export function sumFamilyAmounts(tupels:[number,number][],minBalance:number):voi
         throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amount is to low`)
    }
 }
+
+
+export function initRequiredParams() : Map<string, string[]> {
+   const requiredParams = new Map<string, string[]>();
+   requiredParams.set('individual', ['individual_id', 'first_name', 'last_name', 'currency']);
+   requiredParams.set('business', ['compay_id', 'company_name', 'currency']);
+   requiredParams.set('family', ['owners', 'currency']);
+   return requiredParams;
+ }

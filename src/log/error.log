@@ -468,3 +468,163 @@ c293471d-f63a-4df1-9a27-4d08f52732a5 -- Tue Feb 08 2022 17:25:17 GMT+0200 (Israe
     at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
     at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
     at processTicksAndRejections (node:internal/process/task_queues:94:5)
+2017f302-5d28-49a3-b33b-b5bd8a8b446b -- Tue Feb 08 2022 17:55:19 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+a1850023-2f42-4c2d-88fa-4e52c05930ca -- Tue Feb 08 2022 17:55:47 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+54ad27ac-80ba-4d15-94fa-dc5e99d7e479 -- Tue Feb 08 2022 17:56:50 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+baeaed96-d805-4a89-962b-921fd28d8bfb -- Tue Feb 08 2022 17:57:36 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateBusinessModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/business/business.validator.js:9:15)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/read.js:130:5
+6129ed14-5a47-4468-962f-0abe2cbec148 -- Tue Feb 08 2022 17:58:39 GMT+0200 (Israel Standard Time) 
+ --> TypeError: Cannot read property 'push' of undefined
+    at validateBusinessModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/business/business.validator.js:24:18)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/read.js:130:5
+0f3be6cc-891a-4757-aa02-7ebc697a8fbd -- Tue Feb 08 2022 17:58:55 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+fa6a23b6-9c3c-4732-bb5f-19f47269e64c -- Tue Feb 08 2022 17:59:29 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+adab47b4-5a86-4bf7-959a-6aa740c06c09 -- Tue Feb 08 2022 18:02:31 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:11:15)
+    at validateBusinessModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/business/business.validator.js:7:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+ad5dc41c-62e7-43b1-99c6-4e08e041f5dc -- Tue Feb 08 2022 18:02:55 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:5:15)
+    at validateBusinessModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/business/business.validator.js:7:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+e63646d0-8d95-4d79-9aa3-b30d84d914a4 -- Tue Feb 08 2022 18:03:04 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+f1ed8810-d310-47a0-806a-bb51d65e075d -- Tue Feb 08 2022 18:03:23 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateBusinessModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/business/business.validator.js:9:15)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/read.js:130:5
+97968f3a-d415-4df3-91ac-0fc416c3b696 -- Tue Feb 08 2022 18:33:48 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+c9a374b8-35b5-4675-8f43-c8ead49be9a3 -- Tue Feb 08 2022 18:33:57 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+c801f3b3-8d33-4e4a-a117-b88436c57d2b -- Tue Feb 08 2022 18:35:32 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+d24b1511-bb46-4779-9c7d-75d5e49f067c -- Tue Feb 08 2022 18:39:38 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+fa420a33-f4eb-46ec-be11-ddce001d5399 -- Tue Feb 08 2022 18:42:18 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+c282f83d-ee24-4311-909d-61a0c4dbadcc -- Tue Feb 08 2022 18:43:06 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+e58eed7d-ef27-410d-a977-5fd465da959f -- Tue Feb 08 2022 19:18:06 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+9090d229-81d8-4bf2-a2cf-b843209524dc -- Tue Feb 08 2022 19:30:35 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+bba98c25-0de1-44c7-9d7a-288198e46b3d -- Tue Feb 08 2022 19:31:47 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+ce941110-745a-445f-9186-7741a4b740be -- Tue Feb 08 2022 19:33:08 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+74366ccf-ed74-4025-9813-8ac0815073a4 -- Tue Feb 08 2022 19:33:54 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+313da221-2054-4665-b534-f5dfd8507274 -- Tue Feb 08 2022 19:33:56 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+db6e5cd2-2c24-4669-84da-0fc5fa4cdaba -- Tue Feb 08 2022 19:36:29 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+1a384180-3861-4dcd-95cd-72cfe6510b36 -- Tue Feb 08 2022 19:38:09 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)

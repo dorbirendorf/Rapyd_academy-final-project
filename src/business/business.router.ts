@@ -4,6 +4,7 @@ import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
  import * as business_service from "./business.services.js";
  import {httpResponseMessage} from "../types/types.js"
+import { validateBusinessModel } from "./business.validator.js";
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ const router = express.Router();
 router.use(express.json());
 
 // CREATES A NEW BUSINESS_ACOUNT
-router.post("/",raw( async (req:Request, res:Response) => {
+router.post("/",raw(validateBusinessModel),raw( async (req:Request, res:Response) => {
     const id = await business_service.createBusinessAccount(req.body);
     const ans = await business_service.getBusinessAccountById(id);
     const resMessage : httpResponseMessage ={
