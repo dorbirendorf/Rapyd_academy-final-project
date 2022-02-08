@@ -5,7 +5,7 @@ import * as DB_BUSINESS from "./business.db.js"
     return await DB_BUSINESS.createBusinessAccount(business);
    }
    
-   export async function getBusinessAccountById(businessId:string):Promise<any>{
-    return await DB_BUSINESS.getBusinessAccountById(businessId);
+   export async function getBusinessAccountById(accountId:number):Promise<any>{
+    return await DB_BUSINESS.getBusinessAccountById(accountId);
    }
 

@@ -3,8 +3,6 @@
 
 import { updaetRowById } from "../db.utils";
 
-// import {db} from "../db/sql/sql.connection.js";
-
    export async function updateAccountStatus(primary_id:number,status:boolean):Promise<void>{ 
         await updaetRowById("accounts",{status},{primary_id});
     }

@@ -13,7 +13,7 @@ router.use(express.json());
 // CREATES A NEW BUSINESS_ACOUNT
 router.post("/",raw( async (req:Request, res:Response) => {
     const id = await business_service.createBusinessAccount(req.body);
-    const ans = await business_service.getBusinessAccountById(id.toString());
+    const ans = await business_service.getBusinessAccountById(id);
     const resMessage : httpResponseMessage ={
       status: 201,
       message: "Account created",
@@ -23,7 +23,7 @@ router.post("/",raw( async (req:Request, res:Response) => {
 
   // GET FULL BUSINESS_ACOUNT BY ID
 router.get("/:id",raw( async (req:Request, res:Response) => {
-    const ans = await business_service.getBusinessAccountById(req.params.id);
+    const ans = await business_service.getBusinessAccountById(Number(req.params.id));
     const resMessage : httpResponseMessage ={
       status: 200,
       message: "Account found",

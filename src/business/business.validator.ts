@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction} from "express";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
-import {INVALID_FILED_VALUE,MISSING_REQUIRED_FIELD, COMPANY_ID_LENGTH, INVALID_FILED} from '../types/constants.js';
+import {MISSING_REQUIRED_FIELD, COMPANY_ID_LENGTH, INVALID_FILED} from '../types/constants.js';
 import {IBusiness,Statuses } from "../types/types.js";
 import { validIndividualId } from "../utils/validationFunc.js";
 

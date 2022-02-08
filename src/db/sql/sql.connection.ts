@@ -7,7 +7,7 @@ export let db : mysql.Connection;
 const{
     DB_HOST="localhost",
     DB_PORT="3306",
-    DB_NAME="ebank",
+    DB_NAME="e_bank",
     DB_USER_NAME="root",
     DB_USER_PASSWORD="qwerty"
 } = config;

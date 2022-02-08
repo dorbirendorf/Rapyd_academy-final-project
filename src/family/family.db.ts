@@ -13,8 +13,8 @@ export async function createFamilyAccount(family: IFamily): Promise<number> {
 }
 
 
-export async function getFamilyAccountByIdShort(familyId: string): Promise<IFamily> {
-    const accountRes = await selectRowByIdWithJoin("account", "family", { primary_id: familyId }, "primary_id", "account_id");
+export async function getFamilyAccountByIdShort(accountId: number): Promise<IFamily> {
+    const accountRes = await selectRowByIdWithJoin("account", "family", { primary_id: accountId }, "primary_id", "account_id");
     const familyAccount = addOwners_idToFamily((accountRes as RowDataPacket[])[0] as IFamily)
     return familyAccount;
 }
@@ -56,8 +56,8 @@ export async function addIndividualsToFamilyAccount(family_id: string, payload: 
     await promise.all(pendingPromise)
 }
 
-export async function removeIndividualsFromFamilyAccount(familyId: string, payload: number[]): Promise<void> {
-    const orString = payload.map(id => "individual_id = " + id).join(" OR ")
+export async function removeIndividualsFromFamilyAccount(familyId: string, payload: [number,number][]): Promise<void> {
+    const orString = payload.map(pair => "individual_id = " + pair[0]).join(" OR ")
     await db.query(`DELETE FROM family_individuals WHERE family_id = ${familyId} AND (${orString})`)
 }
 

@@ -25,6 +25,6 @@ export function validateIndividualModel(req:Request,res:Response,next:NextFuncti
 
     const account:Partial <IIndividual> = {first_name,last_name,currency,individual_id,email,address,balance,status:Statuses.Active};
     req.accounts.push(account);
-    console.log("I acount valid!",account);
+    console.log("Iaccount valid!",account);
     next()
 }

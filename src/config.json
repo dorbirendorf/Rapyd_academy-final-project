@@ -8,7 +8,7 @@
 
     "DB_USER": "root",
     "DB_PASSWORD": "qwerty",
-    "DB_NAME": "ebank",
+    "DB_NAME": "e_bank",
     "APP_SECRET": "supercalifragilisticexpialidocious",
 
     "ACCESS_TOKEN_EXPIRATION": "2h",

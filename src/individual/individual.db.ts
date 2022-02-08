@@ -12,8 +12,8 @@ export async function createIndividualAccount(individual:IIndividual):Promise<nu
    return (accountRes as OkPacket).insertId;
 }
 
-   export async function getIndividualAccountById(individualId:string):Promise<IIndividual>{
-      const accountRes = await selectRowByIdWithJoin("account","individual",{primary_id:individualId},"primary_id","account_id")
+   export async function getIndividualAccountById(accountId:number):Promise<IIndividual>{
+      const accountRes = await selectRowByIdWithJoin("account","individual",{primary_id:accountId},"primary_id","account_id")
       const businessRes = await addAddressToAccount((accountRes as RowDataPacket[])[0] as IIndividual)
       return businessRes as IIndividual;
    }

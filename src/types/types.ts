@@ -26,7 +26,8 @@ export interface IIndividual extends IAccount {
 }
 export interface IFamily extends IAccount {
     context?: string;
-    owners:[number,number][];
+    owners_id?:{ account_id: number }[];
+    owners?:IIndividual[];
 }
 export interface IBusiness extends IAccount {
     company_id: number;
@@ -44,21 +45,7 @@ export interface IBusiness extends IAccount {
         message: string;
         data: any;
     }
-        // export enum Types {
-    //     Individual = "Individual",
-    //     Business = "Business",
-    //     Family = "Family",
-    // }
-//     export interface OutputResponse{
-//     [key: string]: any;
-// }
-// export interface ResponseObj extends OutputResponse {
-//     code: number;
-//     message: string;
-//     data?: any;
-//     refresh_token?: any;
-//     access_token?: any;
-// }
+   
 declare global {
     namespace Express {
         interface Request {

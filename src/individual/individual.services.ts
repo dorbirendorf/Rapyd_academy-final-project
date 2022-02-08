@@ -10,8 +10,8 @@ import {IIndividual} from "../types/types.js";
   
    }
    //check with meir about getIndividualByAccountId & getIndividualByIndividualId
-   export async function getIndividualAccountById(individualId:number):Promise<any>{
-    return await DB_INDIVIDUAL.getIndividualAccountById(individualId);
+   export async function getIndividualAccountById(accountId:number):Promise<any>{
+    return await DB_INDIVIDUAL.getIndividualAccountById(accountId);
    }
    
 
