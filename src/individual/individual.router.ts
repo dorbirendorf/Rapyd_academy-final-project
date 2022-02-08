@@ -4,14 +4,23 @@ import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
  import * as individual_service from "./individual.services.js";
 import {httpResponseMessage} from "../types/types.js"
+<<<<<<< HEAD
+=======
+import { validateIndividualModel } from "./individual.validator.js";
+>>>>>>> upstream/main
 const router = express.Router();
 
 // parse json req.body on post routes
 router.use(express.json());
 
 // CREATES A NEW INDIVIDUAL_ACOUNT
+<<<<<<< HEAD
 router.post("/",raw( async (req:Request, res:Response) => {
   const id = await individual_service.createIndividualAccount(req.body);
+=======
+router.post("/",raw(validateIndividualModel),raw( async (req:Request, res:Response) => {
+  const id = await individual_service.createIndividualAccount(req.accounts[0]);
+>>>>>>> upstream/main
   const ans = await individual_service.getIndividualAccountById(id.toString());
   const resMessage : httpResponseMessage ={
     status: 201,

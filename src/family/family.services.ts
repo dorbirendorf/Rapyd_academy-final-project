@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 import * as DB_FAMILY from "./family.db.js"
 import { Family } from "./family.interface.js";
   export async function createFamilyAccount(family:Family):Promise<any>{
+=======
+// import * as DB_FAMILY from "./family.db.js"
+// import { family } from "./family.interface.js";
+
+  export async function createFamilyAccount(family:family):Promise<any>{
+      //getallIndiviuals([accountid,int][])- > type :Iacount[]
+      //service validation(Iaccount,tupels);
+>>>>>>> upstream/main
     return await DB_FAMILY.createFamilyAccount(family);
    }
    
