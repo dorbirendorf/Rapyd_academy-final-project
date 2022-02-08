@@ -70,4 +70,4 @@ errorHanlers() {
 
 const api = new Api();
 
- api.startServer().then(console.log);
+ api.startServer().then();

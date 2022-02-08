@@ -1,8 +1,8 @@
 // import { INVALID_FILED_VALUE } from "../types/constants.js";
 import * as DB_INDIVIDUAL from "./individual.db.js"
-import {IIndividual} from "../types/types.js";
+import {IAccount, IIndividual} from "../types/types.js";
 
-  export async function createIndividualAccount(individual:IIndividual):Promise<any>{
+  export async function createIndividualAccount(individual:IAccount):Promise<any>{
     //db: There can be only one (individual account on our system) - getIndividualByIndividualId
     //if get more than one throw error
     //throw new Error(`${INVALID_FILED_VALUE}- not all accounts are the same type`);
