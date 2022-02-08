@@ -11,8 +11,8 @@ const router = express.Router();
 router.use(express.json());
 
 // CREATES A NEW FAMILY_ACOUNT
-router.post("/",validateFamilyModel,raw( async (req:Request, res:Response) => {
-    const ans = await family_service.createFamilyAccount(req.body);
+router.post("/",validateFamilyModel,validateFamilyModel,raw( async (req:Request, res:Response) => {
+    const ans = await family_service.createFamilyAccount(req.accounts[0]);
     res.status(200).json(ans);
   }));
 

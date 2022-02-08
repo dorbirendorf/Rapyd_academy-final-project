@@ -2,7 +2,7 @@
 import * as DB_INDIVIDUAL from "./individual.db.js"
 import {IIndividual} from "../types/types.js";
 
-  export async function createIndividualAccount(individual:IIndividual):Promise<any>{
+  export async function createIndividualAccount(individual:Partial<IIndividual>):Promise<any>{
     //db: There can be only one (individual account on our system) - getIndividualByIndividualId
     //if get more than one throw error
     //throw new Error(`${INVALID_FILED_VALUE}- not all accounts are the same type`);
