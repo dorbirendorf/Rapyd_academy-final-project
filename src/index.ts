@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import express from "express";
@@ -7,8 +8,8 @@ import cors from "cors";
 import config from "./config.js";
 import { connectDb } from "./db/sql/sql.connection.js";
 import individual_router from "./individual/individual.router.js";
-//import {account_router} from "./account/account.router.js";
-import family_router from "./family/family.router.js";
+import account_router from "./account/account.router.js"
+//import family_router from "./family/family.router.js";
 import business_router from "./business/business.router.js";
 import {logError,sendErrorMessage} from "./middleware/errors.handler.js";
 import {addIdToReq,logRequest} from "./middleware/user_func.js";
@@ -36,9 +37,9 @@ class Api {
 
     routing() {
         log.blue("setting routes...");
-        //this.app.use("/api/account", account_router);
+        this.app.use("/api/account", account_router);
         this.app.use("/api/individual",individual_router);
-        this.app.use("/api/family", family_router);
+        //this.app.use("/api/family", family_router);
         this.app.use("/api/business", business_router);
     }
 

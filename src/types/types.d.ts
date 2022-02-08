@@ -21,7 +21,7 @@ export interface IIndividual extends IAccount {
     first_name:string;
     last_name:string;
     email?:string;
-    address?:Address;
+    address?:IAddress;
     address_id?:number;
 }
 export interface IFamily extends IAccount {
@@ -33,7 +33,7 @@ export interface IBusiness extends IAccount {
     company_id: number;
     company_name: string;
     context?: string;
-    address?:Address;
+    address?:IAddress;
     address_id?:number;
 }
     export enum Statuses {
@@ -45,6 +45,11 @@ export interface IBusiness extends IAccount {
         message: string;
         data: any;
     }
+    export interface ITransfer{
+        source: number;
+        destination: string;
+        amount: any;
+    }
    
 declare global {
     namespace Express {
@@ -54,7 +59,4 @@ declare global {
         }
     }
 }
-
-
-
 
