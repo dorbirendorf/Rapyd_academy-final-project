@@ -6,7 +6,7 @@ import { accountsActive, accountsCurrency as compareAccountsCurrency, accountsEx
 
 
 export function validateFamilyModel(req:Request,res:Response,next:NextFunction):void {
-    const {owners,context,currency,} = req.body;
+    const {owners,context,currency} = req.body;
 
     if(!currency){
         throw new Error(MISSING_REQUIRED_FIELD);
@@ -20,7 +20,7 @@ export function validateFamilyModel(req:Request,res:Response,next:NextFunction):
     next()
 }
 
-export function validateFamilyAccounts(accounts:IAccount[],owners:[number,number][],currency:string):void {
+export  function validateFamilyAccounts(accounts:IAccount[],owners:[number,number][],currency:string):void {
    accountsExist(accounts,owners);
    accountsActive(accounts);
    compareAccountsType(accounts,"Individual");
@@ -29,4 +29,8 @@ export function validateFamilyAccounts(accounts:IAccount[],owners:[number,number
 
 }
 
+
+function allowTransferBalance(accounts: IAccount[], MIN_FAMILY_BALANCE: number) {
+    throw new Error("Function not implemented.");
+}
 
