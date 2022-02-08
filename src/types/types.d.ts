@@ -36,10 +36,6 @@ export interface IBusiness extends IAccount {
     address?:IAddress;
     address_id?:number;
 }
-    export enum Statuses {
-        Active = "Active",
-        Inactive = "Inactive",
-    }
     export interface httpResponseMessage{
         status: number;
         message: string;
@@ -47,8 +43,8 @@ export interface IBusiness extends IAccount {
     }
     export interface ITransfer{
         source: number;
-        destination: string;
-        amount: any;
+        destination: number;
+        amount: number;
     }
    
 declare global {

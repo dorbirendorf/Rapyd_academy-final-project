@@ -5,12 +5,13 @@
 // import { validateFamilyAccounts } from "./family.validator.js";
 
 
-//   export async function createFamilyAccount(family:Partial<IFamily>,owners:[number,number][],currency):Promise<any>{
-//     const individualIds = owners.map((owner)=>owner[1]);
-//     const accounts:IAccount[] = await DB_ACCOUNT.getAllIndividualsAccountsById(individualIds);
-//     validateFamilyAccounts(accounts,owners,currency);
-//     return await DB_FAMILY.createFamilyAccount(family);
-//    }
+  // export async function createFamilyAccount(family:Partial<IFamily>,owners:[number,number][],currency):Promise<any>{
+  //   const individualIds = owners.map((owner)=>owner[1]);
+  //   //check here
+  //   const accounts:IAccount[] = await DB_ACCOUNT.getAllAccountsById(individualIds);
+  //   validateFamilyAccounts(accounts,owners,currency);
+  //   return await DB_FAMILY.createFamilyAccount(family);
+  //  }
    
 //   //  export async function getFamilyAccountByIdShort(familyId:string):Promise<any>{
 //   //   return await DB_FAMILY.getFamilyAccountByIdShort(familyId);
