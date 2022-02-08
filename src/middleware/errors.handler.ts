@@ -27,12 +27,13 @@ export const logError: ErrorRequestHandler = async (
 };
 
 export function sendErrorMessage(error: HttpError, req: Request, res: Response, next: NextFunction):void{
-    console.log({error});
+    console.log("error");
+
      const resMessage : httpResponseMessage ={
          status: error.statusCode,
          message: error.message,
          data: error.description || ""};
-     res.status(error.statusCode).json(resMessage);
+     res.status(error.statusCode|| 500 ).json(resMessage);
  }
 
 

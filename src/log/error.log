@@ -1,0 +1,470 @@
+ebadd18a-f1b5-44f8-8d44-392c623808b1 -- Tue Feb 08 2022 16:34:46 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+e816cbdb-9780-4f05-a8b4-1242d3530d41 -- Tue Feb 08 2022 16:42:40 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:9:9)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+7ba4da59-6fcc-4e12-80ba-218ad7bc0df2 -- Tue Feb 08 2022 16:46:12 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:9:9)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+5e00edad-a79c-410f-b0a1-2cc6baf435ea -- Tue Feb 08 2022 16:50:19 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:9:9)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+63858484-c348-4877-9322-6a0a502bc82e -- Tue Feb 08 2022 16:51:16 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:9:9)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+670a792a-1697-4916-bbc6-64d24a07ae71 -- Tue Feb 08 2022 16:51:36 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:9:9)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+7069aa06-56ac-4163-be49-7b15b1978b72 -- Tue Feb 08 2022 16:53:05 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:9:9)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+b9ec3963-3949-4c81-9821-503e4c42e6b1 -- Tue Feb 08 2022 16:54:44 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:14:15)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:174:3)
+3d59e4e1-2d4f-4c56-9772-54e5cc7b6dbf -- Tue Feb 08 2022 16:59:36 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+54a30f46-78ef-40b8-be62-761281f18b52 -- Tue Feb 08 2022 16:59:38 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+765bd1ab-8864-495e-b83e-2e6adffaeef5 -- Tue Feb 08 2022 17:00:26 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+896e8a68-543b-480c-b514-1da2e4a64a5c -- Tue Feb 08 2022 17:01:19 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+1736e99c-f55a-4d17-b896-d512a177c292 -- Tue Feb 08 2022 17:05:13 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+9230a49e-cd21-495b-9a6d-b7f9c24ef519 -- Tue Feb 08 2022 17:05:13 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+047e1db7-919d-4e76-962b-d571eab81998 -- Tue Feb 08 2022 17:05:13 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+68597c50-83cc-49cd-93c2-8a7ce008d6a9 -- Tue Feb 08 2022 17:05:46 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+57c522cd-d067-491b-978a-a9e9a9182839 -- Tue Feb 08 2022 17:05:59 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+dcfcb09e-77af-4894-b08d-ade6660262d4 -- Tue Feb 08 2022 17:07:33 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+71b046af-676f-4b99-85b1-750fe4fd8a41 -- Tue Feb 08 2022 17:08:23 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+d9740f07-425e-4d66-aa56-0b11e70170ed -- Tue Feb 08 2022 17:12:54 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+3fd02e1c-b5e7-4342-8221-13afe53dcca4 -- Tue Feb 08 2022 17:13:12 GMT+0200 (Israel Standard Time) 
+ --> Error: Missing requiered field
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+5dca59ea-b93d-4a12-bf6d-cca05b2e6660 -- Tue Feb 08 2022 17:13:57 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at validateAccountMandatoryFields (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/account/account.validation.js:4:15)
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:8:5)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/types/json.js:119:7)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:323:13)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+bd64e3e6-1125-4c13-aff1-9c7a80f5e6d8 -- Tue Feb 08 2022 17:17:18 GMT+0200 (Israel Standard Time) 
+ --> TypeError: Cannot read property 'push' of undefined
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:26:18)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:224:16)
+    at done (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (node:events:391:22)
+    at endReadableNT (node:internal/streams/readable:1307:12)
+    at processTicksAndRejections (node:internal/process/task_queues:81:21)
+d2459bea-cc16-4744-ae3e-51b07e2dc369 -- Tue Feb 08 2022 17:17:55 GMT+0200 (Israel Standard Time) 
+ --> TypeError: Cannot read property 'push' of undefined
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:26:18)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:224:16)
+    at done (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (node:events:391:22)
+    at endReadableNT (node:internal/streams/readable:1307:12)
+    at processTicksAndRejections (node:internal/process/task_queues:81:21)
+39e9a61a-00a7-45b2-b3e8-918186ba8f09 -- Tue Feb 08 2022 17:18:38 GMT+0200 (Israel Standard Time) 
+ --> TypeError: Cannot read property 'push' of undefined
+    at validateIndividualModel (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/individual/individual.validator.js:27:18)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/express/lib/router/index.js:275:10)
+    at /Users/dorbirendof/Desktop/workspace/finalProject/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:224:16)
+    at done (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/Users/dorbirendof/Desktop/workspace/finalProject/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (node:events:391:22)
+    at endReadableNT (node:internal/streams/readable:1307:12)
+    at processTicksAndRejections (node:internal/process/task_queues:81:21)
+27295e24-b013-4bbe-bb45-35839580ee6e -- Tue Feb 08 2022 17:23:26 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+ad87493d-4b01-4351-ad1c-82011fa3f47d -- Tue Feb 08 2022 17:24:27 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+a9aad295-0ed7-4a11-ab76-cf37d54c33bc -- Tue Feb 08 2022 17:24:55 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+c293471d-f63a-4df1-9a27-4d08f52732a5 -- Tue Feb 08 2022 17:25:17 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)

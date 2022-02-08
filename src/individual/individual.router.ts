@@ -14,12 +14,13 @@ router.use(express.json());
 
 // CREATES A NEW INDIVIDUAL_ACOUNT
 router.post("/",raw(validateIndividualModel),raw( async (req:Request, res:Response) => {
+  console.log("router")
   const id = await individual_service.createIndividualAccount(req.accounts[0] as Partial<IIndividual>);
   const ans = await individual_service.getIndividualAccountById(id.toString());
   const resMessage : httpResponseMessage ={
     status: 201,
     message: "Account created",
-    data: ans};
+    data: ans}; 
     res.status(201).json(resMessage);
 }) );
 
