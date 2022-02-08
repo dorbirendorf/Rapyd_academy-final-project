@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
-import { validateTransfer } from "./account.validation.js";
+import { validateTransferModel } from "./account.validation.js";
  import * as account_service from "./account.services.js"
+import { httpResponseMessage } from "../types/types.js";
 
  const router = express.Router();
 
@@ -17,9 +19,14 @@ router.use(express.json());
 //   }));
 
   //TRANSFER ACCOUNT B2B
-router.post("/transfer/b2b",raw(validateTransfer),raw( async (req:Request, res:Response) => {
-  await account_service.transferB2B(req.body);
-  res.status(200).json({"work":"fdd"});
+router.post("/transfer/b2b",raw(validateTransferModel),raw( async (req:Request, res:Response) => {
+  let ans = await account_service.transferB2B(req.body);
+  const resMessage : httpResponseMessage ={
+    status: 201,
+    message: "transfer comleted",
+    data: ans
+  }; 
+    res.status(201).json(resMessage);
 }));
 
 
