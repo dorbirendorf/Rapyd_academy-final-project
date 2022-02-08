@@ -13,7 +13,7 @@ import {IAccount} from "../types/types.js";
    export async function getIndividualAccountById(accountId:number):Promise<any>{
     return await DB_INDIVIDUAL.getIndividualAccountById(accountId);
    }
-   
+
 
 
   

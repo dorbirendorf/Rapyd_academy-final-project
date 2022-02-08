@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction,RequestHandler } from "express";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
 import {INVALID_FILED_VALUE,INDIVIDUAL_ID_LENGTH,MISSING_REQUIRED_FIELD, INVALID_FILED, ACCOUNT_ALREADY_EXIST} from '../types/constants.js';
-import { IAccount, IIndividual, Statuses } from "../types/types.d.js";
+import { IAccount, IIndividual } from "../types/types.d.js";
 import { validIndividualId } from "../utils/validationFunc.js";
 
 

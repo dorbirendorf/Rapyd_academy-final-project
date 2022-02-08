@@ -11,7 +11,7 @@ export function accountsExist(accounts:IAccount[],tuples:[number,number][]):bool
     return true;
  }
 export function accountsActive(accounts:IAccount[]):boolean{
-    const allActive:boolean = accounts.every(acc=>acc.status === "Active");
+    const allActive:boolean = accounts.every(acc=>acc.status === true);
     if (!allActive){
       throw new Error(`${INVALID_FILED_VALUE}- not all accounts are active`)
    }

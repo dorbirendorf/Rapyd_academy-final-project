@@ -5,7 +5,7 @@
 import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
  import * as individual_service from "./individual.services.js";
-import {httpResponseMessage, IAccount, IIndividual} from "../types/types.js"
+import {httpResponseMessage, IIndividual} from "../types/types.js"
 import { validateIndividualModel } from "./individual.validator.js";
 const router = express.Router();
 

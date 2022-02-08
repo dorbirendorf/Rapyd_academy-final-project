@@ -468,3 +468,47 @@ c293471d-f63a-4df1-9a27-4d08f52732a5 -- Tue Feb 08 2022 17:25:17 GMT+0200 (Israe
     at httpErrorFactoryClass.createError (file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/exceptions/errorFactoryClass.js:36:28)
     at file:///Users/dorbirendof/Desktop/workspace/finalProject/dist/middleware/route.async.wrapper.js:4:31
     at processTicksAndRejections (node:internal/process/task_queues:94:5)
+0c285bef-0ddf-4fd7-868e-3f5f84203a08 -- Tue Feb 08 2022 17:53:22 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value - msg.. 
+    at amountPositive (file:///Users/ellabenatia/Desktop/project/finalproject/dist/utils/validationFunc.js:14:15)
+    at validateTransfer (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:19:5)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+0fa20829-1da7-4154-9efc-b2247343f56d -- Tue Feb 08 2022 18:32:33 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value - msg.. 
+    at amountPositive (file:///Users/ellabenatia/Desktop/project/finalproject/dist/utils/validationFunc.js:14:15)
+    at validateTransferModel (file:///Users/ellabenatia/Desktop/project/finalproject/dist/account/account.validation.js:19:5)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/ellabenatia/Desktop/project/finalproject/node_modules/express/lib/router/index.js:275:10)
+d5990772-b3fb-4593-b8d3-d0c7df0cee40 -- Tue Feb 08 2022 19:53:55 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value
+    at httpErrorFactoryClass.createError (file:///Users/ellabenatia/Desktop/project/finalproject/dist/exceptions/errorFactoryClass.js:20:28)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+eff760ff-4abf-4cbe-9a79-d09e451ffc74 -- Tue Feb 08 2022 19:54:33 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value
+    at httpErrorFactoryClass.createError (file:///Users/ellabenatia/Desktop/project/finalproject/dist/exceptions/errorFactoryClass.js:20:28)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+88366668-b0c2-47dd-8534-888b97ecd5c5 -- Tue Feb 08 2022 19:54:50 GMT+0200 (Israel Standard Time) 
+ --> Error: Invalid filed value
+    at httpErrorFactoryClass.createError (file:///Users/ellabenatia/Desktop/project/finalproject/dist/exceptions/errorFactoryClass.js:20:28)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+ad2ed99e-b349-436f-b14a-9f76d1cf2205 -- Tue Feb 08 2022 19:55:25 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/ellabenatia/Desktop/project/finalproject/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/ellabenatia/Desktop/project/finalproject/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
