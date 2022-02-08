@@ -2,6 +2,8 @@ import { IAccount } from "../types/types.js";
 import {ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, } from '../types/constants.js';
 import { amountPositive } from "./validationFunc.js";
 
+
+
 export function accountsExist(accounts:IAccount[],tuples:[number,number][]):boolean{
     if (tuples.length!==accounts.length){
          throw new Error(`${INVALID_FILED_VALUE}- not all accounts are exsits`)

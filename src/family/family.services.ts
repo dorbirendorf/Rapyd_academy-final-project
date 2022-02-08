@@ -1,6 +1,9 @@
+import { getAllIndividualsAccountsById } from "../individual/individual.db.js";
 import { IFamily } from "../types/types.js";
 import * as DB_FAMILY from "./family.db.js"
-  export async function createFamilyAccount(family:IFamily):Promise<any>{
+  export async function createFamilyAccount(family:IFamily,):Promise<any>{
+    const individualIds = 
+   await DB_ACCOUNT.getAllIndividualsAccountsById()
     return await DB_FAMILY.createFamilyAccount(family);
    }
    

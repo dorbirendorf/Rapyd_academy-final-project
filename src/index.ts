@@ -70,4 +70,4 @@ errorHanlers() {
 
 const api = new Api();
 
- api.startServer().then();
+ void api.startServer().then(()=>console.log("listning..."));
