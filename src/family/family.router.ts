@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
+import { IFamily } from "../types/types.js";
  import * as family_service from "./family.services.js";
 import { validateFamilyModel } from "./family.validator.js";
 
@@ -12,7 +14,7 @@ router.use(express.json());
 
 // CREATES A NEW FAMILY_ACOUNT
 router.post("/",validateFamilyModel,validateFamilyModel,raw( async (req:Request, res:Response) => {
-    const ans = await family_service.createFamilyAccount(req.accounts[0]);
+    const ans = await family_service.createFamilyAccount(req.accounts[0] as Partial<IFamily>,req.body.owners,req.body.currency);
     res.status(200).json(ans);
   }));
 

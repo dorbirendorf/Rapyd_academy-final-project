@@ -1,9 +1,14 @@
-import { getAllIndividualsAccountsById } from "../individual/individual.db.js";
-import { IFamily } from "../types/types.js";
-import * as DB_FAMILY from "./family.db.js"
-  export async function createFamilyAccount(family:IFamily,):Promise<any>{
-    const individualIds = 
-   await DB_ACCOUNT.getAllIndividualsAccountsById()
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { IAccount, IFamily } from "../types/types.js";
+import * as DB_FAMILY from "./family.db.js";
+import * as DB_ACCOUNT from "../account/account.db.js";
+import { validateFamilyAccounts } from "./family.validator.js";
+
+
+  export async function createFamilyAccount(family:Partial<IFamily>,owners:[number,number][],currency):Promise<any>{
+    const individualIds = owners.map((owner)=>owner[1]);
+    const accounts:IAccount[] = await DB_ACCOUNT.getAllIndividualsAccountsById(individualIds);
+    validateFamilyAccounts(accounts,owners,currency);
     return await DB_FAMILY.createFamilyAccount(family);
    }
    

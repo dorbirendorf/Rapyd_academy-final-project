@@ -6,7 +6,7 @@ import { db } from "../db/sql/sql.connection.js";
 import promise from "bluebird";
 import { IFamily, IIndividual } from "../types/types.js";
 
-export async function createFamilyAccount(family: IFamily): Promise<number> {
+export async function createFamilyAccount(family: Partial<IFamily>): Promise<number> {
     const accountRes = await createRow("account", { currency: family.currency, balance: family.balance, status: true, type: "family" })
     await createRow("business", { account_id: (accountRes as OkPacket).insertId, context: family.context})
     return (accountRes as OkPacket).insertId;
