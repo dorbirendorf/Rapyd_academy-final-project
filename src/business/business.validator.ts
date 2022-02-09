@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction} from "express";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
 import {MISSING_REQUIRED_FIELD, COMPANY_ID_LENGTH, INVALID_FILED} from '../types/constants.js';
-import {IBusiness,Statuses } from "../types/types.d.js";
+import {IBusiness } from "../types/types.d.js";
 import { validIndividualId } from "../utils/validationFunc.js";
 
 export function validateBusinessModel(req:Request,res:Response,next:NextFunction):void {
