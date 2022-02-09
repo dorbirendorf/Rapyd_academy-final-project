@@ -46,9 +46,9 @@ async function addOwnersToFamily(account: IFamily): Promise<IFamily> {
 }
 
 export async function getAllFamilyMembers(familyId: number): Promise<IIndividual[]> {
-    const [rows] = await db.query(`SELECT * FROM accounts JOIN individual on accounts.primary_id =  individual.accounts_id
+    const [rows] = await db.query(`SELECT * FROM account JOIN individual on account.primary_id =  individual.account_id
     JOIN address on address.address_id = individual.address_id
-    JOIN family_individuals on family_individuals.individual_id = individual.accounts_id
+    JOIN family_individuals on family_individuals.individual_id = individual.account_id
     where family_individuals.family_id = ?`, [familyId])
     if(!((rows as RowDataPacket[])[0])){
         return []
@@ -69,3 +69,4 @@ export async function removeIndividualsFromFamilyAccount(familyId: string, paylo
     await db.query(`DELETE FROM family_individuals WHERE family_id = ${familyId} AND (${orString})`)
 }
 
+///extract family

@@ -32,12 +32,13 @@ export async function updateMultipleRowsById(tableName:string,objData:object[],o
     const data_name = Object.keys(objData[0])[0];
     let whenStrings:string = "";
     for (let i = 0; i < objData.length;i++){
-        let line:string = " WHEN " + Object.keys(objId[i])[0] +" = " + Object.values(objId[i])[0] + " THEN "+ Object.keys(objData[i])[1]
+        let line:string = " WHEN " + Object.keys(objId[i])[0] +" = " + Object.values(objId[i])[0] + " THEN "+ Object.values(objData[i])[0]
         whenStrings = whenStrings + line;
     }
-    const orString = objId.map(obj => Object.entries(obj)[0]).map(pair => "account_id = " + pair[0].toString()).join(" OR ")
-
-    const [rows] = await db.query("UPDATE "+ tableName+" SET "+data_name+" = CASE "+whenStrings+" END WHERE" + orString);
+    const orString = objId.map(obj => Object.entries(obj)[0]).map(pair => pair[0].toString() + " = " + pair[1].toString()).join(" OR ")
+    console.log("UPDATE "+ tableName+" SET "+data_name+" = CASE "+whenStrings+" END WHERE " + orString)
+    const [rows] = await db.query("UPDATE "+ tableName+" SET "+data_name+" = CASE "+whenStrings+" END WHERE " + orString);
+    console.log(rows)
     return rows
     }
 
