@@ -12,6 +12,9 @@ const router = express.Router();
 router.use(express.json());
 
 // CREATES A NEW BUSINESS_ACOUNT
+router.get("/",raw(validateBusinessModel),raw (async (req:Request, res:Response) => {
+  throw new Error("Account ballance too low - blabla");
+}))
 router.post("/",raw(validateBusinessModel),raw( async (req:Request, res:Response) => {
     const id = await business_service.createBusinessAccount(req.body);
     const ans = await business_service.getBusinessAccountById(id);
