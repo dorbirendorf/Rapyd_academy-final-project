@@ -14,6 +14,9 @@ export async function createIndividualAccount(individual: Partial<IIndividual>):
 export async function getIndividualAccountById(accountId: number): Promise<IIndividual> {
    const [rows] = await db.query(`SELECT * FROM individual JOIN account on individual.account_id = account.primary_id
    JOIN address on address.address_id = individual.address_id WHERE individual.account_id = ?`, [accountId])
+   if(!((rows as RowDataPacket[])[0])){
+      throw new Error("Data not found")
+   }
    const individual = extractIndividualFromObj((rows as RowDataPacket[])[0] as IIndividualFromDB)
    return individual
 }
@@ -22,6 +25,9 @@ export async function getAllIndividualsAccountsById(payload: [number, number][])
    const orString = payload.map(pair => "account_id = " + pair[0].toString()).join(" OR ")
    const [rows] = await db.query(`SELECT * FROM individual JOIN account on individual.account_id = account.primary_id
    JOIN address on address.address_id = individual.address_id WHERE ${orString}`)
+   if(!((rows as RowDataPacket[])[0])){
+      throw new Error("Data not found")
+   }
    const individuals = ((rows as RowDataPacket[]) as IIndividualFromDB[]).map(extractIndividualFromObj)
    
    return individuals

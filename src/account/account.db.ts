@@ -3,18 +3,23 @@
 // /* eslint-disable prefer-const */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { updaetRowById } from "../db.utils.js";
+import { log } from "console";
+import { sqlRes, updaetRowById, updateMultipleRowsById } from "../db.utils.js";
 import { IAccount } from "../types/types.js";
 
-   export async function updateAccountStatus(primary_id:number,status:boolean):Promise<void>{ 
-        await updaetRowById("account",{status},{primary_id});
+   export async function updateAccountStatus(primary_id:number[],status:boolean):Promise<sqlRes>{ 
+        const idsArray = primary_id.map(account_id=>{return {account_id}})
+        const statusArray = primary_id.map(()=>{return {status}})
+        const res = await updateMultipleRowsById("account",statusArray,idsArray);
+        console.log(res);
+        return res
     }
 
-    export async function updateAccountBalance(primary_id:number,balance:number):Promise<void>{ 
-        await updaetRowById("account",{balance},{primary_id});
+    export async function updateAccountBalance(idsAndBalances:[number,number][]):Promise<sqlRes>{ 
+        const idsArray = idsAndBalances.map(pair=> {return{account_id:pair[0]}})
+        const balanceArray = idsAndBalances.map(pair=> {return{balance:pair[1]}})
+        const res =  await updaetRowById("account",balanceArray,idsArray);
+        console.log(res);
+        return res
     }
 
-    export async function getAccountsById(account:number):Promise<IAccount>{ 
-        //implentation
-        return {} as IAccount;
-        }

@@ -9,12 +9,39 @@ export async function createRow(tableName:string,objData: object) :Promise<sqlRe
     return rows;
 }
 
+export async function createMultipleRows(tableName:string,objData: object[]) :Promise<sqlRes> {
+    const parameters = Object.keys(objData[0]).join(",");
+    const questionMarks = objData.map(()=>`(${parameters.split(",").map(() => "?").join(",")})`).join(",");
+    const splitedValues = objData.map(obj=> Object.values(obj)).
+    reduce((prev,curr) => {
+        prev.push(curr);
+        return prev as string[];
+    },[])
+    const [rows] = await db.query("INSERT INTO "+ tableName+" ("+parameters+")  VALUES ("+questionMarks+")",splitedValues);
+    return rows;
+}
+
 export async function updaetRowById(tableName:string,objData: object, objId:object):Promise<sqlRes> {
     const setString = Object.entries(objData).map(pair=> pair[0] + " = " + pair[1]).join(", ");
     const whereString = Object.keys(objId)[0] + " = " +Object.values(objId)[0];
     const [rows] = await db.query("UPDATE "+ tableName+" SET "+setString+" WHERE " + whereString);
     return rows;
 }
+
+export async function updateMultipleRowsById(tableName:string,objData:object[],objId:object[]):Promise<sqlRes> {
+    const data_name = Object.keys(objData[0])[0];
+    let whenStrings:string = "";
+    for (let i = 0; i < objData.length;i++){
+        let line:string = " WHEN " + Object.keys(objId[i])[0] +" = " + Object.values(objId[i])[0] + " THEN "+ Object.keys(objData[i])[1]
+        whenStrings = whenStrings + line;
+    }
+    const orString = objId.map(obj => Object.entries(obj)[0]).map(pair => "account_id = " + pair[0].toString()).join(" OR ")
+
+    const [rows] = await db.query("UPDATE "+ tableName+" SET "+data_name+" = CASE "+whenStrings+" END WHERE" + orString);
+    return rows
+    }
+
+
 
 export async function deleteRowById(tableName:string, objId:object):Promise<sqlRes> {
     const whereString = Object.keys(objId)[0] + " = " +Object.values(objId)[0];
