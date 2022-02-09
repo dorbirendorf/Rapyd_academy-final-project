@@ -25,7 +25,7 @@ export function validateIndividualModel(req:Request,res:Response,next:NextFuncti
 
     validIndividualId(INDIVIDUAL_ID_LENGTH,individual_id as number);
 
-    const account:Partial <IIndividual> = {first_name,last_name,currency,individual_id,email,address,balance,status:Statuses.Active};
+    const account:Partial <IIndividual> = {first_name,last_name,currency,individual_id,email,address,balance,status:true};
     console.log("Iaccount valid!",account);
     req.accounts=[account];
     next()

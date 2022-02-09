@@ -17,7 +17,7 @@ export function validateBusinessModel(req:Request,res:Response,next:NextFunction
     }  
     validIndividualId(COMPANY_ID_LENGTH,company_id as number);
     
-    const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:Statuses.Active};
+    const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:true};
     req.accounts=[account];
     console.log("valid",account)
     next()

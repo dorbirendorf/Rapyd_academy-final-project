@@ -6,7 +6,7 @@
   "type": "module",
   "types": "./typings",
   "scripts": {
-    "build": "rm -rf dist && swc src -d dist",
+    "build": "rm -rf dist && tsc && swc src -d dist",
     "build-dev": "npm run build && node dist/index.js",
     "dev": "nodemon",
     "start": "npm run build && NODE_ENV=production node dist/index.js",
@@ -74,6 +74,7 @@
     "mysql2": "^2.3.3",
     "node-cron": "^3.0.0",
     "node-fetch": "^3.2.0",
+    "ts-node": "^10.5.0",
     "uuid": "^3.4.0"
   },
   "repository": {
