@@ -1,0 +1,89 @@
+1bb9bb12-de0f-4a50-bcef-62da04e2dc9f -- Wed Feb 09 2022 10:00:50 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+925cd84d-3a95-4471-9301-ed289a0955fa -- Wed Feb 09 2022 10:01:56 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+87caf165-e0d5-4404-b3a8-339273d9186a -- Wed Feb 09 2022 10:02:16 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+bf12f88b-a5e3-420e-80ca-fb4084f5cfe1 -- Wed Feb 09 2022 10:02:55 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+865f438a-c8af-4905-987d-fd9e453e568b -- Wed Feb 09 2022 10:04:30 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+4fec473d-0eb8-4f79-8041-88c5cb55c956 -- Wed Feb 09 2022 10:05:32 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+954545ec-fe75-4b36-831d-bec237977f11 -- Wed Feb 09 2022 10:05:54 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+5b66da43-dff5-45f3-9088-30390d80a94b -- Wed Feb 09 2022 10:06:31 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+54181cf4-bc06-4974-bd51-4ad438f965c6 -- Wed Feb 09 2022 10:07:03 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low - blabla
+    at validateBusinessModel (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/business/business.validator.js:6:11)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/body-parser/lib/types/json.js:110:7)
+277a2718-1086-4a47-baa6-42f68fb29a51 -- Wed Feb 09 2022 10:09:41 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+6a18fa53-6eac-4eca-858b-46717d1606c1 -- Wed Feb 09 2022 10:16:39 GMT+0200 (Israel Standard Time) 
+ --> Error: somthing went wrong
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:36:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+b501e3b3-3582-4a4c-8a0a-38f357e8b66e -- Wed Feb 09 2022 10:16:51 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+84a2e16e-4e30-40a2-9734-4bf4558e68a4 -- Wed Feb 09 2022 10:17:21 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
+97c27168-a390-43d5-ab9f-a3201d8566ee -- Wed Feb 09 2022 10:17:32 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low - blabla
+    at validateBusinessModel (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/business/business.validator.js:6:11)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:2:57
+    at Layer.handle [as handle_request] (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/index.js:341:12)
+    at next (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/node_modules/body-parser/lib/types/json.js:110:7)
+32c1e6fe-3c0d-472f-adfc-c3b691c62683 -- Wed Feb 09 2022 10:21:28 GMT+0200 (Israel Standard Time) 
+ --> Error: Account ballance too low
+    at httpErrorFactoryClass.createError (file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/exceptions/errorFactoryClass.js:32:28)
+    at file:///Users/meirshtarkman/Desktop/Academy/FinaleProject/finalproject-myfork/dist/middleware/route.async.wrapper.js:4:31
+    at processTicksAndRejections (node:internal/process/task_queues:94:5)
