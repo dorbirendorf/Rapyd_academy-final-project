@@ -1,5 +1,5 @@
 import { IAccount } from "../types/types.js";
-import {ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, } from '../types/constants.js';
+import {ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, SOMTHING_WENT_WRONG, } from '../types/constants.js';
 import { amountPositive } from "./validationFunc.js";
 
 
@@ -52,6 +52,23 @@ export function allowTransfers(accounts:IAccount[],amount : number,minBalance:nu
    }
      return true;
 }
+export function checkLimitTransfer(type:string,amount:number,sourceName?:string, destName?:string):boolean{
+   let limitTransfer = 0;
+   if(type === "B2I"){
+      limitTransfer = 1000;
+   }
+   if(type === "F2B"){
+      limitTransfer = 5000;
+   }
+   if(type === "B2B"){
+      limitTransfer = (sourceName=== destName) ? 10000 :1000;
+   }
+   if(amount>limitTransfer){
+      throw new Error(`${SOMTHING_WENT_WRONG}- transfer is limited to ${limitTransfer}`);
+   }
+   return true;
+}
+
 
 //  //   async function getRate(base:string, currency:string) {
 //  //     try{

@@ -18,6 +18,7 @@ export function amountPositive(amount:number):void{
    }
 }
 
+
 //[account_id,amount]
 export function sumFamilyAmounts(tupels:[number,number][],minBalance:number):void{
    const sum:number = tupels.reduce((prev,tupel)=>tupel[1]+ prev,0);

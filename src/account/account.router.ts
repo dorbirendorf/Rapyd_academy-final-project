@@ -29,19 +29,27 @@ router.post("/transfer/b2b",raw(validateTransferModel),raw( async (req:Request, 
     res.status(201).json(resMessage);
 }));
 
+  //TRANSFER ACCOUNT B2I
+  router.post("/transfer/b2i",raw(validateTransferModel),raw( async (req:Request, res:Response) => {
+    const ans = await account_service.transferB2I(req.body);
+    const resMessage : httpResponseMessage ={
+      status: 201,
+      message: "transfer comleted",
+      data: ans
+    }; 
+      res.status(201).json(resMessage);
+  }));
 
-
-  // //TRANSFER ACCOUNT B2I
-  // router.post("/transfer/b2i",raw( async (req:Request, res:Response) => {
-  //   const ans = await account_service.transferB2I(req.body);
-  //   res.status(200).json(ans);
-  // }));
-
-  //  //TRANSFER ACCOUNT F2B
-  //  router.post("/transfer/f2b",raw( async (req:Request, res:Response) => {
-  //   const ans = await account_service.transferF2B(req.body);
-  //   res.status(200).json(ans);
-  // }));
+   //TRANSFER ACCOUNT F2B
+   router.post("/transfer/f2b",raw(validateTransferModel),raw( async (req:Request, res:Response) => {
+    const ans = await account_service.transferF2B(req.body);
+    const resMessage : httpResponseMessage ={
+      status: 201,
+      message: "transfer comleted",
+      data: ans
+    }; 
+      res.status(201).json(resMessage);
+  }));
 
   //   //TRANSFER ACCOUNT B2BFX
   //   router.post("/transfer/b2bfx",raw( async (req:Request, res:Response) => {
