@@ -3,7 +3,7 @@
 import { createRow, selectRowById } from "../db.utils.js";
 import { OkPacket, RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
-import { IIndividual, IIndividualFromDB } from "../types/types.js";
+import { IFamily, IIndividual, IIndividualFromDB } from "../types/types.js";
 
 export async function createIndividualAccount(individual: Partial<IIndividual>): Promise<number> {
    const accountRes = await createRow("account", { currency: individual.currency, balance: individual.balance, status: true, type: "individual" })
@@ -37,12 +37,10 @@ export async function checkIfIndivdualExistByIndividualId(individual_id: number)
    return rows.length > 0;
 }
 
-export function extractIndividualFromObj(obj: IIndividualFromDB): IIndividual {
-   const { account_id, currency, balance, status, type, individual_id, first_name, last_name, email,
-      address_id, country_name, country_code, postal_code, city, region, street_name, street_number } = obj
-   const individual: IIndividual = { account_id, currency, balance, status, type, individual_id, first_name, last_name, email };
-   individual.address = { address_id, country_name, country_code, postal_code, city, region, street_name, street_number }
-   return individual
+export function extractFamilyFromObj(obj: IFamily): IFamily {
+   const { account_id, currency, balance, status, type, context,  } = obj
+   const family: IFamily = { account_id, currency, balance, status, type,context};
+   return family
 }
 
 

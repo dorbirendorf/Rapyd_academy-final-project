@@ -3,7 +3,7 @@
 // /* eslint-disable prefer-const */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { sqlRes, updaetRowById, updateMultipleRowsById } from "../db.utils.js";
+import { sqlRes, updateMultipleRowsById } from "../db.utils.js";
 import { IAccount } from "../types/types.js";
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
