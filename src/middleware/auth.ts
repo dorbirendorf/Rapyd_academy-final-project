@@ -1,3 +1,31 @@
+import {createSignture} from "../utils/utils.js"
+import {getSecretKeyByAccessKey} from "../account/account.services.js"
+import { Request,Response,NextFunction } from "express";
+import { NOT_AUTHORIZED } from "../types/constants.js";
+
+export const auth = 
+    async (req: Request, res: Response, next: NextFunction):Promise<void> => {
+        const reqSignture = req.headers.get("x-signture") ;
+        const access_key  = req.headers.get("x-access_key");
+        const timeStamp   = Number(req.headers.get("x-timeStamp")) || undefined; 
+
+        const secret = getSecretKeyByAccessKey(access_key);
+        const signature2 =  createSignture(req.body as Object,secret,timeStamp);
+
+        const signturesMatch = (reqSignture===signature2);
+        
+        if (!reqSignture || !access_key  || !signturesMatch){
+            throw new Error(NOT_AUTHORIZED)
+
+         }
+
+        next();
+    }
+;
+
+
+
+
 // import raw from "./route.async.wrapper.js";
 // import { NextFunction, Response, Request } from "express";
 // import jwt from "jsonwebtoken";

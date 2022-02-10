@@ -6,7 +6,7 @@ import { db } from "../db/sql/sql.connection.js";
 import { IIndividual, IIndividualFromDB } from "../types/types.js";
 import {createAccount,createAddress} from "../account/account.db"
 
-export async function createIndividualAccount(individual: IIndividual): Promise<number> {
+export async function createIndividualAccount(individual: Partial<IIndividual>): Promise<number> {
    const account_id = await createAccount(individual,"individual");
    const address_id = await createAddress(individual.address);
   await createRow("individual", { account_id, individual_id: individual.individual_id, first_name: individual.first_name, last_name: individual.last_name, email: individual.email, address_id})

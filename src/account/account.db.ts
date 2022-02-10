@@ -9,7 +9,7 @@ import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 
 
-export async function updateAccountStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
+export async function updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
     const idsArray = primary_ids.map(primary_id => { return { primary_id } })
     const statusArray = primary_ids.map(() => { return { status } })
     const res = await updateMultipleRowsById("account", statusArray, idsArray);
