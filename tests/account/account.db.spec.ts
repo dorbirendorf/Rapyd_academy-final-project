@@ -8,6 +8,26 @@
 // describe("account db functions ", () => {
 //     context("updateAccountStatus ", () => {
   
+<<<<<<< HEAD
+        it("should be function", () => {
+            expect(updateAccountStatus).to.be.a("Function");
+        });
+        it("should return undefined if ok ", async () => {
+            const res = await updateAccountStatus([2,4,6],true);
+            expect(res).to.be.eqls({fieldCount: 0,
+                affectedRows: 3,
+                insertId: 0,
+                info: 'Rows matched: 3  Changed: 0  Warnings: 0',
+                serverStatus: 2,
+                warningStatus: 0,
+                changedRows: 0}
+              )
+        });
+        // it("should throw error if not ok ", () => {
+        //     expect(()=>updateAccountStatus(2000,1000)).to.throw();
+        // });
+    });
+=======
 //         it("should be function", () => {
 //             expect(updateAccountStatus).to.be.a("Function");
 //         });
@@ -27,6 +47,7 @@
 //         //     expect(()=>updateAccountStatus(2000,1000)).to.throw();
 //         // });
 //     });
+>>>>>>> upstream/main
 
 //     context("updateAccountBalance ", () => {
   

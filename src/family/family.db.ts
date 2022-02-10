@@ -1,14 +1,15 @@
 // /* eslint-disable prefer-const */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createMultipleRows, createRow, selectRowByIdWithJoin, sqlRes } from "../db.utils.js";
-import { OkPacket , RowDataPacket} from "mysql2";
+import { RowDataPacket} from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
-import { IFamily, IIndividual ,IIndividualFromDB} from "../types/types.js";
+import { IAccount, IFamily, IIndividual ,IIndividualFromDB} from "../types/types.js";
 import {extractIndividualFromObj} from "../individual/individual.db.js"
+import { createAccount } from "../account/account.db.js";
 export async function createFamilyAccount(family: Partial<IFamily>): Promise<number> {
-    const accountRes = await createRow("account", { currency: family.currency, balance: family.balance, status: true, type: "family" })
-    await createRow("business", { account_id: (accountRes as OkPacket).insertId, context: family.context})
-    return (accountRes as OkPacket).insertId;
+    const account_id = await createAccount(family as IAccount,"family")
+    await createRow("business", { account_id, context: family.context})
+    return account_id;
 }
 
 
@@ -17,7 +18,7 @@ export async function getFamilyAccountByIdShort(accountId: number): Promise<IFam
     if(!((accountRes as RowDataPacket[])[0])){
         throw new Error("Data not found")
      }
-    const familyAccount = addOwners_idToFamily((accountRes as RowDataPacket[])[0] as IFamily)
+    const familyAccount = addOwners_idToFamily(extractFamilyFromObj((accountRes as RowDataPacket[])[0] as IFamily))
     return familyAccount;
 }
 
@@ -36,7 +37,8 @@ export async function getFamilyAccountByIdFull(familyId: number): Promise<IFamil
     if(!((accountRes as RowDataPacket[])[0])){
         throw new Error("Data not found")
      }
-    const familyAccount = addOwnersToFamily((accountRes as RowDataPacket[])[0] as IFamily)
+
+    const familyAccount = addOwnersToFamily(extractFamilyFromObj((accountRes as RowDataPacket[])[0] as IFamily))
     return familyAccount;
 }
 
@@ -69,4 +71,8 @@ export async function removeIndividualsFromFamilyAccount(familyId: string, paylo
     await db.query(`DELETE FROM family_individuals WHERE family_id = ${familyId} AND (${orString})`)
 }
 
-///extract family
+export function extractFamilyFromObj(obj: IFamily): IFamily {
+    const { account_id, currency, balance, status,agent_id, type, context,  } = obj
+    const family: IFamily = { account_id, currency, balance,agent_id, status, type,context};
+    return family
+ }

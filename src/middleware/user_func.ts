@@ -10,7 +10,7 @@ export function addIdToReq(req:Request, res:Response, next:NextFunction):void {
 }
 
 export function logRequest() : RequestHandler {
-    const requestsFileLogger = fs.createWriteStream("./src/log/http.log", { flags: 'a' });
+    const requestsFileLogger = fs.createWriteStream("./src/log/http.log", { flags: 'a+' });
     return function (req: Request, res: Response, next: NextFunction) : void {
         requestsFileLogger.write(`${req.method} , ${req.originalUrl} , ${req.id} -- ${getTimeString()}\n`);
         next();

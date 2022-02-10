@@ -4,4 +4,4 @@ export declare function checkBalance(minimalBalance: number, balance: number): v
 export declare function amountPositive(amount: number): void;
 export declare function sumFamilyAmounts(tupels: [number, number][], minBalance: number): number;
 export declare function initRequiredParams(): Map<string, string[]>;
-export declare function validateAccountId(req: Request, res: Response, next: NextFunction): Promise<void>;
+export declare function validateAccountId(req: Request, res: Response, next: NextFunction): void;
