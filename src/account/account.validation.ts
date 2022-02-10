@@ -60,6 +60,7 @@ export async function validateStatus(req:Request,res:Response,next:NextFunction)
    }
    next();
 }
+
 export function validateStatusAccounts(accounts:IAccount[],accountsId:number[], action:boolean):void {
 accountsTypes(accounts,["individual", "business"]);
 checkProperState(accounts,!action);
