@@ -12,7 +12,7 @@ describe("account db functions ", () => {
             expect(updateAccountStatus).to.be.a("Function");
         });
         it("should return undefined if ok ", async () => {
-            const res = await updateAccountStatus(1,true);
+            const res = await updateAccountStatus(10000,true);
             expect(res).to.be.undefined
         });
         // it("should throw error if not ok ", () => {

@@ -7,7 +7,7 @@ import { updaetRowById } from "../db.utils.js";
 import { IAccount } from "../types/types.js";
 
    export async function updateAccountStatus(primary_id:number,status:boolean):Promise<void>{ 
-        await updaetRowById("account",{status},{primary_id});
+         await updaetRowById("account",{status},{primary_id});
     }
 
     export async function updateAccountBalance(primary_id:number,balance:number):Promise<void>{ 
