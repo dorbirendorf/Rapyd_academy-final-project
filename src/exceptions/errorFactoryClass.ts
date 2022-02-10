@@ -6,6 +6,7 @@ import {HttpInvalidFieldError} from "./HttpInvalidFieldError.js"
 import {HttpInvalidFieldValueError} from "./HttpInvalidFieldValueError.js";
 import {HttpMissingRequieredFieldError} from "./HttpMissingRequieredFieldError.js"
 import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.js"
+import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
 
 class httpErrorFactoryClass{
@@ -32,6 +33,9 @@ class httpErrorFactoryClass{
             }
             case "Data not found": {
                 return new HttpDataNotFound(description);
+            } 
+            case "Invalid amount": { 
+                return new HttpInvalidAmountError(description);
             } 
             default: { 
                return new HttpError("somthing went wrong",500);
