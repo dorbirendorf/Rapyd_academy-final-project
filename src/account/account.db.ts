@@ -17,7 +17,7 @@ export async function updateAccountsStatus(primary_ids: number[], status: boolea
     return res
 }
 
-export async function updateAccountBalance(idsAndBalances: [number, number][]): Promise<sqlRes> {
+export async function updateAccountsBalance(idsAndBalances: [number, number][]): Promise<sqlRes> {
     const idsArray = idsAndBalances.map(pair => { return { primary_id: pair[0] } })
     const balanceArray = idsAndBalances.map(pair => { return { balance: pair[1] } })
     const res = await updateMultipleRowsById("account", balanceArray, idsArray);

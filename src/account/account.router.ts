@@ -21,7 +21,7 @@ router.post("/",raw(validateStatus),raw( async (req:Request, res:Response) => {
       message: "accounts status update comleted",
       data: ans
     }; 
-      res.status(201).json(resMessage);  }));
+      res.status(201).json(resMessage);}));
 
   //TRANSFER ACCOUNT B2B
 router.post("/transfer/b2b",raw(validateTransferModel),raw( async (req:Request, res:Response) => {
