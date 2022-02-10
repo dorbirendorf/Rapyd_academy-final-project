@@ -1,24 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-console */
-// import jwt from "jsonwebtoken";
+
 import uuid from "uuid";
 import fetch from "node-fetch";
-
-// import { exec } from "child_process";
-// import fetch from "node-fetch";
-
-// const {
-//     ACCESS_TOKEN_EXPIRATION,
-//     REFRESH_TOKEN_EXPIRATION,
-//     APP_SECRET,
-//     DB_NAME,
-// } = process.env;
+import crypto,{ KeyObject } from "crypto";
+//import buffer from "buffer"
 
 
 export function generateID():string{
     // return Math.random().toString(32).slice(2);
     return uuid.v4();
 }
+
 export function getTimeString():string {
     const date = new Date();
     return `${date.toDateString()} ${date.toTimeString()}`;
@@ -34,6 +27,17 @@ export async function convertCurrency(base:string,target:string,amount:number):P
   const data:any = await res.json()
   const rate = data.rates[target]
   return (rate as number)*amount;
+}
+
+export  function createSignture(data:Object,secret:KeyObject,time?:number):string{
+  
+  // Convert Stringified json data to buffer  
+  const dataBuff = Buffer.from( JSON.stringify({data,time}) );
+  
+  // Sign the data and returned signature
+  const signature = crypto.sign(undefined, dataBuff , secret).toString('base64');
+
+  return signature;
 }
 
 
