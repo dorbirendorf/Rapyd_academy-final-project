@@ -15,7 +15,7 @@ export async function validateIndividualModel(req:Request,res:Response,next:Next
     if(!(first_name && last_name && currency && individual_id && agent_id)){
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
-    if(!(typeof first_name ==="string" && typeof last_name ==="string" && typeof currency === "string" )){
+    if(!(typeof first_name ==="string" && typeof last_name ==="string" && typeof currency === "string")){
         throw new Error(`${INVALID_FILED_VALUE} - type of first name, last name and currency should be stirng `);
     }
 
