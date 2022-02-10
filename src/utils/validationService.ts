@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { IAccount, IFamily, transferType } from "../types/types.js";
+import { IAccount, transferType } from "../types/types.js";
 import {ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE, SOMTHING_WENT_WRONG } from '../types/constants.js';
 
 
@@ -49,20 +49,6 @@ export function accountsActive(accounts:IAccount[]):boolean{
    return true;
    } 
   
- 
-
-  //excepted to get accounts with amount.
-  //minBalance we get when use func.
-//   export function checkAmountBalance(accounts:IAccount[],minBalance:number):boolean{
-//       const allCurrency:boolean = accounts.every(acc=>{
-//          amountPositive(acc.amount as number);
-//          acc.balance-(acc.amount as number)>minBalance
-//       });
-//       if (!allCurrency){
-//          throw new Error(`${INVALID_FILED_VALUE}- not all accounts are fdggfdd`)
-//       }
-//    return true;
-// }
 export function allowTransfers(accounts:IAccount[],amount : number,minBalance:number):boolean{
      const allTransfers:boolean = accounts.every(acc=>(acc.balance-amount>minBalance));
      if (!allTransfers){

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE } from "../types/constants.js";
 import { Request, Response, NextFunction} from "express";
@@ -36,7 +37,7 @@ export function initRequiredParams() : Map<string, string[]> {
    requiredParams.set('family', ['owners', 'currency']);
    return requiredParams;
  }
- export function validateAccountId(req:Request,res:Response,next:NextFunction):void {
+ export async function validateAccountId(req:Request,res:Response,next:NextFunction):Promise<void> {
    const {id} = req.params;
    
    if((id === "undefined")||(isNaN(Number(id)))){

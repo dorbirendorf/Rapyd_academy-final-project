@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { KeyObject } from "crypto";
-import { IAccount, ITransfer } from "../types/types.js";
+import { ITransfer } from "../types/types.js";
 import { getRate } from "../utils/utils.js";
 import * as DB_ACCOUNT from "./account.db.js"
 import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B ,validateStatusAccounts} from "./account.validation.js";
@@ -25,7 +25,6 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
      }
 
      export async function transferB2BFX(payload:ITransfer):Promise<string>{
-
       let {source,destination,amount} = payload;
        //let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
       // let destTransfer = await DB_BUSINESS.getAccountsById(destination);
@@ -64,13 +63,11 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
       return ans;
      }
 
-     export async function getSecretKeyByAccessKey(accessKey):Promise<KeyObject>{
-        console.log(accessKey);
-        throw new Error("not implemeted yet")
-     }
-   //   export async function transferB2BFX(payload:any):Promise<void>{
-   //    return await DB_ACCOUNT.transferB2BFX(payload);
+   //   export async function getSecretKeyByAccessKey(accessKey):Promise<KeyObject>{
+   //      console.log(accessKey);
+   //      throw new Error("not implemeted yet")
    //   }
+
   
      export async function exectueTransfer(srcId:number, srcBalance:number, destId:number, srcCurr:string, destCurr:string, destBalance:number,amount:number,FX=1):Promise<string>{
       srcBalance= srcBalance - amount*FX;

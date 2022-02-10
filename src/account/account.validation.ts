@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import { amountPositive } from "../utils/validationFunc.js";
 import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
@@ -20,7 +21,7 @@ export function validateAccountMandatoryFields(currency:string,balance:number):v
     }
  }
  
- export function validateTransferModel(req:Request,res:Response,next:NextFunction):void {
+ export async function validateTransferModel(req:Request,res:Response,next:NextFunction):Promise<void> {
      let {source, destination, amount} = req.body;
      if(!(source && destination && amount)){
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
@@ -48,7 +49,7 @@ export function validateTransferAccounts(source:IAccount,dest:IAccount,amount:nu
     allowTransfers([source],amount,limit);
 
 }
-export function validateStatus(req:Request,res:Response,next:NextFunction):void {
+export async function validateStatus(req:Request,res:Response,next:NextFunction):Promise<void> {
     let {accounts,action} = req.body;
     if(!(accounts && action && accounts.length>0)){
        throw new Error(`${MISSING_REQUIRED_FIELD}`);
