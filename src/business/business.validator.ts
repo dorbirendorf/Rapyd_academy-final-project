@@ -6,10 +6,10 @@ import {IBusiness } from "../types/types.d.js";
 import { validIndividualId } from "../utils/validationFunc.js";
 
 export async function validateBusinessModel(req:Request,res:Response,next:NextFunction):Promise<void> {
-    const {company_id,company_name,context=null,currency,account_id,address=null,balance=0} = req.body;
+    const {company_id,company_name,context=null,currency,account_id,address=null,balance=0,agent_id} = req.body;
     validateAccountMandatoryFields(currency as string,balance as number);
 
-    if(!(company_id && company_name)){
+    if(!(company_id && company_name&&agent_id)){
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
     if (account_id !== undefined) {
@@ -17,7 +17,7 @@ export async function validateBusinessModel(req:Request,res:Response,next:NextFu
     }  
     validIndividualId(COMPANY_ID_LENGTH,company_id as number);
     
-    const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:true};
+    const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:true,agent_id};
     req.accounts=[account];
     console.log("valid",account)
     next()
