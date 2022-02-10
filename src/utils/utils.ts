@@ -4,21 +4,17 @@
 /* eslint-disable no-console */
 // import jwt from "jsonwebtoken";
 import uuid from "uuid";
-// import { exec } from "child_process";
 import fetch from "node-fetch";
-
-// const {
-//     ACCESS_TOKEN_EXPIRATION,
-//     REFRESH_TOKEN_EXPIRATION,
-//     APP_SECRET,
-//     DB_NAME,
-// } = process.env;
+//import crypto,{ KeyObject } from "crypto";
+//import buffer from "buffer"
+// import { exec } from "child_process";
 
 
 export function generateID():string{
     // return Math.random().toString(32).slice(2);
     return uuid.v4();
 }
+
 export function getTimeString():string {
     const date = new Date();
     return `${date.toDateString()} ${date.toTimeString()}`;

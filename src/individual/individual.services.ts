@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 // import { INVALID_FILED_VALUE } from "../types/constants.js";
 import * as DB_INDIVIDUAL from "./individual.db.js"
 import { IIndividual} from "../types/types.js";
@@ -9,15 +10,16 @@ import { INVALID_FILED_VALUE } from "../types/constants.js";
    }
     export async function getIndividualByAccountId(accountId:string):Promise<IIndividual>{
       //meir :if not found - throw....
-    return await DB_INDIVIDUAL.getIndividualByAccountId(Number(accountId));
+      return (await DB_INDIVIDUAL.getAllIndividualsAccountsById([Number(accountId)]))[0];
    }
 
    export async function getIndividualByIndividualId(individualId:number):Promise<any>{
-    let individual =  await DB_INDIVIDUAL.getIndividualByIndividualId(individualId);
+    let individual =  await DB_INDIVIDUAL.checkIfIndivdualExistByIndividualId(individualId);
     //meir : how response comeback? fix if.
-    if(individual!=="null"){
+    if(individual){
       throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
     }
+    return false;
    }
 
 
