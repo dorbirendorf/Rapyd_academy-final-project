@@ -17,6 +17,7 @@ import {
     SOMTHING_WENT_WRONG,
 } from "../types/constants.js";
 import { sumFamilyAmounts } from "../utils/validationFunc.js";
+import { convertTupelsToArray } from "../utils/utils.js";
 // import { validateFamilyAccounts } from "./family.validator.js";
 
 export async function createFamilyAccount(
@@ -34,6 +35,8 @@ export async function createFamilyAccount(
         individual_id: 6,
         first_name: "string",
         last_name: "string",
+        agent_id:1
+
     };
     let id2 = {
         account_id: 4,
@@ -44,6 +47,7 @@ export async function createFamilyAccount(
         individual_id: 6,
         first_name: "string",
         last_name: "string",
+        agent_id:1
     };
     let accounts = [id1, id2];
     validateAddToFamily(accounts, owners, currency);
@@ -101,7 +105,7 @@ export async function addIndividualsToFamilyAccount(
         owners.reduce((prev, owner) => owner[1] + prev, family.balance),
     ];
     IndividualSBalance.push(familyBalance);
-    await DB_ACCOUNT.updateAccountBalance(IndividualSBalance);
+    await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
     await DB_FAMILY.addIndividualsToFamilyAccount(
         family.account_id,
         individualIds
@@ -119,8 +123,7 @@ export async function removeIndividualsFromFamilyAccount(
     format: string
 ): Promise<any> {
     const family = await getFamilyAccountByIdFull(familyId);
-    const accounts: IIndividual[] =
-        await DB_INDIVIDUAL.getAllIndividualsAccountsById(owners);
+    const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(convertTupelsToArray(owners));
     validateRemoveFromFamily(accounts, owners, family);
     let removeBalance = 0;
     if ((family.owners as IIndividual[]).length === owners.length) {
@@ -130,18 +133,15 @@ export async function removeIndividualsFromFamilyAccount(
         removeBalance = sumFamilyAmounts(owners, MIN_FAMILY_BALANCE); //should be >=5000
     }
     let IndividualSBalance: [number, number][] = accounts.map((account) => {
-        const owner = owners.find((own) => own[0] === account.account_id) as [
-            number,
-            number
-        ];
+        const owner = owners.find((own) => own[0] === account.account_id) as [number,number];
         return [owner[0], account.balance + owner[1]];
     });
     const familyBalance: [number, number] = [
         family.account_id,
         family.balance - removeBalance,
     ];
-    let allUpdateBalance = IndividualSBalance.push(familyBalance);
-    await DB_ACCOUNT.updateAccountsBalance(allUpdateBalance);
+    IndividualSBalance.push(familyBalance);
+    await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
     await DB_FAMILY.removeIndividualsFromFamilyAccount(
         family.account_id,
         owners
@@ -152,3 +152,4 @@ export async function removeIndividualsFromFamilyAccount(
             : await DB_FAMILY.getFamilyAccountByIdShort;
     return ans;
 }
+

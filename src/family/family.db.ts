@@ -61,12 +61,12 @@ export async function getAllFamilyMembers(familyId: number): Promise<IIndividual
 }
 
 
-export async function addIndividualsToFamilyAccount(family_id: string, payload: number[]): Promise<sqlRes> {
+export async function addIndividualsToFamilyAccount(family_id: number, payload: number[]): Promise<sqlRes> {
     const res = await createMultipleRows("family_individuals",(payload.map(individual_id => {return {family_id,individual_id}})))
     return res;
 }
 
-export async function removeIndividualsFromFamilyAccount(familyId: string, payload: [number,number][]): Promise<void> {
+export async function removeIndividualsFromFamilyAccount(familyId: number, payload: [number,number][]): Promise<void> {
     const orString = payload.map(pair => "individual_id = " + String(pair[0])).join(" OR ")
     await db.query(`DELETE FROM family_individuals WHERE family_id = ${familyId} AND (${orString})`)
 }
