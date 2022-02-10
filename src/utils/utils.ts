@@ -5,24 +5,22 @@
 // import jwt from "jsonwebtoken";
 import uuid from "uuid";
 import fetch from "node-fetch";
-//import crypto,{ KeyObject } from "crypto";
-//import buffer from "buffer"
-// import { exec } from "child_process";
 
 
 export function generateID():string{
     // return Math.random().toString(32).slice(2);
     return uuid.v4();
 }
+
 export function convertTupelsToArray(tupels:[number,number][]):number[]{
   return tupels.map((tupel: [number, number]) => tupel[0]); 
 }
-
 
 export function getTimeString():string {
     const date = new Date();
     return `${date.toDateString()} ${date.toTimeString()}`;
 }
+
 export async function getRate(base:string, currency:string):Promise<number>{
      try{
        const base_url = `http://api.exchangeratesapi.io/latest`;
