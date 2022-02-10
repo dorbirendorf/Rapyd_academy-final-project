@@ -1,5 +1,5 @@
 // import { expect } from "chai";
-// import { updateAccountStatus,updateAccountBalance,getAccountsById } from "../../src/account/account.db.js";
+// import {getAccountsById } from "../../src/account/account.db.js";
 // import {connectDb} from "../../src/db/sql/sql.connection.js"
 
 // before(async()=>{

@@ -1,25 +1,25 @@
-// import { expect } from "chai";
-// import { getAllIndividualsAccountsById,createIndividualAccount,checkIfIndivdualExistByIndividualId,extractIndividualFromObj } from "../../src/individual/individual.db.js";
-// import {connectDb} from "../../src/db/sql/sql.connection.js"
+import { expect } from "chai";
+import { getAllIndividualsAccountsById,createIndividualAccount,checkIfIndivdualExistByIndividualId,extractIndividualFromObj } from "../../src/individual/individual.db.js";
+import {connectDb} from "../../src/db/sql/sql.connection.js"
 
-// before(async()=>{
-//    await connectDb()
-// })
-// describe("individual db functions ", () => {
-//     context("getAllIndividualsAccountsById ", () => {
+before(async()=>{
+   await connectDb()
+})
+describe("individual db functions ", () => {
+    context("getAllIndividualsAccountsById ", () => {
   
-//         it("should be function", () => {
-//             expect(getAllIndividualsAccountsById).to.be.a("Function");
-//         });
-//         it("should return undefined if ok ", async () => {
-//             const res = await getAllIndividualsAccountsById([2,4,6]);
-//             console.log(res)
-//             expect(res.length).to.be.eqls(3)
-//         });
-//         // it("should throw error if not ok ", () => {
-//         //     expect(()=>updateAccountStatus(2000,1000)).to.throw();
-//         // });
-//     });
+        it("should be function", () => {
+            expect(getAllIndividualsAccountsById).to.be.a("Function");
+        });
+        it("should return undefined if ok ", async () => {
+            const res = await getAllIndividualsAccountsById([2,4,6]);
+            console.log(res)
+            expect(res.length).to.be.eqls(3)
+        });
+        // it("should throw error if not ok ", () => {
+        //     expect(()=>updateAccountStatus(2000,1000)).to.throw();
+        // });
+    });
 
 //     // context("updateAccountBalance ", () => {
   
