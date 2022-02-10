@@ -4,6 +4,7 @@ export declare const MISSING_REQUIRED_FIELD = "Missing requiered field";
 export declare const ACCOUNT_NOT_EXIST = "Account does not exist";
 export declare const ACCOUNT_ALREADY_EXIST = "only 1 individual Account per person is allowed";
 export declare const ACCOUNT_BALLANCE_LOW = "Account ballance too low";
+export declare const DATA_NOT_FOUND = "Data not found";
 export declare const SOMTHING_WENT_WRONG = "somthing went wrong";
 export declare const INDIVIDUAL_ID_LENGTH = 7;
 export declare const COMPANY_ID_LENGTH = 8;
