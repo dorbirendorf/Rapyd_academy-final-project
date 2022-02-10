@@ -1,14 +1,16 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createRow, selectRowById } from "../db.utils.js";
-import { OkPacket, RowDataPacket } from "mysql2";
+import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
-import { IFamily, IIndividual, IIndividualFromDB } from "../types/types.js";
+import { IIndividual, IIndividualFromDB } from "../types/types.js";
+import {createAccount,createAddress} from "../account/account.db"
 
-export async function createIndividualAccount(individual: Partial<IIndividual>): Promise<number> {
-   const accountRes = await createRow("account", { currency: individual.currency, balance: individual.balance, status: true, type: "individual" })
-   await createRow("individual", { account_id: (accountRes as OkPacket).insertId, individual_id: individual.individual_id, first_name: individual.first_name, last_name: individual.last_name, email: individual.email, address_id: individual.address_id })
-   return (accountRes as OkPacket).insertId;
+export async function createIndividualAccount(individual: IIndividual): Promise<number> {
+   const account_id = await createAccount(individual,"individual");
+   const address_id = await createAddress(individual.address);
+  await createRow("individual", { account_id, individual_id: individual.individual_id, first_name: individual.first_name, last_name: individual.last_name, email: individual.email, address_id})
+   return account_id;
 }
 
 // export async function getIndividualAccountById(accountId: number): Promise<IIndividual> {
@@ -32,15 +34,18 @@ export async function getAllIndividualsAccountsById(payload: number[]): Promise<
    
    return individuals
 }
+
 export async function checkIfIndivdualExistByIndividualId(individual_id: number): Promise<boolean> {
    const rows = await selectRowById("individual",{individual_id});
    return rows.length > 0;
 }
 
-export function extractFamilyFromObj(obj: IFamily): IFamily {
-   const { account_id, currency, balance, status, type, context,  } = obj
-   const family: IFamily = { account_id, currency, balance, status, type,context};
-   return family
+export function extractIndividualFromObj(obj: IIndividualFromDB): IIndividual {
+   const { account_id, currency, balance, status,agent_id, type, individual_id, first_name, last_name, email,
+      address_id, country_name, country_code, postal_code, city, region, street_name, street_number } = obj
+   const individual: IIndividual = { account_id ,agent_id,currency, balance, status, type, individual_id, first_name, last_name, email };
+   individual.address = { address_id, country_name, country_code, postal_code, city, region, street_name, street_number }
+   return individual
 }
 
 
