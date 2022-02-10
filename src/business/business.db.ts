@@ -14,6 +14,9 @@ export async function createBusinessAccount(business: IBusiness): Promise<number
 export async function getBusinessAccountById(accountId: number): Promise<IBusiness> {
     const [rows] = await db.query(`SELECT * FROM business JOIN account on business.account_id = account.primary_id
     JOIN address on address.address_id = business.address_id WHERE business.account_id = ?`, [accountId])
+    if(!((rows as RowDataPacket[])[0])){
+        throw new Error("Data not found")
+     }
     const business = extractBusinessFromObj((rows as RowDataPacket[])[0] as IBusinessFromDb);
     return business
 }
