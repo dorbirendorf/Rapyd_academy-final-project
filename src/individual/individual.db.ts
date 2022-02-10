@@ -4,7 +4,7 @@ import { createRow, selectRowById } from "../db.utils.js";
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import { IIndividual, IIndividualFromDB } from "../types/types.js";
-import {createAccount,createAddress} from "../account/account.db"
+import {createAccount,createAddress} from "../account/account.db.js"
 
 export async function createIndividualAccount(individual: Partial<IIndividual>): Promise<number> {
    const account_id = await createAccount(individual,"individual");
