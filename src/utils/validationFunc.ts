@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE } from "../types/constants.js";
-
+import { Request, Response, NextFunction} from "express";
 
 export function validIndividualId(id_length:number,id:number):void{
     if(String(id).length !== id_length) {
@@ -13,18 +14,18 @@ export function checkBalance(minimalBalance:number,balance:number):void{
 }
 
 export function amountPositive(amount:number):void{
-   if(typeof amount !== "number"|| (amount)<0){
+   if(typeof amount !== "number"|| amount<=0){
       throw new Error(`${INVALID_FILED_VALUE} - msg.. `)
    }
 }
 
 
-//[account_id,amount]
-export function sumFamilyAmounts(tupels:[number,number][],minBalance:number):void{
+export function sumFamilyAmounts(tupels:[number,number][],minBalance:number):number{
    const sum:number = tupels.reduce((prev,tupel)=>tupel[1]+ prev,0);
    if (sum<minBalance){
         throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amount is to low`)
    }
+   return sum;
 }
 
 
@@ -35,3 +36,11 @@ export function initRequiredParams() : Map<string, string[]> {
    requiredParams.set('family', ['owners', 'currency']);
    return requiredParams;
  }
+ export function validateAccountId(req:Request,res:Response,next:NextFunction):void {
+   const {id} = req.params;
+   
+   if((id === "undefined")||(isNaN(Number(id)))){
+      throw new Error(`${INVALID_FILED_VALUE} - id isnt accept`)
+   }
+}
+ 

@@ -5,6 +5,7 @@ import raw from "../middleware/route.async.wrapper.js";
  import * as business_service from "./business.services.js";
  import {httpResponseMessage} from "../types/types.js"
 import { validateBusinessModel } from "./business.validator.js";
+import { validateAccountId, validIndividualId } from "../utils/validationFunc.js";
 
 const router = express.Router();
 
@@ -23,8 +24,8 @@ router.post("/",raw(validateBusinessModel),raw( async (req:Request, res:Response
   }) );
 
   // GET FULL BUSINESS_ACOUNT BY ID
-router.get("/:id",raw( async (req:Request, res:Response) => {
-    const ans = await business_service.getBusinessAccountById(Number(req.params.id));
+router.get("/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
+    const ans = await business_service.getBusinessAccountById(req.params.id);
     const resMessage : httpResponseMessage ={
       status: 200,
       message: "Account found",

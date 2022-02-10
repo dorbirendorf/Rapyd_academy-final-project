@@ -6,6 +6,7 @@ import {HttpInvalidFieldError} from "./HttpInvalidFieldError.js"
 import {HttpInvalidFieldValueError} from "./HttpInvalidFieldValueError.js";
 import {HttpMissingRequieredFieldError} from "./HttpMissingRequieredFieldError.js"
 import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.js"
+import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 
 class httpErrorFactoryClass{
     createError(message:string):HttpError{
@@ -28,6 +29,9 @@ class httpErrorFactoryClass{
             } 
             case "Account ballance too low": { 
                 return new HttpAccountBallanceTooLowError(description);
+            } 
+            case "Invalid amount": { 
+                return new HttpInvalidAmountError(description);
             } 
             default: { 
                return new HttpError("somthing went wrong",500);

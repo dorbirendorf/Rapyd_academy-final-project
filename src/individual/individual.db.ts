@@ -12,12 +12,14 @@ export async function createIndividualAccount(individual:Partial<IIndividual>):P
    return (accountRes as OkPacket).insertId;
 }
 
-   export async function getIndividualAccountById(accountId:number):Promise<IIndividual>{
+   export async function getIndividualByAccountId(accountId:number):Promise<IIndividual>{
       const accountRes = await selectRowByIdWithJoin("account","individual",{primary_id:accountId},"primary_id","account_id")
       const businessRes = await addAddressToAccount((accountRes as RowDataPacket[])[0] as IIndividual)
       return businessRes as IIndividual;
    }
-
+   export async function getIndividualByIndividualId(individualId:number):Promise<IIndividual>{
+     //meir
+   }
    export async function getAllIndividualsAccountsById(payload:[number,number][]):Promise<IIndividual[]>{
       const orString = payload.map(pair => "individual_id = " + pair[0].toString()).join(" OR ")
       const accountRes = await db.query(`SELECT * FROM accounts JOIN individual ON accounts.primary_id = individual.account_id WHERE ${orString}`)

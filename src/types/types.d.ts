@@ -12,10 +12,10 @@ export interface IAccount {
     account_id : number;
     currency: string;  
     balance: number; 
-    amount?: number;  
-    status: Statuses;
+    status: boolean;
     type:string;
 }
+
 export interface IIndividual extends IAccount {
     individual_id:number;
     first_name:string;
@@ -46,6 +46,7 @@ export interface IBusiness extends IAccount {
         destination: number;
         amount: number;
     }
+    export type transferType = "B2B" | "B2I" | "F2B" ;
    
 declare global {
     namespace Express {

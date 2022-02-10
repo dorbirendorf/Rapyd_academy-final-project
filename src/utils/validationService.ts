@@ -1,7 +1,8 @@
-import { IAccount } from "../types/types.js";
-import {ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, SOMTHING_WENT_WRONG, } from '../types/constants.js';
-import { amountPositive } from "./validationFunc.js";
-
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { IAccount, IFamily, transferType } from "../types/types.js";
+import {ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE, SOMTHING_WENT_WRONG } from '../types/constants.js';
 
 
 export function accountsExist(accounts:IAccount[],tuples:[number,number][]):boolean{
@@ -17,34 +18,51 @@ export function accountsActive(accounts:IAccount[]):boolean{
    }
     return true;
  }
-
- export function accountsType(accounts:IAccount[],type:string):boolean{
-   const allSametype:boolean = accounts.every(acc=>acc.type === type);
-   if (!allSametype){
-     throw new Error(`${INVALID_FILED_VALUE}- not all accounts are the same type`)
+ export function checkProperState(accounts:IAccount[],action:boolean):boolean{
+   const allStatusProper:boolean = accounts.every(acc=>acc.status === action);
+   if (!allStatusProper){
+     throw new Error(`${INVALID_FILED_VALUE}- not all accounts ${action}`)
   }
    return true;
 }
-  export function accountsCurrency(accounts:IAccount[],currency:string):boolean{
+
+ export function accountsTypes(accounts:IAccount[],type:string[]):boolean{
+   const allAccepttype:boolean = accounts.every(acc=>(acc.type === type[0]||acc.type === type[1]));
+   if (!allAccepttype){
+     throw new Error(`${INVALID_FILED_VALUE}- not all accounts are the type ${type[0]} or ${type[1]} `)
+  }
+   return true;
+}
+  export function accountsCurrency(accounts:IAccount[],currency:string,FX=false):boolean{
+     if(FX) return true;
      const allCurrency:boolean = accounts.every(acc=>acc.currency === currency);
      if (!allCurrency){
       throw new Error(`${INVALID_FILED_VALUE}- not all accounts dont have same currency`)
    }
      return true;
   }
+  export function accountsBelongToFamily(owners:{ account_id: number }[],accounts:number[]):boolean{
+     const check = owners.every(owner =>accounts.includes(owner.account_id));
+      if(!check){
+       throw new Error(`${SOMTHING_WENT_WRONG}- msg...`)
+   }
+   return true;
+   } 
+  
+ 
 
   //excepted to get accounts with amount.
   //minBalance we get when use func.
-  export function checkAmountBalance(accounts:IAccount[],minBalance:number):boolean{
-      const allCurrency:boolean = accounts.every(acc=>{
-         amountPositive(acc.amount as number);
-         acc.balance-(acc.amount as number)>minBalance
-      });
-      if (!allCurrency){
-      throw new Error(`${INVALID_FILED_VALUE}- not all accounts dont have same currency`)
-      }
-   return true;
-}
+//   export function checkAmountBalance(accounts:IAccount[],minBalance:number):boolean{
+//       const allCurrency:boolean = accounts.every(acc=>{
+//          amountPositive(acc.amount as number);
+//          acc.balance-(acc.amount as number)>minBalance
+//       });
+//       if (!allCurrency){
+//          throw new Error(`${INVALID_FILED_VALUE}- not all accounts are fdggfdd`)
+//       }
+//    return true;
+// }
 export function allowTransfers(accounts:IAccount[],amount : number,minBalance:number):boolean{
      const allTransfers:boolean = accounts.every(acc=>(acc.balance-amount>minBalance));
      if (!allTransfers){
@@ -52,38 +70,21 @@ export function allowTransfers(accounts:IAccount[],amount : number,minBalance:nu
    }
      return true;
 }
-export function checkLimitTransfer(type:string,amount:number,sourceName?:string, destName?:string):boolean{
-   let limitTransfer = 0;
-   if(type === "B2I"){
-      limitTransfer = 1000;
+export function checkLimitTransfer(type:transferType,amount:number,sourceName?:string, destName?:string):boolean{
+   const max_tranfare = {
+      "F2B":5000,
+      "B2I":1000,
+      "B2B":{
+          "SC":10000,
+          "DC":1000
+      }
    }
-   if(type === "F2B"){
-      limitTransfer = 5000;
-   }
-   if(type === "B2B"){
-      limitTransfer = (sourceName=== destName) ? 10000 :1000;
-   }
+   let limitTransfer = (type==="B2B") ? 
+   ((sourceName=== destName) ?max_tranfare[type].SC : max_tranfare[type].DC):
+   max_tranfare[type];
+  
    if(amount>limitTransfer){
-      throw new Error(`${SOMTHING_WENT_WRONG}- transfer is limited to ${limitTransfer}`);
+      throw new Error(`${INVALID_AMOUNT_VALUE}- transfer is limited to ${limitTransfer}`);
    }
    return true;
 }
-
-
-//  //   async function getRate(base:string, currency:string) {
-//  //     try{
- 
-//  //       const base_url = `http://api.exchangeratesapi.io/latest`;
-//  //       const url = `${base_url}?base=${base}&symbols=${currency}&access_key=9acb60fcfa9f9cc2569783ac6219ef2f`;
-   
-//  //       const res = await fetch(url);
-//  //       const json = await res.json();
- 
-//  //       if (json.rates[currency]) return json.rates[currency];
-//  //       else throw new Error(`currency: ${currency} doesn't exist in results.`); //app logic error
-    
-//  //     }catch(error){
-//  //       console.log("Error getting currency value", error);
-//  //       throw error;
-//  //     }
- 

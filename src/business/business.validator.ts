@@ -5,7 +5,7 @@ import {IBusiness } from "../types/types.d.js";
 import { validIndividualId } from "../utils/validationFunc.js";
 
 export function validateBusinessModel(req:Request,res:Response,next:NextFunction):void {
-    const {company_id,company_name,context,currency,account_id,address,balance=0} = req.body;
+    const {company_id,company_name,context=null,currency,account_id,address=null,balance=0} = req.body;
 
     validateAccountMandatoryFields(currency as string,balance as number);
 
@@ -17,7 +17,7 @@ export function validateBusinessModel(req:Request,res:Response,next:NextFunction
     }  
     validIndividualId(COMPANY_ID_LENGTH,company_id as number);
     
-    const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:Statuses.Active};
+    const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:true};
     req.accounts=[account];
     console.log("valid",account)
     next()

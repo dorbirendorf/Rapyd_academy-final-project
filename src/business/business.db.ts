@@ -5,7 +5,7 @@ import { createRow, selectRowById, selectRowByIdWithJoin} from "../db.utils.js";
 import { IAddress, IBusiness, IIndividual } from "../types/types.js";
 
 
-export async function createBusinessAccount(business:IBusiness):Promise<number>{
+export async function createBusinessAccount(business:Partial<IBusiness>):Promise<number>{
     const accountRes = await createRow("account",{currency:business.currency,balance:business.balance,status:true, type: "business"})
     await createRow("business",{account_id:(accountRes as OkPacket).insertId,company_id:business.company_id,company_name:business.company_name,context:business.context,address_id:business.address_id})
     return (accountRes as OkPacket).insertId;
