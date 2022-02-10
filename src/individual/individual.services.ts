@@ -1,18 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 // import { INVALID_FILED_VALUE } from "../types/constants.js";
 import * as DB_INDIVIDUAL from "./individual.db.js"
-import {IAccount} from "../types/types.js";
+import { IIndividual} from "../types/types.js";
+import { INVALID_FILED_VALUE } from "../types/constants.js";
 
-  export async function createIndividualAccount(individual:Partial<IAccount>):Promise<any>{
-    //db: There can be only one (individual account on our system) - getIndividualByIndividualId
-    //if get more than one throw error
-    //throw new Error(`${INVALID_FILED_VALUE}- not all accounts are the same type`);
+  export async function createIndividualAccount(individual:Partial<IIndividual>):Promise<any>{
+    await getIndividualByIndividualId(individual.individual_id as number);
     return await DB_INDIVIDUAL.createIndividualAccount(individual);
-  
    }
-   //check with meir about getIndividualByAccountId & getIndividualByIndividualId
-   export async function getIndividualAccountById(accountId:number):Promise<any>{
-    return await DB_INDIVIDUAL.getIndividualAccountById(accountId);
+    export async function getIndividualByAccountId(accountId:string):Promise<IIndividual>{
+      //meir :if not found - throw....
+      return (await DB_INDIVIDUAL.getAllIndividualsAccountsById([Number(accountId)]))[0];
    }
+
+   export async function getIndividualByIndividualId(individualId:number):Promise<any>{
+    let individual =  await DB_INDIVIDUAL.checkIfIndivdualExistByIndividualId(individualId);
+    //meir : how response comeback? fix if.
+    if(individual){
+      throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
+    }
+    return false;
+   }
+
 
 
 

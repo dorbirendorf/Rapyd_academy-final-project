@@ -1,30 +1,43 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { KeyObject } from "crypto";
-import {IIndividual, ITransfer } from "../types/types.js";
-import * as DB_ACCOUNT from "./account.db.js";
-import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B } from "./account.validation.js";
+import { IAccount, ITransfer } from "../types/types.js";
+import { getRate } from "../utils/utils.js";
+import * as DB_ACCOUNT from "./account.db.js"
+import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B ,validateStatusAccounts} from "./account.validation.js";
 
-   // export async function updateAccountStatus(payload:any):Promise<void>{
-   //  return await DB_ACCOUNT.updateAccountStatus(payload);
-   // }
+   
    export async function transferB2B(payload:ITransfer):Promise<string>{
       let {source,destination,amount} = payload;
        //let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
       // let destTransfer = await DB_BUSINESS.getAccountsById(destination);
-      let sourceTransfer = {account_id:1, currency:"USD", balance:100000, status:true, type:"business",company_id:4,
+      let sourceTransfer = {account_id:1, currency:"USD", balance:100000000, status:true, type:"business",company_id:3,
       company_name:"SF"};
-      let destTransfer = {account_id:2, currency:"USD", balance:100000, status:true, type:"business",company_id:4,
+      let destTransfer = {account_id:2, currency:"USD", balance:100000, status:true, type:"business",company_id:3,
       company_name:"SF"};
       validateTransferAccountsB2B(sourceTransfer,destTransfer,amount);
-      let sourceBalance = sourceTransfer.balance-amount;
-      let destBalance = destTransfer.balance+amount;
-      await DB_ACCOUNT.updateAccountBalance(sourceTransfer.account_id,sourceBalance);
-      await DB_ACCOUNT.updateAccountBalance(destTransfer.account_id,destBalance);
-      let ans = `source: ${sourceTransfer.account_id},balance: ${sourceBalance},currency: ${sourceTransfer.currency}, destination: ${destTransfer.account_id},balance: ${destBalance},currency: ${destTransfer.currency}`;
+      let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
       return ans;
+     }
+
+     export async function transferB2BFX(payload:ITransfer):Promise<string>{
+
+      let {source,destination,amount} = payload;
+       //let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
+      // let destTransfer = await DB_BUSINESS.getAccountsById(destination);
+      let sourceTransfer = {account_id:1, currency:"ILS", balance:100000000, status:true, type:"business",company_id:4,
+      company_name:"SF"};
+      let destTransfer = {account_id:2, currency:"EUR", balance:100000, status:true, type:"business",company_id:4,
+      company_name:"SF"};  
+      const FX = await getRate(destTransfer.currency,sourceTransfer.currency);
+      const amountFX = FX*amount;  
+      validateTransferAccountsB2B(sourceTransfer,destTransfer,amountFX,true);
+      let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount,FX);
+      return await ans;
      }
 
      export async function transferB2I(payload:ITransfer):Promise<string>{
@@ -35,26 +48,19 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
       company_name:"SF"};
       let destTransfer = {account_id:2, currency:"USD", balance:100000, status:true, type:"individual", individual_id:6,first_name:"string",last_name:"string"};
       validateTransferAccountsB2I(sourceTransfer,destTransfer,amount);
-      let sourceBalance = sourceTransfer.balance - amount;
-      let destBalance = destTransfer.balance + amount;
-      await DB_ACCOUNT.updateAccountBalance(sourceTransfer.account_id,sourceBalance);
-      await DB_ACCOUNT.updateAccountBalance(destTransfer.account_id,destBalance);
-      let ans = `source: ${sourceTransfer.account_id},balance: ${sourceBalance},currency: ${sourceTransfer.currency}, destination: ${destTransfer.account_id},balance: ${destBalance},currency: ${destTransfer.currency}`;
+      let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
       return ans;
      }
+
      export async function transferF2B(payload:ITransfer):Promise<string>{
       let {source,destination,amount} = payload;
        //let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
       // let destTransfer = await DB_INDIVIDUAL.getAccountsById(destination);
       let sourceTransfer = {account_id:1, currency:"USD", balance:100000, status:true, type:"family"};
-      let destTransfer = {account_id:1, currency:"USD", balance:100000, status:true, type:"business",company_id:4,
+      let destTransfer = {account_id:1, currency:"USD", balance:1000888800, status:true, type:"business",company_id:4,
       company_name:"SF"};
       validateTransferAccountsF2B(sourceTransfer,destTransfer,amount);
-      let sourceBalance = sourceTransfer.balance - amount;
-      let destBalance = destTransfer.balance + amount;
-      await DB_ACCOUNT.updateAccountBalance(sourceTransfer.account_id,sourceBalance);
-      await DB_ACCOUNT.updateAccountBalance(destTransfer.account_id,destBalance);
-      let ans = `source: ${sourceTransfer.account_id},balance: ${sourceBalance},currency: ${sourceTransfer.currency}, destination: ${destTransfer.account_id},balance: ${destBalance},currency: ${destTransfer.currency}`;
+      let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
       return ans;
      }
 
@@ -65,3 +71,20 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
    //   export async function transferB2BFX(payload:any):Promise<void>{
    //    return await DB_ACCOUNT.transferB2BFX(payload);
    //   }
+  
+     export async function exectueTransfer(srcId:number, srcBalance:number, destId:number, srcCurr:string, destCurr:string, destBalance:number,amount:number,FX=1):Promise<string>{
+      srcBalance= srcBalance - amount*FX;
+      destBalance = destBalance + amount;
+      //await DB_ACCOUNT.updateAccountBalance([[srcId,srcBalance],[destId,destBalance]]);
+      return `source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}`;
+   }
+
+   export async function updateAccountStatus(accountsId:number[], action:boolean):Promise<string>{
+      //let accounts:IAccount[] = await DB_ACCOUNT.getAccountsById(accountsId);
+      let accounts = [{account_id:1, currency:"USD", balance:100000, status:false, type:"individual"}];
+      //if some of the accounts not exists throw error
+      validateStatusAccounts(accounts,accountsId,action);
+      //add function that update all list of statuses
+      await DB_ACCOUNT.updateAccountsStatus(accountsId,action);
+      return `acounts: ${accountsId} changed to status ${action}`;
+     }

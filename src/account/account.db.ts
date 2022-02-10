@@ -8,6 +8,9 @@ import { IAccount } from "../types/types.js";
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 
+export async function updateAccountsStatus(primary_id:number[],status:boolean):Promise<void>{ 
+    await updaetRowById("accounts",{status},{primary_id});
+}
 
 export async function updateAccountStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
     const idsArray = primary_ids.map(primary_id => { return { primary_id } })
@@ -34,5 +37,4 @@ export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]
     }
     return (rows as RowDataPacket[]) as IAccount[]
 }
-
 
