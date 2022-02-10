@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { KeyObject } from "crypto";
 import {IIndividual, ITransfer } from "../types/types.js";
 import * as DB_ACCOUNT from "./account.db.js";
 import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B } from "./account.validation.js";
@@ -55,6 +56,11 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
       await DB_ACCOUNT.updateAccountBalance(destTransfer.account_id,destBalance);
       let ans = `source: ${sourceTransfer.account_id},balance: ${sourceBalance},currency: ${sourceTransfer.currency}, destination: ${destTransfer.account_id},balance: ${destBalance},currency: ${destTransfer.currency}`;
       return ans;
+     }
+
+     export async function getSecretKeyByAccessKey(accessKey):Promise<KeyObject>{
+        console.log(accessKey);
+        throw new Error("not implemeted yet")
      }
    //   export async function transferB2BFX(payload:any):Promise<void>{
    //    return await DB_ACCOUNT.transferB2BFX(payload);
