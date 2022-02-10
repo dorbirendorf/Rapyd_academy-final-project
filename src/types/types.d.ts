@@ -11,8 +11,9 @@ export interface IAddress {
 export interface IAccount {    
     account_id : number;
     currency: string;  
-    balance: number; 
-    status: boolean;
+    balance: number;
+    agent_id: number;
+    status: Statuses;
     type:string;
 }
 
@@ -29,6 +30,7 @@ export interface IIndividualFromDB {
     account_id : number;
     currency: string;  
     balance: number; 
+    agent_id:number;
     amount?: number;  
     status: boolean;
     type:string;
@@ -64,6 +66,7 @@ export interface IBusinessFromDb{
     currency: string;  
     balance: number; 
     amount?: number;  
+    agent_id:number;
     status: boolean;
     type:string;
     company_id: number;
@@ -78,7 +81,6 @@ export interface IBusinessFromDb{
     region?: string;
     street_name?: string;
     street_number?: number;
-
 }
     export interface httpResponseMessage{
         status: number;
