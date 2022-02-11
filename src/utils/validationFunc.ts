@@ -5,7 +5,8 @@ import { Request, Response, NextFunction} from "express";
 
 export function validIndividualId(id_length:number,id:number):void{
     if(String(id).length !== id_length) {
-      throw new Error(`${INVALID_FILED_VALUE} - individual id not valid`);    }
+      throw new Error(`${INVALID_FILED_VALUE} - individual id not valid`);   
+    }
 }
 
 export function checkBalance(minimalBalance:number,balance:number):void{
@@ -43,5 +44,6 @@ export function initRequiredParams() : Map<string, string[]> {
    if((id === "undefined")||(isNaN(Number(id)))){
       throw new Error(`${INVALID_FILED_VALUE} - id isnt accept`)
    }
+   next()
 }
  

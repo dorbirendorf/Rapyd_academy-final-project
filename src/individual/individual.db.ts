@@ -26,7 +26,7 @@ export async function createIndividualAccount(individual: Partial<IIndividual>):
 export async function getAllIndividualsAccountsById(payload: number[]): Promise<IIndividual[]> {
    const orString = payload.map(id => "account_id = " + id.toString()).join(" OR ")
    const [rows] = await db.query(`SELECT * FROM individual JOIN account on individual.account_id = account.primary_id
-   JOIN address on address.address_id = individual.address_id WHERE ${orString}`)
+   LEFT JOIN address on address.address_id = individual.address_id WHERE ${orString}`)
    if(!((rows as RowDataPacket[])[0])){
       throw new Error("Data not found")
    }

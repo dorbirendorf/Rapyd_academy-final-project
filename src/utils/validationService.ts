@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { IAccount, transferType } from "../types/types.js";
+import { IAccount, IIndividual, transferType } from "../types/types.js";
 import {ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE, SOMTHING_WENT_WRONG } from '../types/constants.js';
 
 
@@ -41,8 +41,8 @@ export function accountsActive(accounts:IAccount[]):boolean{
    }
      return true;
   }
-  export function accountsBelongToFamily(owners:{ account_id: number }[],accounts:number[]):boolean{
-     const check = owners.every(owner =>accounts.includes(owner.account_id));
+  export function accountsBelongToFamily(owners:IIndividual[],accounts:number[]):boolean{
+   const check = owners.every(owner =>accounts.includes(owner.account_id));
       if(!check){
        throw new Error(`${SOMTHING_WENT_WRONG}- msg...`)
    }

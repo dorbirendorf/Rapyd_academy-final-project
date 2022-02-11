@@ -27,8 +27,6 @@ export const logError: ErrorRequestHandler = async (
 };
 
 export function sendErrorMessage(error: HttpError, req: Request, res: Response, next: NextFunction):void{
-    console.log("error");
-
      const resMessage : httpResponseMessage ={
          status: error.statusCode,
          message: error.message,

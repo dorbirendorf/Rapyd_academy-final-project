@@ -9,13 +9,11 @@ import { INVALID_FILED_VALUE } from "../types/constants.js";
     return await DB_INDIVIDUAL.createIndividualAccount(individual);
    }
     export async function getIndividualByAccountId(accountId:string):Promise<IIndividual>{
-      //meir :if not found - throw....
       return (await DB_INDIVIDUAL.getAllIndividualsAccountsById([Number(accountId)]))[0];
    }
 
    export async function getIndividualByIndividualId(individualId:number):Promise<any>{
     let individual =  await DB_INDIVIDUAL.checkIfIndivdualExistByIndividualId(individualId);
-    //meir : how response comeback? fix if.
     if(individual){
       throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
     }
