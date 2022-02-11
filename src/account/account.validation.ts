@@ -8,7 +8,7 @@ import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
 import { accountsActive, accountsCurrency, accountsTypes, allowTransfers, checkLimitTransfer, checkProperState } from "../utils/validationService.js";
 import logger from "../utils/logger.js";
 
-export function validateAccountMandatoryFields(currency:string,balance:number):void {
+export function validateAccountMandatoryFields(currency:string,balance:number,agent_id:number):void {
    
     try{
         logger.params("validateAccountMandatoryFields", {currency,balance});
@@ -21,10 +21,16 @@ export function validateAccountMandatoryFields(currency:string,balance:number):v
     if (balance < 0) {
         throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
     }
+<<<<<<< HEAD
     logger.funcRet("validateAccountMandatoryFields", "void");}catch (error) {
         logger.error("validateAccountMandatoryFields", error as Error);
        throw error;
    }
+=======
+    if (agent_id === undefined) {
+        throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
+    }
+>>>>>>> upstream/main
  }
  
  export async function validateTransferModel(req:Request,res:Response,next:NextFunction):Promise<void> {

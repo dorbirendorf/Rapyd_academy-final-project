@@ -10,9 +10,9 @@ import { validIndividualId } from "../utils/validationFunc.js";
 export async function validateIndividualModel(req:Request,res:Response,next:NextFunction):Promise<void> {
 
     const {first_name,last_name,currency,account_id,individual_id,email=null,address=null,balance=0,agent_id} = req.body;
-    validateAccountMandatoryFields(currency as string,balance as number);
+    validateAccountMandatoryFields(currency as string,balance as number,agent_id as number);
   
-    if(!(first_name && last_name && currency && individual_id && agent_id)){
+    if(!(first_name && last_name && currency && individual_id)){
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
     if(!(typeof first_name ==="string" && typeof last_name ==="string" && typeof currency === "string")){
