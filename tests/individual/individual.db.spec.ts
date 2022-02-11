@@ -34,7 +34,7 @@ describe("individual db functions ", async() => {
                 "balance":2000,
                 "individual_id":7894561,
                 "agent_id":1,
-                "address_id":null
+                "address":null
             
             });
             expect(account_id).to.be.eql(46);

@@ -22,7 +22,7 @@ describe("utils  functions ", () => {
                     currency:"usd",
                     individual_id:1234567
                 }
-            const res = await createsignature(req,"bla",Date.now());
+            const res = await createsignature(req,"bla",Date.now().toString());
             expect(res).to.be.string;
             
 
@@ -37,7 +37,7 @@ describe("utils  functions ", () => {
                     individual_id:1234567
                 }
 
-            const res = await createsignature(req,"bla",Date.now());
+            const res = await createsignature(req,"bla",Date.now().toString());
             expect(res).to.be.string;
             
 
