@@ -1,13 +1,32 @@
 import { expect } from "chai";
+<<<<<<< HEAD
 import {  convertTupelsToArray, createSignture, generateID, getRate, getTimeString} from "../../src/utils/utils.js";
 import crypto from "crypto";
  
 describe("utils functions ", () => {
     context("createSignture ", () => {
+=======
+import {  createsignature} from "../../src/utils/utils.js";
+import crypto from "crypto";
+
+
+
+describe("utils  functions ", () => {
+    
+
+
+    context("createsignature ", () => {
+  
+>>>>>>> upstream/main
         it("should be function", () => {
-            expect(createSignture).to.be.a("Function");
+            expect(createsignature).to.be.a("Function");
         });
+<<<<<<< HEAD
         it("should generate signture with time ", async () => {
+=======
+
+        it("should generate signature with time ", async () => {
+>>>>>>> upstream/main
             const req = 
                 {
                     first_name:"dor",
@@ -15,11 +34,11 @@ describe("utils functions ", () => {
                     currency:"usd",
                     individual_id:1234567
                 }
-            const res = await createSignture(req,"bla",Date.now());
+            const res = await createsignature(req,"bla",Date.now().toString());
             expect(res).to.be.string;
         });
 
-        it("should generate signture without time ", async () => {
+        it("should generate signature without time ", async () => {
             const req = 
                 {
                     first_name:"dor",
@@ -27,8 +46,13 @@ describe("utils functions ", () => {
                     currency:"usd",
                     individual_id:1234567
                 }
+<<<<<<< HEAD
                 //i delete date from createSigntue;
             const res = await createSignture(req,"bla");
+=======
+
+            const res = await createsignature(req,"bla",Date.now().toString());
+>>>>>>> upstream/main
             expect(res).to.be.string;
         });
        

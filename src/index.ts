@@ -13,6 +13,7 @@ import family_router from "./family/family.router.js";
 import business_router from "./business/business.router.js";
 import {logError,sendErrorMessage} from "./middleware/errors.handler.js";
 import {addIdToReq,logRequest} from "./middleware/user_func.js";
+import {auth} from "./middleware/auth.js"
 // import cron from "node-cron";
 
 class Api {
@@ -30,9 +31,11 @@ class Api {
     applyGlobalMiddleware() {
         log.blue("setting Middlewares...");
         this.app.use(cors());
+        this.app.use(express.json());
         this.app.use(morgan("dev"));
         this.app.use(addIdToReq);
         this.app.use(logRequest());
+        this.app.use(auth)
     }
 
     routing() {

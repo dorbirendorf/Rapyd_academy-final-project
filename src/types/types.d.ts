@@ -1,7 +1,7 @@
 export interface IAddress {
     address_id?: number;
     country_name?: string;
-    country_code?: number;
+    country_code?: string;
     postal_code?: number;
     city?: string;
     region?: string;
@@ -22,8 +22,8 @@ export interface IIndividual extends IAccount {
     first_name:string;
     last_name:string;
     email?:string;
-    address?:IAddress;
-    address_id?:number;
+    address?:IAddress|null;
+    address_id?:number|null;
 }
 
 export interface IIndividualFromDB {
@@ -40,7 +40,7 @@ export interface IIndividualFromDB {
     email?:string;
     address_id?:number;
     country_name?: string;
-    country_code?: number;
+    country_code?: string;
     postal_code?: number;
     city?: string;
     region?: string;
@@ -57,8 +57,8 @@ export interface IBusiness extends IAccount {
     company_id: number;
     company_name: string;
     context?: string;
-    address?:IAddress;
-    address_id?:number;
+    address?:IAddress|null;
+    address_id?:number|null;
     
 }
 export interface IBusinessFromDb{
@@ -75,7 +75,7 @@ export interface IBusinessFromDb{
     address?:IAddress;
     address_id?:number;
     country_name?: string;
-    country_code?: number;
+    country_code?: string;
     postal_code?: number;
     city?: string;
     region?: string;
