@@ -1,62 +1,117 @@
-// import { expect } from "chai";
-// import { getAllIndividualsAccountsById,createIndividualAccount,checkIfIndivdualExistByIndividualId,extractIndividualFromObj } from "../../src/individual/individual.db.js";
-// import {connectDb} from "../../src/db/sql/sql.connection.js"
+import { expect } from "chai";
+import { getAllIndividualsAccountsById,createIndividualAccount,checkIfIndivdualExistByIndividualId,extractIndividualFromObj } from "../../src/individual/individual.db.js";
+import {connectDb} from "../../src/db/sql/sql.connection.js"
 
-// before(async()=>{
-//    await connectDb()
-// })
-// describe("individual db functions ", () => {
-//     context("getAllIndividualsAccountsById ", () => {
+before(async()=>{
+   await connectDb()
+})
+describe("individual db functions ", async() => {
+    context("getAllIndividualsAccountsById ", () => {
   
-//         it("should be function", () => {
-//             expect(getAllIndividualsAccountsById).to.be.a("Function");
-//         });
-//         it("should return undefined if ok ", async () => {
-//             const res = await getAllIndividualsAccountsById([2,4,6]);
-//             console.log(res)
-//             expect(res.length).to.be.eqls(3)
-//         });
-//         // it("should throw error if not ok ", () => {
-//         //     expect(()=>updateAccountStatus(2000,1000)).to.throw();
-//         // });
-//     });
+        it("should be function", () => {
+            expect(getAllIndividualsAccountsById).to.be.a("Function");
+        });
+        it("should return undefined if ok ", async () => {
+            const res = await getAllIndividualsAccountsById([2,4,6]);
+            console.log(res)
+            expect(res.length).to.be.eqls(3)
+        });
+        // it("should throw error if not ok ", async () => {
+        //  expect(async ()=> await getAllIndividualsAccountsById([2,4,1232])).to.throw();
+        // });
+    });
 
-//     // context("updateAccountBalance ", () => {
+    context("createIndividualAccount ", () => {
   
-//     //     it("should be function", () => {
-//     //         expect(updateAccountBalance).to.be.a("Function");
-//     //     });
-//         // it("should return undefined if ok ", async() => {
-//         //     const res = await updateAccountBalance([[1,20000],[2,20000],[3,20000],[4,20000],[5,20000]]);
-//         //     expect(res).to.be.eql({fieldCount: 0,
-//         //         affectedRows: 5,
-//         //         insertId: 0,
-//         //         info: 'Rows matched: 5  Changed: 5  Warnings: 0',
-//         //         serverStatus: 2,
-//         //         warningStatus: 0,
-//         //         changedRows: 5})
-//         // });
-//         // it("should throw error if not ok ", () => {
-//         //     expect(()=>updateAccountBalance(7,1234)).to.throw();
-//         // });
-//     // });
+        it("should be function", () => {
+            expect(createIndividualAccount).to.be.a("Function");
+        });
+        it("should return account_id if ok ", async() => {
+            const account_id = await createIndividualAccount({
+                "first_name":"dor",
+                "last_name":"birendorf",
+                "currency":"usd",
+                "individual_id":7894561,
+                "agent_id":1
+            
+            });
+            expect(account_id).to.be.eql(46);
+        // it("should throw error if not ok ", () => {
+        //     expect(()=>createIndividualAccount(7,1234)).to.throw();
+        // });
+    });
 
-//     // context("getAccountsById ", () => {
+    context("checkIfIndivdualExistByIndividualId ", () => {
   
-//     //     it("should be function", () => {
-//     //         expect(getAccountsById).to.be.a("Function");
-//     //     });
-//     //     it("should return undefined if ok ", async () => {
-//     //         const accounts = await getAccountsById([1,2,3,4,5])
-//     //         console.log(accounts);
-//     //         expect(accounts.length).to.be.equal(5)
-//     //     });
-//         // it("should throw error if not ok ", () => {
-//         //     expect(()=>getAccountsById(-1000)).to.throw();
-//         // });
-//         // it("should throw error if not ok ", () => {
-//         //     expect(()=>getAccountsById(0)).to.throw();
-//         // });
-//     // });
+        it("should be function", () => {
+            expect(checkIfIndivdualExistByIndividualId).to.be.a("Function");
+        });
+        it("should return true if individual Id already exist ", async () => {
+            const exist = await checkIfIndivdualExistByIndividualId(7894561)
+            expect(exist).to.be.equal(true)
+        });
+        it("should return false if individual Id doesn't exist ", async () => {
+            const exist = await checkIfIndivdualExistByIndividualId(9999999)
+            expect(exist).to.be.equal(false)
+        });
+        // it("should throw error if not ok ", () => {
+        //     expect(()=>getAccountsById(-1000)).to.throw();
+        // });
+        // it("should throw error if not ok ", () => {
+        //     expect(()=>getAccountsById(0)).to.throw();
+        // });
+    });
 
-// });
+    context("extractIndividualFromObj ", () => {
+  
+        it("should be function", () => {
+            expect(extractIndividualFromObj).to.be.a("Function");
+        });
+        it("should return account_id if ok ", async() => {
+            const individual = extractIndividualFromObj({account_id : 1,
+                currency: "USA",  
+                balance: 12,
+                agent_id:2,
+                status: true,
+                type:"individual",
+                individual_id:1,
+                first_name: "Meir",
+                last_name: "Shtarkman",
+                email:"meir@gmail.com",
+                address_id:2,
+                country_name: "Spain",
+                country_code: "es",
+                postal_code: 1234,
+                city: "Haifa",
+                region: "Asia",
+                street_name: "Hertzel",
+                street_number: 12
+            })
+            expect(individual).to.be.eql({account_id : 1,
+                currency: "USA",  
+                balance: 12,
+                agent_id:2,
+                status: true,
+                type:"individual",
+                individual_id:1,
+                first_name: "Meir",
+                last_name: "Shtarkman",
+                email:"meir@gmail.com",
+                address:{address_id:2,
+                country_name: "Spain",
+                country_code: "es",
+                postal_code: 1234,
+                city: "Haifa",
+                region: "Asia",
+                street_name: "Hertzel",
+                street_number: 12}
+            })
+        });
+        // it("should throw error if not ok ", () => {
+        //     expect(()=>createIndividualAccount(7,1234)).to.throw();
+        // });
+ 
+    });
+
+    });
+})

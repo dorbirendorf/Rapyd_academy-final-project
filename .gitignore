@@ -3,3 +3,4 @@ dist
 coverage
 mysql-data
 src/log/
+src/typing/
