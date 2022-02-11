@@ -85,3 +85,7 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
       await DB_ACCOUNT.updateAccountsStatus(accountsId,action);
       return `acounts: ${accountsId} changed to status ${action}`;
      }
+
+     export async function getSecretKeyByAccessKey(access_key:string){
+         return DB_ACCOUNT.getAgentByAccessId(access_key);
+     }

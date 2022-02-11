@@ -5,7 +5,7 @@
 // import jwt from "jsonwebtoken";
 import uuid from "uuid";
 import fetch from "node-fetch";
-import Crypto from "crypto-js";
+  import Crypto from "crypto-js";
 
 
 export function generateID():string{
@@ -37,9 +37,9 @@ export async function getRate(base:string, currency:string):Promise<number>{
      }
    }
 
-export async function createSignture(data:Object,secret:string,time?:number):Promise<string> {
+export  function createSignture(data:Object,secret:string,time?:number):string {
   const payload = {data,time};
-  const hash = Crypto.HmacSHA256(JSON.stringify(payload), secret).toString();
+  const hash = Crypto.SHA256(JSON.stringify(payload), secret).toString();
   return hash
 }
 // export async function backupDB() {

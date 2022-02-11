@@ -49,12 +49,12 @@ export async function createAddress(address?: IAddress): Promise<number|null> {
     }
 }
 
-export async function getAgentByAccessId(access_key: number): Promise<number> {
+export async function getAgentByAccessId(access_key: string): Promise<string> {
     const [rows] = await selectRowById("agent",{access_key});
     if (!((rows as RowDataPacket[])[0])) {
         throw new Error("Data not found")
     }
-    return (rows as RowDataPacket[])[0].secretKey as number
+    return (rows as RowDataPacket[])[0].secretKey as string
 }
 
 
