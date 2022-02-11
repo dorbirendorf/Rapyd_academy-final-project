@@ -14,7 +14,6 @@ import business_router from "./business/business.router.js";
 import {logError,sendErrorMessage} from "./middleware/errors.handler.js";
 import {addIdToReq,logRequest} from "./middleware/user_func.js";
 import {auth} from "./middleware/auth.js"
-import raw from "./middleware/route.async.wrapper.js"
 // import cron from "node-cron";
 
 class Api {

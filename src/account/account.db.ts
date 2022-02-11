@@ -71,17 +71,20 @@ export async function createAccount(account: Partial<IAccount>, type: string): P
     }
 }
 
-export async function createAddress(address?: IAddress): Promise<number | null> {
+export async function createAddress(address?: IAddress|null): Promise<number | null> {
     try {
          logger.params("createAddress", { address });
+
         if (address) {
+            console.log(address,1);
             const res = await createRow("address", address)
             const id = (res as OkPacket).insertId
              logger.funcRet("createAddress", id);
             return id
         } else {
+            console.log(address,12);
              logger.funcRet("createAddress", null);
-
+             console.log(address,12);
             return null;
         }
     } catch (error) {
