@@ -9,6 +9,7 @@ import { validateAccountMandatoryFields } from "../account/account.validation.js
 import { sumFamilyAmounts } from "../utils/validationFunc.js";
 import { accountsActive, accountsBelongToFamily, accountsCurrency, accountsExist, allowTransfers } from "../utils/validationService.js";
 import { convertTupelsToArray } from "../utils/utils.js";
+import logger from "../utils/logger.js";
 
 
 export function validateFamilyModel(req:Request,res:Response,next:NextFunction):void {
@@ -26,7 +27,9 @@ export function validateFamilyModel(req:Request,res:Response,next:NextFunction):
 }
 
 export function validateAddToFamily(accounts:IIndividual[],owners:[number,number][],currency:string):void {
-   accountsExist(accounts,owners);
+  try{
+      logger.params("validateAddToFamily",{accounts,owners,currency});
+    accountsExist(accounts,owners);
    accountsActive(accounts);
    accountsCurrency(accounts,currency);
    accounts.map((account)=>{
@@ -36,13 +39,27 @@ export function validateAddToFamily(accounts:IIndividual[],owners:[number,number
     }
     const amount = owner[1];
     allowTransfers([account],amount,1000);
+    logger.funcRet("validateAddToFamily","void");
    })
+  } catch (error) {
+    logger.error("validateAddToFamily", error as Error);
+   throw error;
+}
+
 }
 export function validateRemoveFromFamily(accounts:IIndividual[],owners:[number,number][],family:IFamily):void {
-    accountsExist(accounts,owners);
-    const individualIds = convertTupelsToArray(owners);
-    accountsBelongToFamily(family.owners as IIndividual[],individualIds);
+    try{
+        logger.params("validateRemoveFromFamily",{accounts,owners,family}); 
+        accountsExist(accounts,owners);
+        const individualIds = convertTupelsToArray(owners);
+        accountsBelongToFamily(family.owners as IIndividual[],individualIds);
+        logger.funcRet("validateRemoveFromFamily","void");
+    }catch (error) {
+    logger.error("validateRemoveFromFamily", error as Error);
+   throw error;
 }
+}
+
 export function validateUpdateAccounts(req:Request,res:Response,next:NextFunction):void {
     let {owners,account_id} = req.body;
     if(!(owners &&account_id  && owners.length>0)){
@@ -57,6 +74,3 @@ export function validateUpdateAccounts(req:Request,res:Response,next:NextFunctio
     } 
     next()
 }
-
-
-
