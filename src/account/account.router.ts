@@ -11,7 +11,6 @@ import { httpResponseMessage } from "../types/types.js";
  const router = express.Router();
 
 // parse json req.body on post routes
-router.use(express.json());
 
 //ACTIVATE/DEACTIVATE ACCOUNT
 router.post("/",raw(validateStatus),raw( async (req:Request, res:Response) => {

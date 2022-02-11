@@ -12,83 +12,87 @@ import logger from "../utils/logger.js"
 
 export async function updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
     try {
-        await logger.params("updateAccountsStatus", { primary_ids, status })
+        logger.params("updateAccountsStatus", { primary_ids, status })
         const idsArray = primary_ids.map(primary_id => { return { primary_id } })
         const statusArray = primary_ids.map(() => { return { status } })
         const res = await updateMultipleRowsById("account", statusArray, idsArray);
-        await logger.funcRet("updateAccountsStatus", res)
+         logger.funcRet("updateAccountsStatus", res)
         return res
     } catch (error) {
-        await logger.error("updateAccountsStatus", error as Error);
+         logger.error("updateAccountsStatus", error as Error);
         throw error;
     }
 }
 
 export async function updateAccountsBalance(idsAndBalances: [number, number][]): Promise<sqlRes> {
     try {
-        await logger.params("updateAccountsBalance", { idsAndBalances });
+         logger.params("updateAccountsBalance", { idsAndBalances });
         const idsArray = idsAndBalances.map(pair => { return { primary_id: pair[0] } })
         const balanceArray = idsAndBalances.map(pair => { return { balance: pair[1] } })
         const res = await updateMultipleRowsById("account", balanceArray, idsArray);
-        await logger.funcRet("updateAccountsBalance", res);
+         logger.funcRet("updateAccountsBalance", res);
         return res
     } catch (error) {
-        await logger.error("updateAccountsBalance", error as Error);
+         logger.error("updateAccountsBalance", error as Error);
         throw error;
     }
 }
 
 export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]> {
     try {
+        logger.funcRet("getAccountsById", {accounts_id});
+
         const orString = accounts_id.map(id => "primary_id = " + id.toString()).join(" OR ")
         const [rows] = (await db.query(`SELECT primary_id, status, balance, type, currency
     FROM account WHERE ${orString}`)) as RowDataPacket[][]
         if (!(rows[0]) || rows.length != accounts_id.length) {
             throw new Error("Data not found")
         }
+        logger.params("getAccountsById",rows);
+
         return (rows) as IAccount[]
     } catch (error) {
-        await logger.error("getAccountsById", error as Error);
+         logger.error("getAccountsById", error as Error);
         throw error;
     }
 }
 
 export async function createAccount(account: Partial<IAccount>, type: string): Promise<number> {
     try {
-        await logger.params("createAccount", { account, type });
+         logger.params("createAccount", { account, type });
         const res = await createRow("account", { currency: account.currency, agent_id: account.agent_id, balance: account.balance, status: true, type })
         const id = (res as OkPacket).insertId
-        await logger.params("createAccount", id);
+         logger.params("createAccount", id);
 
         return id
     } catch (error) {
-        await logger.error("createAccount", error as Error);
+         logger.error("createAccount", error as Error);
         throw error;
     }
 }
 
 export async function createAddress(address?: IAddress): Promise<number | null> {
     try {
-        await logger.params("createAddress", { address });
+         logger.params("createAddress", { address });
         if (address) {
             const res = await createRow("address", address)
             const id = (res as OkPacket).insertId
-            await logger.funcRet("createAddress", id);
+             logger.funcRet("createAddress", id);
             return id
         } else {
-            await logger.funcRet("createAddress", null);
+             logger.funcRet("createAddress", null);
 
             return null;
         }
     } catch (error) {
-        await logger.error("createAddress", error as Error);
+         logger.error("createAddress", error as Error);
         throw error;
     }
 }
 
 export async function getSecretKeyByAccessKey(access_key: string): Promise<string> {
     try {
-        await logger.params("getSecretKeyByAccessKey", { access_key });
+        logger.params("getSecretKeyByAccessKey", { access_key });
 
         const rows = await selectRowById("agent", { access_key });
         console.log(rows);
@@ -96,10 +100,10 @@ export async function getSecretKeyByAccessKey(access_key: string): Promise<strin
             throw new Error("Data not found")
         }
         const secret_key = String(rows[0].secret_key);
-        await logger.funcRet("getSecretKeyByAccessKey", secret_key);
+        logger.funcRet("getSecretKeyByAccessKey", secret_key);
         return secret_key
     } catch (error) {
-        await logger.error("getSecretKeyByAccessKey", error as Error);
+        logger.error("getSecretKeyByAccessKey", error as Error);
         throw error;
     }
 }

@@ -8,6 +8,7 @@ import fetch from "node-fetch";
   import Crypto from "crypto-js";
 
 
+
 export function generateID():string{
     // return Math.random().toString(32).slice(2);
     return uuid.v4();
@@ -37,10 +38,17 @@ export async function getRate(base:string, currency:string):Promise<number>{
      }
    }
 
-export  function createSignture(data:Object,secret:string,time?:number):string {
+export  function createsignature(data:Object,secret:string,time?:string):string {
   const payload = {data,time};
   const hash = Crypto.SHA256(JSON.stringify(payload), secret).toString();
   return hash
+}
+
+
+export function hasTimeout(timeStamp:number,timeOutLength:number):boolean{
+  const now = Date.now();
+  const MSdiff = now-timeStamp
+  return  MSdiff>timeOutLength
 }
 // export async function backupDB() {
 //         console.log("backing up...");

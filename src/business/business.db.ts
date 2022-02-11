@@ -9,31 +9,31 @@ import logger from "../utils/logger.js";
 
 export async function createBusinessAccount(business: Partial<IBusiness>): Promise<number> {
     try {
-        await logger.params("createBusinessAccount", { business });
+        logger.params("createBusinessAccount", { business });
         const account_id = await createAccount(business, "business");
         const address_id = await createAddress(business.address);
         await createRow("business", { account_id, company_id: business.company_id, company_name: business.company_name, context: business.context, address_id })
-        await logger.funcRet("createBusinessAccount", account_id);
+        logger.funcRet("createBusinessAccount", account_id);
         return account_id;
     } catch (error) {
-        await logger.error("createBusinessAccount", error as Error);
+        logger.error("createBusinessAccount", error as Error);
         throw error;
     }
 }
 
 export async function getBusinessAccountById(accountId: number): Promise<IBusiness> {
     try {
-        await logger.params("getBusinessAccountById", { accountId });
+        logger.params("getBusinessAccountById", { accountId });
         const [rows] = (await db.query(`SELECT * FROM business JOIN account on business.account_id = account.primary_id
     JOIN address on address.address_id = business.address_id WHERE business.account_id = ?`, [accountId])) as RowDataPacket[][]
         if (!(rows[0])) {
             throw new Error("Data not found")
         }
         const business = extractBusinessFromObj(rows[0] as IBusinessFromDb);
-        await logger.funcRet("getBusinessAccountById", business);
+        logger.funcRet("getBusinessAccountById", business);
         return business
     } catch (error) {
-        await logger.error("getBusinessAccountById", error as Error);
+        logger.error("getBusinessAccountById", error as Error);
         throw error;
     }
 }

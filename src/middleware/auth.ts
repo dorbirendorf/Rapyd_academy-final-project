@@ -1,27 +1,29 @@
-import {createSignture} from "../utils/utils.js"
+import {createsignature, hasTimeout} from "../utils/utils.js"
 import {getSecretKeyByAccessKey} from "../account/account.services.js"
 import { Request,Response,NextFunction } from "express";
 import { NOT_AUTHORIZED } from "../types/constants.js";
 
 export const auth = 
     async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-        const reqSignture = req.headers["x-signture"];
+        const reqSignature = req.headers["x-signature"];
         const access_key  = req.headers["x-access_key"];
-        const timeStamp   = Number(req.headers["x-timeStamp"]) || undefined; 
-
-        const secret = getSecretKeyByAccessKey(access_key);
-        const signature2 =  createSignture(req.body as Object,secret as string,timeStamp);
-
-        const signturesMatch = (reqSignture===signature2);
+        const timeStamp   = req.headers["x-time"];
         
-        if (!reqSignture || !access_key  || !signturesMatch){
+
+        hasTimeout(Number(timeStamp),1000);
+
+
+        const secret =await getSecretKeyByAccessKey(access_key as string);
+        const serverSignature =  createsignature((req.body || {} )as Object,secret ,timeStamp as string);
+
+        const signaturesMatch = (reqSignature===serverSignature);
+        
+        if (hasTimeout || !reqSignature || !access_key  || !signaturesMatch){
             throw new Error(NOT_AUTHORIZED)
 
          }
-
         next();
-    }
-;
+    };
 
 
 
