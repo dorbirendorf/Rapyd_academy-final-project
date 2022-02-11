@@ -40,7 +40,7 @@ export async function updateAccountsBalance(idsAndBalances: [number, number][]):
 
 export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]> {
     try {
-        logger.funcRet("getAccountsById", {accounts_id});
+        logger.params("getAccountsById", {accounts_id});
 
         const orString = accounts_id.map(id => "primary_id = " + id.toString()).join(" OR ")
         const [rows] = (await db.query(`SELECT primary_id, status, balance, type, currency
@@ -48,7 +48,7 @@ export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]
         if (!(rows[0]) || rows.length != accounts_id.length) {
             throw new Error("Data not found")
         }
-        logger.params("getAccountsById",rows);
+        logger.funcRet("getAccountsById",rows);
 
         return (rows) as IAccount[]
     } catch (error) {
