@@ -7,6 +7,7 @@ import { sqlRes, updateMultipleRowsById, createRow, selectRowById } from "../db.
 import { IAccount, IAddress } from "../types/types.js";
 import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
+import logger from "../utils/logger.js";
 
 
 export async function updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
@@ -49,12 +50,20 @@ export async function createAddress(address?: IAddress): Promise<number|null> {
     }
 }
 
-export async function getAgentByAccessId(access_key: string): Promise<string> {
-    const [rows] = await selectRowById("agent",{access_key});
-    if (!((rows as RowDataPacket[])[0])) {
-        throw new Error("Data not found")
+export async function getSecretKeyByAccessKey(access_key: string): Promise<string> {
+    try {
+        await logger.params("getSecretKeyByAccessKey", {access_key});
+        const rows = await selectRowById("agent", { access_key });
+        if (!(rows[0])) {
+            throw new Error("Data not found")
+        }
+        const secret_key = String(rows[0].secret_key);
+        await logger.funcRet("getSecretKeyByAccessKey", secret_key);
+        return secret_key
+    } catch (error) {
+        await logger.error("getSecretKeyByAccessKey", error as Error);
+        throw error;
     }
-    return (rows as RowDataPacket[])[0].secretKey as string
 }
 
 

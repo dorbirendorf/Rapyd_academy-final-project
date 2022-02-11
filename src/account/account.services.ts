@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { KeyObject } from "crypto";
 import { ITransfer } from "../types/types.js";
+import logger from "../utils/logger.js";
 import { getRate } from "../utils/utils.js";
 import * as DB_ACCOUNT from "./account.db.js"
 import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B ,validateStatusAccounts} from "./account.validation.js";
@@ -87,5 +88,5 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
      }
 
      export async function getSecretKeyByAccessKey(access_key:string){
-         return DB_ACCOUNT.getAgentByAccessId(access_key);
+         return DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
      }

@@ -9,8 +9,7 @@ import { validateAccountId } from "../utils/validationFunc.js";
 
 const router = express.Router();
 
-// parse json req.body on post routes
-router.use(express.json());
+
 
 // CREATES A NEW BUSINESS_ACOUNT
 router.post("/",raw(validateBusinessModel),raw( async (req:Request, res:Response) => {

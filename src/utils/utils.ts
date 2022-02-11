@@ -6,6 +6,7 @@
 import uuid from "uuid";
 import fetch from "node-fetch";
   import Crypto from "crypto-js";
+import logger from "./logger.js";
 
 
 export function generateID():string{
@@ -37,7 +38,7 @@ export async function getRate(base:string, currency:string):Promise<number>{
      }
    }
 
-export  function createSignture(data:Object,secret:string,time?:number):string {
+export  function createsignature(data:Object,secret:string,time?:string):string {
   const payload = {data,time};
   const hash = Crypto.SHA256(JSON.stringify(payload), secret).toString();
   return hash

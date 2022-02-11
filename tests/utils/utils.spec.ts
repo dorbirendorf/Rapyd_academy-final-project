@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import {  createSignture} from "../../src/utils/utils.js";
+import {  createsignature} from "../../src/utils/utils.js";
 import crypto from "crypto";
 
 
@@ -8,13 +8,13 @@ describe("utils  functions ", () => {
     
 
 
-    context("createSignture ", () => {
+    context("createsignature ", () => {
   
         it("should be function", () => {
-            expect(createSignture).to.be.a("Function");
+            expect(createsignature).to.be.a("Function");
         });
 
-        it("should generate signture with time ", async () => {
+        it("should generate signature with time ", async () => {
             const req = 
                 {
                     first_name:"dor",
@@ -22,13 +22,13 @@ describe("utils  functions ", () => {
                     currency:"usd",
                     individual_id:1234567
                 }
-            const res = await createSignture(req,"bla",Date.now());
+            const res = await createsignature(req,"bla",Date.now());
             expect(res).to.be.string;
             
 
         });
 
-        it("should generate signture without time ", async () => {
+        it("should generate signature without time ", async () => {
             const req = 
                 {
                     first_name:"dor",
@@ -37,7 +37,7 @@ describe("utils  functions ", () => {
                     individual_id:1234567
                 }
 
-            const res = await createSignture(req,"bla",Date.now());
+            const res = await createsignature(req,"bla",Date.now());
             expect(res).to.be.string;
             
 

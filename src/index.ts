@@ -32,10 +32,11 @@ class Api {
     applyGlobalMiddleware() {
         log.blue("setting Middlewares...");
         this.app.use(cors());
+        this.app.use(express.json());
         this.app.use(morgan("dev"));
         this.app.use(addIdToReq);
         this.app.use(logRequest());
-        this.app.use(raw(auth))
+        this.app.use(auth)
     }
 
     routing() {

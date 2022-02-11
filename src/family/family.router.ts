@@ -12,8 +12,7 @@ import { validateAccountId } from "../utils/validationFunc.js";
 
 const router = express.Router();
 
-// parse json req.body on post routes
-router.use(express.json());
+
 
 // CREATES A NEW FAMILY_ACOUNT
 router.post("/",raw(validateFamilyModel),raw( async (req:Request, res:Response) => {

@@ -52,7 +52,7 @@ export async function deleteRowById(tableName:string, objId:object):Promise<sqlR
 
 export async function selectRowById(tableName:string, objId:object, columnNames?:string[]):Promise<RowDataPacket[]>{
     const columnString = columnNames? columnNames.join(", ") :"*";
-    const whereString = Object.keys(objId)[0] + " = " +Object.values(objId)[0];
+    const whereString = `${Object.keys(objId)[0]} = "${Object.values(objId)[0]}"`;
     const [rows] = await db.query("SELECT "+ columnString + " FROM "+ tableName+" WHERE " + whereString);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return (rows as RowDataPacket[]);
