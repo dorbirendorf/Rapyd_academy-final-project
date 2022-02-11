@@ -43,6 +43,13 @@ export  function createsignature(data:Object,secret:string,time?:string):string 
   const hash = Crypto.SHA256(JSON.stringify(payload), secret).toString();
   return hash
 }
+
+
+export function hasTimeout(timeStamp:number,timeOutLength:number):boolean{
+  const now = Date.now();
+  const MSdiff = now-timeStamp
+  return  MSdiff>timeOutLength
+}
 // export async function backupDB() {
 //         console.log("backing up...");
 //         const p = exec(
