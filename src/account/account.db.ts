@@ -62,7 +62,7 @@ export async function createAccount(account: Partial<IAccount>, type: string): P
          logger.params("createAccount", { account, type });
         const res = await createRow("account", { currency: account.currency, agent_id: account.agent_id, balance: account.balance, status: true, type })
         const id = (res as OkPacket).insertId
-         logger.params("createAccount", id);
+         logger.funcRet("createAccount", id);
 
         return id
     } catch (error) {
