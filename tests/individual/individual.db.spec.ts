@@ -31,8 +31,10 @@ describe("individual db functions ", async() => {
                 "first_name":"dor",
                 "last_name":"birendorf",
                 "currency":"usd",
+                "balance":2000,
                 "individual_id":7894561,
-                "agent_id":1
+                "agent_id":1,
+                "address_id":null
             
             });
             expect(account_id).to.be.eql(46);
@@ -113,9 +115,5 @@ describe("individual db functions ", async() => {
  
     });
 
-<<<<<<< HEAD
     });
 })
-=======
- });
->>>>>>> upstream/main
