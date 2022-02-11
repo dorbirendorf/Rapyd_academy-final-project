@@ -6,7 +6,7 @@
 import uuid from "uuid";
 import fetch from "node-fetch";
   import Crypto from "crypto-js";
-import logger from "./logger.js";
+
 
 
 export function generateID():string{

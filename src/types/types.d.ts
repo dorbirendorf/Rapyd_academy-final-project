@@ -1,7 +1,7 @@
 export interface IAddress {
     address_id?: number;
     country_name?: string;
-    country_code?: number;
+    country_code?: string;
     postal_code?: number;
     city?: string;
     region?: string;
@@ -40,7 +40,7 @@ export interface IIndividualFromDB {
     email?:string;
     address_id?:number;
     country_name?: string;
-    country_code?: number;
+    country_code?: string;
     postal_code?: number;
     city?: string;
     region?: string;
@@ -75,7 +75,7 @@ export interface IBusinessFromDb{
     address?:IAddress;
     address_id?:number;
     country_name?: string;
-    country_code?: number;
+    country_code?: string;
     postal_code?: number;
     city?: string;
     region?: string;
