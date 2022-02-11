@@ -7,9 +7,9 @@ import { validIndividualId } from "../utils/validationFunc.js";
 
 export async function validateBusinessModel(req:Request,res:Response,next:NextFunction):Promise<void> {
     const {company_id,company_name,context=null,currency,account_id,address=null,balance=0,agent_id} = req.body;
-    validateAccountMandatoryFields(currency as string,balance as number);
+    validateAccountMandatoryFields(currency as string,balance as number,agent_id as number);
 
-    if(!(company_id && company_name&&agent_id)){
+    if(!(company_id && company_name)){
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
     if (account_id !== undefined) {

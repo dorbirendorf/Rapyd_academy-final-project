@@ -8,17 +8,18 @@ import { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MIN_FAMILY_BALANCE, MISSING_REQ
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
 import { sumFamilyAmounts } from "../utils/validationFunc.js";
 import { accountsActive, accountsBelongToFamily, accountsCurrency, accountsExist, allowTransfers } from "../utils/validationService.js";
+import { convertTupelsToArray } from "../utils/utils.js";
 
 
 export function validateFamilyModel(req:Request,res:Response,next:NextFunction):void {
-    let {owners ,currency,balance=0,context=null} = req.body;
-    validateAccountMandatoryFields(currency as string,balance as number);
+    let {owners ,currency,balance=0,context=null,agent_id} = req.body;
+    validateAccountMandatoryFields(currency as string,balance as number,agent_id as number);
     if(!owners){
         throw new Error(`${MISSING_REQUIRED_FIELD}- some mandatory field dont accept`)
     }
     const individualIds = owners.map((owner:[number,number])=>({"account_id":owner[0] }));
     balance = sumFamilyAmounts(owners,MIN_FAMILY_BALANCE);
-    const account= {currency,balance,status:true,type:"family",context,owners_id:individualIds};
+    const account= {currency,balance,status:true,type:"family",context,owners_id:individualIds,agent_id};
     req.accounts=[account];
     console.log(account);
     next()
@@ -39,8 +40,8 @@ export function validateAddToFamily(accounts:IIndividual[],owners:[number,number
 }
 export function validateRemoveFromFamily(accounts:IIndividual[],owners:[number,number][],family:IFamily):void {
     accountsExist(accounts,owners);
-    const individualIds = owners.map((owner:[number,number])=>(owner[0]));
-    accountsBelongToFamily(family.owners_id as { account_id: number }[],individualIds);
+    const individualIds = convertTupelsToArray(owners);
+    accountsBelongToFamily(family.owners as IIndividual[],individualIds);
 }
 export function validateUpdateAccounts(req:Request,res:Response,next:NextFunction):void {
     let {owners,account_id} = req.body;

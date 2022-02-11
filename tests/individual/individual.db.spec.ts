@@ -11,9 +11,9 @@ describe("individual db functions ", async() => {
         it("should be function", () => {
             expect(getAllIndividualsAccountsById).to.be.a("Function");
         });
-        it("should return undefined if ok ", async () => {
+        it("should return get all idndividuals account if ok ", async () => {
             const res = await getAllIndividualsAccountsById([2,4,6]);
-            console.log(res)
+            //console.log(res)
             expect(res.length).to.be.eqls(3)
         });
         // it("should throw error if not ok ", async () => {
@@ -41,7 +41,7 @@ describe("individual db functions ", async() => {
         // it("should throw error if not ok ", () => {
         //     expect(()=>createIndividualAccount(7,1234)).to.throw();
         // });
-    });
+    // });
 
     context("checkIfIndivdualExistByIndividualId ", () => {
   
@@ -116,4 +116,5 @@ describe("individual db functions ", async() => {
     });
 
     });
+})
 })

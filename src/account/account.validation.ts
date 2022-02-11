@@ -8,7 +8,7 @@ import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
 import { accountsActive, accountsCurrency, accountsTypes, allowTransfers, checkLimitTransfer, checkProperState } from "../utils/validationService.js";
 
 
-export function validateAccountMandatoryFields(currency:string,balance:number):void {
+export function validateAccountMandatoryFields(currency:string,balance:number,agent_id:number):void {
    
     if (currency === undefined) {
         throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
@@ -17,6 +17,9 @@ export function validateAccountMandatoryFields(currency:string,balance:number):v
         throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
     }
     if (balance < 0) {
+        throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
+    }
+    if (agent_id === undefined) {
         throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
     }
  }
