@@ -25,7 +25,6 @@ export async function getAllBusinessAccountById(accounts_id: number[]): Promise<
     try {
         logger.params("getAllBusinessAccountById", { accounts_id });
         const orString = accounts_id.map(id => "account_id = " + id.toString()).join(" OR ")
-
         const [rows] = (await db.query(`SELECT * FROM business JOIN account on business.account_id = account.primary_id
     LEFT JOIN address on address.address_id = business.address_id WHERE ${orString}`)) as RowDataPacket[][]
         if (!(rows[0]) || rows.length != accounts_id.length) {

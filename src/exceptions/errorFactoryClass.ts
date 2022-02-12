@@ -8,7 +8,7 @@ import {HttpMissingRequieredFieldError} from "./HttpMissingRequieredFieldError.j
 import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.js"
 import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
-
+import {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_ALREADY_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG,NOT_AUTHORIZED, INVALID_FILED_VALUE} from "../types/constants.js"
 class httpErrorFactoryClass{
     createError(message:string):HttpError{
         const spliteMessage = message.split("-");
@@ -16,29 +16,29 @@ class httpErrorFactoryClass{
         const description = spliteMessage[1]?.trim()||"";
 
         switch(type) { 
-            case "Invalid field": { 
+            case INVALID_FILED: { 
                return new HttpInvalidFieldError(description);
             } 
-            case "Invalid filed value": { 
+            case INVALID_FILED_VALUE: { 
                 return new HttpInvalidFieldValueError(description);
             } 
-            case "Missing requiered field": { 
+            case MISSING_REQUIRED_FIELD: { 
                 return new HttpMissingRequieredFieldError(description);
             } 
-            case "Account does not exist": { 
+            case ACCOUNT_NOT_EXIST: { 
                 return new HttpAccountDoesNotExistError(description);
             } 
-            case "Account ballance too low": { 
+            case ACCOUNT_BALLANCE_LOW: { 
                 return new HttpAccountBallanceTooLowError(description);
             }
-            case "Data not found": {
+            case DATA_NOT_FOUND: {
                 return new HttpDataNotFound(description);
             } 
-            case "Invalid amount": { 
+            case INVALID_AMOUNT_VALUE: { 
                 return new HttpInvalidAmountError(description);
             } 
             default: { 
-               return new HttpError("somthing went wrong",500);
+               return new HttpError(SOMTHING_WENT_WRONG,500);
             } 
          }
     }
