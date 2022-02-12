@@ -12,12 +12,12 @@ import { convertTupelsToArray } from "../utils/utils.js";
 import logger from "../utils/logger.js";
 
 
-export function validateFamilyModel(req:Request,res:Response,next:NextFunction):void {
+export async function validateFamilyModel(req:Request,res:Response,next:NextFunction):Promise<void> {
     let {owners ,currency,balance=0,context=null,agent_id} = req.body;
     if(!(owners && owners.length>0)){
         throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
     }
-    const tupelsValid : boolean = owners.every((owner: number[])=>(!(isNaN(Number(owner[0])))&&(isNaN(Number(owner[1])))&&(owner[1]>0)));
+    const tupelsValid : boolean = owners.every((owner: number[])=>((!isNaN(Number(owner[0]))&&!isNaN(Number(owner[1]))&&(Number(owner[1]))>0)));
      if (!tupelsValid){
        throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
     }
@@ -25,7 +25,6 @@ export function validateFamilyModel(req:Request,res:Response,next:NextFunction):
     sumFamilyAmounts(owners,MIN_FAMILY_BALANCE);
     const account= {currency,balance,status:true,type:"family",context,owners_id:[],agent_id};
     req.accounts=[account];
-    console.log(account);
     next()
 }
 
