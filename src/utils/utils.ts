@@ -58,7 +58,7 @@ export  function createsignature(data:Object,secret:string,time?:string):string 
     logger.params("createsignature",{data,secret,time})
     const payload = {data,time};
     const hash = Crypto.SHA256(JSON.stringify(payload), secret).toString();
-    logger.params("createsignature",{hash});
+    logger.funcRet("createsignature",{hash});
     return hash
 
   }catch(err){

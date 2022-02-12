@@ -37,7 +37,7 @@ class Api {
         this.app.use(morgan("dev"));
         this.app.use(addIdToReq);
         this.app.use(logRequest());
-       // this.app.use(raw(auth))
+        this.app.use(raw(auth))
     }
 
     routing() {

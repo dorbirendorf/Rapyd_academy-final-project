@@ -296,30 +296,8 @@ describe("family db functions ", () => {
         });
         it("should return get all idndividuals account_ids if ok ", async () => {
             const res = await addIndividualsToFamilyAccount(49,[2,4]);
-            //console.log(res)
-            expect(res).to.be.eqls({
-                "account_id": 42,
-                "currency": "EUR",
-                "balance": 8000,
-                "agent_id": 1,
-                "status": 1,
-                "type": "family",
-                "context": "travel",
-                "owners_id": [
-                    {
-                        "account_id": 8
-                    },
-                    {
-                        "account_id": 6
-                    },
-                    {
-                        "account_id": 4
-                    },
-                    {
-                        "account_id": 2
-                    }
-                ]
-            })
+            console.log(res)
+            expect(res).to.be.eqls(5)
         });
         // it("should throw error if not ok ", async () => {
         //  expect(async ()=> await getAllIndividualsAccountsById([2,4,1232])).to.throw();
