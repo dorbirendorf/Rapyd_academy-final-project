@@ -3,17 +3,18 @@
 import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
-export function validIndividualId(id_length: number, id: number): void {
+validEntityId
+export function validEntityId(id_length: number, id: number): void {
    try {
-      logger.params("validIndividualId",{id_length,id})
+      logger.params("validEntityId",{id_length,id})
 
       if (String(id).length !== id_length) {
-         throw new Error(`${INVALID_FILED_VALUE} - individual id not valid`);
+         throw new Error(`${INVALID_FILED_VALUE} -  id not valid`);
       }
-      logger.funcRet("validIndividualId","void")
+      logger.funcRet("validEntityId","void")
 
    } catch (err) {
-      logger.error("validIndividualId", err as Error)
+      logger.error("validEntityId", err as Error)
       throw err
    }
 }
@@ -86,12 +87,12 @@ export function initRequiredParams(): Map<string, string[]> {
 }
 export async function validateAccountId(req: Request, res: Response, next: NextFunction): Promise<void> {
    try {
-      logger.params("validateAccountId",{req})
+      logger.params("validateAccountId",{})
 
       const { id } = req.params;
 
       if ((id === "undefined") || (isNaN(Number(id)))) {
-         throw new Error(`${INVALID_FILED_VALUE} - id isnt accept`)
+         throw new Error(`${INVALID_FILED_VALUE} - id is not valid!`)
       }
       logger.funcRet("validateAccountId", "void")
       next()

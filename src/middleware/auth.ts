@@ -6,7 +6,6 @@ import logger from "../utils/logger.js";
 
 export const auth = 
     async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-<<<<<<< HEAD
         try{
 
             logger.params("auth-middleware",{})
@@ -30,26 +29,6 @@ export const auth =
             logger.error("auth-middleware",err as Error)
             throw err
         }
-=======
-        const reqSignature = req.headers["x-signature"];
-        const access_key  = req.headers["x-access_key"];
-        const timeStamp   = req.headers["x-time"];
-        
-
-        const timeout= hasTimeout(Number(timeStamp),1000);
-
-
-        const secret =await getSecretKeyByAccessKey(access_key as string);
-        const serverSignature =  createsignature((req.body || {} )as Object,secret ,timeStamp as string);
-
-        const signaturesMatch = (reqSignature===serverSignature);
-        
-        if (timeout || !reqSignature || !access_key  || !signaturesMatch){
-            throw new Error(NOT_AUTHORIZED)
-
-         }
-        next();
->>>>>>> upstream/main
     };
 
 

@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from "express";
 import { IFamily, IIndividual, } from "../types/types.js";
 import { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MIN_FAMILY_BALANCE, MISSING_REQUIRED_FIELD} from "../types/constants.js";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
-import {sumFamilyAmounts } from "../utils/validationFunc.js";
+import {  sumFamilyAmounts } from "../utils/validationFunc.js";
 import { accountsActive, accountsBelongToFamily, accountsCurrency, accountsExist, allowTransfers } from "../utils/validationService.js";
 import { convertTupelsToArray } from "../utils/utils.js";
 import logger from "../utils/logger.js";

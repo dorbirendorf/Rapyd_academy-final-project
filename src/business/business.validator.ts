@@ -4,7 +4,7 @@ import { validateAccountMandatoryFields } from "../account/account.validation.js
 import {MISSING_REQUIRED_FIELD, COMPANY_ID_LENGTH, INVALID_FILED} from '../types/constants.js';
 import {IBusiness } from "../types/types.d.js";
 import logger from "../utils/logger.js";
-import { validIndividualId } from "../utils/validationFunc.js";
+import { validEntityId } from "../utils/validationFunc.js";
 
 export async function validateBusinessModel(req:Request,res:Response,next:NextFunction):Promise<void> {
     try{
@@ -16,9 +16,9 @@ export async function validateBusinessModel(req:Request,res:Response,next:NextFu
             throw new Error(`${MISSING_REQUIRED_FIELD}`);
         }
         if (account_id !== undefined) {
-            throw new Error(INVALID_FILED);
+            throw new Error(`${INVALID_FILED}-account_id must not be provided!`);
         }  
-        validIndividualId(COMPANY_ID_LENGTH,company_id as number);
+        validEntityId(COMPANY_ID_LENGTH,company_id as number);
         
         const account:Partial <IBusiness> = {company_id,company_name,currency,context,address,balance,status:true,agent_id};
         req.accounts=[account];
