@@ -23,50 +23,57 @@ import { convertTupelsToArray } from "../utils/utils.js";
 import logger from "../utils/logger.js";
 // import { validateFamilyAccounts } from "./family.validator.js";
 
-export async function createFamilyAccount(
-    family: Partial<IFamily>,
-    owners: [number, number][],
-    currency: string
-): Promise<any> {
+export async function createFamilyAccount(family: Partial<IFamily>,owners: [number, number][],
+    currency: string): Promise<any> {
     try {
     logger.params("createFamilyAccount", {family,owners,currency});
-    let individualIds = convertTupelsToArray(owners);
-    const accounts:IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
-        // let id1 = {
-        //     account_id: 1,
-        //     currency: "ILS",
-        //     balance: 100000,
-        //     status: true,
-        //     type: "individual",
-        //     individual_id: 6,
-        //     first_name: "string",
-        //     last_name: "string",
-        //     agent_id:1
-    
-        // };
-        // let id2 = {
-        //     account_id: 4,
-        //     currency: "ILS",
-        //     balance: 100000,
-        //     status: true,
-        //     type: "individual",
-        //     individual_id: 6,
-        //     first_name: "string",
-        //     last_name: "string",
-        //     agent_id:1
-        // };
-        // let accounts = [id1, id2];
-        validateAddToFamily(accounts, owners, currency);
-        let ans = await DB_FAMILY.createFamilyAccount(family);
-        logger.funcRet("createIndividualAccount", ans);
+    const familyId = await DB_FAMILY.createFamilyAccount(family); //return account id
+    let ans = addIndividualsToFamilyAccount(familyId,owners,"full");
+        logger.funcRet("createFamilyAccount", ans);
         return ans;
 } catch (error) {
-    logger.error("createIndividualAccount", error as Error);
+    logger.error("createFamilyAccount", error as Error);
    throw error;
 }
 }
+export async function addIndividualsToFamilyAccount(
+    familyId: number,
+    owners: [number, number][],
+    format: string
+): Promise<any> {
+    try{
+        logger.params("addIndividualsToFamilyAccount",{ familyId,owners,format})
+        const family = await getFamilyAccountByIdShort(familyId);
+        const individualIds = convertTupelsToArray(owners);
+        const accounts: IIndividual[] =await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
+        validateAddToFamily(accounts, owners, family.currency);
+        let IndividualSBalance: [number, number][] = accounts.map((account) => {
+            const owner = owners.find((own) => own[0] === account.account_id) as [
+                number,
+                number
+            ];
+            return [owner[0], account.balance - owner[1]];
+        });
+        const familyBalance: [number, number] = [
+            family.account_id,
+            owners.reduce((prev, owner) => owner[1] + prev, family.balance),
+        ];
+        IndividualSBalance.push(familyBalance);
+        await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
+        await DB_FAMILY.addIndividualsToFamilyAccount(family.account_id,individualIds);
+        let ans =
+            format === "full"
+                ? await DB_FAMILY.getFamilyAccountByIdFull
+                : await DB_FAMILY.getFamilyAccountByIdShort;
+                logger.funcRet("addIndividualsToFamilyAccount",ans);
+        return ans;
+    }catch (error) {
+            logger.error("addIndividualsToFamilyAccount", error as Error);
+           throw error;
+}
+}
 
-export async function getFamilyAccountByIdShort(familyId: string): Promise<IFamily> {
+export async function getFamilyAccountByIdShort(familyId: number): Promise<IFamily> {
     try{
           logger.params("getFamilyAccountByIdShort",{familyId});
     let ans = await DB_FAMILY.getFamilyAccountByIdShort(Number(familyId));
@@ -79,7 +86,7 @@ export async function getFamilyAccountByIdShort(familyId: string): Promise<IFami
 }
 
 export async function getFamilyAccountByIdFull(
-    familyId: string
+    familyId: number
 ): Promise<IFamily> {
     try{
             logger.params("getFamilyAccountByIdFull",{familyId});
@@ -92,7 +99,7 @@ export async function getFamilyAccountByIdFull(
     }
 }
 
-export async function closeFamilyAccount(familyId: string): Promise<any> {
+export async function closeFamilyAccount(familyId: number): Promise<any> {
     try{
     logger.params("closeFamilyAccount", { familyId });
     const family = await getFamilyAccountByIdFull(familyId);
@@ -115,49 +122,9 @@ export async function closeFamilyAccount(familyId: string): Promise<any> {
         }
 }
 
-export async function addIndividualsToFamilyAccount(
-    familyId: string,
-    owners: [number, number][],
-    format: string
-): Promise<any> {
-    try{
-        logger.params("addIndividualsToFamilyAccount",{ familyId,owners,format})
-        const family = await getFamilyAccountByIdShort(familyId);
-        const individualIds = owners.map((owner: [number, number]) => owner[0]);
-        const accounts: IIndividual[] =
-            await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
-        validateAddToFamily(accounts, owners, family.currency);
-        let IndividualSBalance: [number, number][] = accounts.map((account) => {
-            const owner = owners.find((own) => own[0] === account.account_id) as [
-                number,
-                number
-            ];
-            return [owner[0], account.balance - owner[1]];
-        });
-        const familyBalance: [number, number] = [
-            family.account_id,
-            owners.reduce((prev, owner) => owner[1] + prev, family.balance),
-        ];
-        IndividualSBalance.push(familyBalance);
-        await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
-        await DB_FAMILY.addIndividualsToFamilyAccount(
-            family.account_id,
-            individualIds
-        );
-        let ans =
-            format === "full"
-                ? await DB_FAMILY.getFamilyAccountByIdFull
-                : await DB_FAMILY.getFamilyAccountByIdShort;
-                logger.funcRet("addIndividualsToFamilyAccount",ans);
-        return ans;
-    }catch (error) {
-            logger.error("addIndividualsToFamilyAccount", error as Error);
-           throw error;
-}
-}
 
 export async function removeIndividualsFromFamilyAccount(
-    familyId: string,
+    familyId: number,
     owners: [number, number][],
     format: string
 ): Promise<any> {

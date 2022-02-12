@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE } from "../types/constants.js";
+import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
 export function validIndividualId(id_length: number, id: number): void {
@@ -65,6 +65,7 @@ export function sumFamilyAmounts(tupels: [number, number][], minBalance: number)
       throw err
    }
 }
+  
 
 
 export function initRequiredParams(): Map<string, string[]> {
