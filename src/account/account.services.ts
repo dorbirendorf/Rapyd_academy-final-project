@@ -109,7 +109,7 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
         try{ logger.params("getSecretKeyByAccessKey",{access_key})
             const secret_key =  DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
         logger.funcRet("getSecretKeyByAccessKey",secret_key);   
-        return
+        return secret_key;
          
          }catch (error) {
          logger.error("getSecretKeyByAccessKey", error as Error);

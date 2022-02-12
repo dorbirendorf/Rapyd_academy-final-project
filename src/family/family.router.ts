@@ -33,6 +33,7 @@ router.get("/full/:id",raw(validateAccountId),raw( async (req:Request, res:Respo
 
   // GET SHORT FAMILY_ACOUNT BY ID
   router.get("/short/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
+    console.log("enter Route")
     const ans = await family_service.getFamilyAccountByIdShort(req.params.id);
     res.status(200).json(ans);
   }));
