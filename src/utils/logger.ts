@@ -8,11 +8,9 @@ class Logger {
         this.stream = fs.createWriteStream(path, { flags: 'a+' });
     }
     params(function_name: string, parameters: Object): void {
-        let paramsText = ""
+        let paramsText = JSON.stringify(parameters,null,2);
         let timeStamp = getTimeString();
-        for (const [key, value] of Object.entries(parameters)) {
-            paramsText += `${key}: ${value}: ${typeof value} \n`;
-        }
+        
         const logText = `FUNCTION EXECUTION\n${timeStamp}\nsteping into "${function_name}" with parameters:\n${paramsText}\n\n`
         this.stream.write(logText);
     }
@@ -25,11 +23,8 @@ class Logger {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     funcRet(function_name:string,returnValue:any):void{
         let timeStamp = getTimeString();
-        const returnObject = typeof returnValue ==="object" ? returnValue || {} :{returnValue};
-        let returnValueString=""
-        for (const [key, value] of Object.entries(returnObject as object)){
-            returnValueString +=`${key}: ${value}: ${typeof value} \n`;
-          }
+        let returnValueString=JSON.stringify(returnValue,null,2);
+        
         const logText = `FUNCTION RETURN\n${timeStamp}\nreturning from "${function_name}" with value:\n${returnValueString}\n\n`
         this.stream.write(logText);
     }

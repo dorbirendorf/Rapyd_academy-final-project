@@ -10,7 +10,7 @@ export const auth =
         const timeStamp   = req.headers["x-time"];
         
 
-        hasTimeout(Number(timeStamp),1000);
+        const timeout= hasTimeout(Number(timeStamp),1000);
 
 
         const secret =await getSecretKeyByAccessKey(access_key as string);
@@ -18,7 +18,7 @@ export const auth =
 
         const signaturesMatch = (reqSignature===serverSignature);
         
-        if (hasTimeout || !reqSignature || !access_key  || !signaturesMatch){
+        if (timeout || !reqSignature || !access_key  || !signaturesMatch){
             throw new Error(NOT_AUTHORIZED)
 
          }
