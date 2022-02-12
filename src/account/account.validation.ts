@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import { INVALID_FILED, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import { amountPositive } from "../utils/validationFunc.js";
 import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
@@ -13,16 +13,16 @@ export function validateAccountMandatoryFields(currency: string, balance: number
     try {
         logger.params("validateAccountMandatoryFields", { currency, balance });
         if (currency === undefined) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
+            throw new Error(`${MISSING_REQUIRED_FIELD} - please provide currency`)
         }
         if (balance === undefined) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
+            throw new Error(`${MISSING_REQUIRED_FIELD} - please provide balance`)
         }
         if (balance < 0) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
+            throw new Error(`${INVALID_FILED_VALUE} - balance cant be negative`)
         }
         if (agent_id === undefined) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - some mandatory field dont accept`)
+            throw new Error(`${MISSING_REQUIRED_FIELD} - must provide agent_id`)
         }
         logger.funcRet("validateAccountMandatoryFields", "void");
     } catch (error) {

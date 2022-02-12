@@ -17,12 +17,12 @@ import * as DB_BUSINESS from "./business.db.js"
    
    export async function getBusinessAccountById(accountId:string):Promise<any>{
     try{
-      logger.params("getBusinessAccountById",{accountId})
-      const business=await DB_BUSINESS.getBusinessAccountById(Number(accountId));
+      logger.params("service-getBusinessAccountById",{accountId})
+      const business=await DB_BUSINESS.getAllBusinessAccountById([Number(accountId)]);
       logger.funcRet("getBusinessAccountById",{business})
       return business
     }catch(err){
-      logger.error("createBusinessAccount",err as Error)
+      logger.error("service-createBusinessAccount",err as Error)
       throw err
 
     }
