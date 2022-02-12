@@ -71,7 +71,7 @@ describe("account db functions ", () => {
         it("should return number of account_id if ok ", async () => {
             const accounts = await createAccount({balance:2000,currency:"USD",agent_id:1,type:"individual",status:true},"individual")
             console.log(accounts);
-            expect(accounts).to.be.equal(5)
+            expect(accounts).to.be.equal(45)
         });
         // it("should throw error if not ok ", () => {
         //     expect(()=>getAccountsById(-1000)).to.throw();

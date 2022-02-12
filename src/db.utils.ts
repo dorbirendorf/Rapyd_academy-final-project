@@ -21,11 +21,12 @@ export async function createMultipleRows(tableName:string,objData: object[]) :Pr
 
         const parameters = Object.keys(objData[0]).join(",");
     const questionMarks = objData.map(()=>`(${parameters.split(",").map(() => "?").join(",")})`).join(",");
-    const splitedValues = objData.map(obj=> Object.values(obj)).
+    let splitedValues = objData.map(obj=> Object.values(obj)).
     reduce((prev,curr) => {
         prev.push(curr);
         return prev as string[];
     },[])
+    console.log("INSERT INTO "+ tableName+" ("+parameters+")  VALUES ("+questionMarks+")",splitedValues)
     const [rows] = await db.query("INSERT INTO "+ tableName+" ("+parameters+")  VALUES ("+questionMarks+")",splitedValues);
     logger.funcRet("createMultipleRows", rows);
 
