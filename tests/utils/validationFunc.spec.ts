@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { checkBalance,validIndividualId,amountPositive ,sumFamilyAmounts} from "../../src/utils/validationFunc.js";
+import { checkBalance, validEntityId,amountPositive ,sumFamilyAmounts} from "../../src/utils/validationFunc.js";
 
 
 describe("validation middelware functions ", () => {
@@ -19,13 +19,13 @@ describe("validation middelware functions ", () => {
     context("validIndividualId ", () => {
   
         it("should be function", () => {
-            expect(validIndividualId).to.be.a("Function");
+            expect(validEntityId).to.be.a("Function");
         });
         it("should return undefined if ok ", () => {
-            expect(validIndividualId(7,1234567)).to.be.undefined
+            expect(validEntityId(7,1234567)).to.be.undefined
         });
         it("should throw error if not ok ", () => {
-            expect(()=>validIndividualId(7,1234)).to.throw();
+            expect(()=>validEntityId(7,1234)).to.throw();
         });
     });
 

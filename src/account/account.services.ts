@@ -9,19 +9,17 @@ import { ITransfer } from "../types/types.js";
 import logger from "../utils/logger.js";
 import { getRate } from "../utils/utils.js";
 import * as DB_ACCOUNT from "./account.db.js"
+import * as DB_BUSINESS from "../business/business.db.js"
 import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B ,validateStatusAccounts} from "./account.validation.js";
 
    
    export async function transferB2B(payload:ITransfer):Promise<string>{
       try {let {source,destination,amount} = payload;
-       //let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
-      // let destTransfer = await DB_BUSINESS.getAccountsById(destination);
-      let sourceTransfer = {account_id:1, currency:"USD", balance:100000000,agent_id:1, status:true, type:"business",company_id:3,
-      company_name:"SF"};
-      let destTransfer = {account_id:2, currency:"USD", balance:100000,agent_id:1, status:true, type:"business",company_id:3,
-      company_name:"SF"};
+      let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
+      let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
+      
       validateTransferAccountsB2B(sourceTransfer,destTransfer,amount);
-      let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
+      let ans = exectueTransfer(sourceTransfer.company_id, sourceTransfer.balance, destTransfer.company_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
       return ans;} catch (error) {
          logger.error("transferB2B", error as Error);
         throw error;
@@ -56,18 +54,18 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
       validateTransferAccountsB2I(sourceTransfer,destTransfer,amount);
       let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
       return ans;}catch (error) {
-         logger.error("transferB2BFX", error as Error);
+         logger.error("transferB2I", error as Error);
         throw error;
     }
      }
 
      export async function transferF2B(payload:ITransfer):Promise<string>{
       try{let {source,destination,amount} = payload;
-       //let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
+      // let sourceTransfer = await DB_BUSINESS.getAccountsById(source);
       // let destTransfer = await DB_INDIVIDUAL.getAccountsById(destination);
-      let sourceTransfer = {account_id:1, currency:"USD", balance:100000,agent_id:1,  status:true, type:"family"};
-      let destTransfer = {account_id:1, currency:"USD", balance:1000888800,agent_id:1,  status:true, type:"business",company_id:4,
-      company_name:"SF"};
+      // let sourceTransfer = {account_id:1, currency:"USD", balance:100000,agent_id:1,  status:true, type:"family"};
+      // let destTransfer = {account_id:1, currency:"USD", balance:1000888800,agent_id:1,  status:true, type:"business",company_id:4,
+      // company_name:"SF"};
       validateTransferAccountsF2B(sourceTransfer,destTransfer,amount);
       let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency,destTransfer.currency, destTransfer.balance,amount);
       return ans;}catch (error) {
@@ -85,7 +83,7 @@ import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTrans
      export async function exectueTransfer(srcId:number, srcBalance:number, destId:number, srcCurr:string, destCurr:string, destBalance:number,amount:number,FX=1):Promise<string>{
       try{srcBalance= srcBalance - amount*FX;
       destBalance = destBalance + amount;
-      //await DB_ACCOUNT.updateAccountBalance([[srcId,srcBalance],[destId,destBalance]]);
+      await DB_ACCOUNT.updateAccountsBalance([[srcId,srcBalance],[destId,destBalance]]);
       return `source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}`;}catch (error) {
          logger.error("transferB2BFX", error as Error);
         throw error;

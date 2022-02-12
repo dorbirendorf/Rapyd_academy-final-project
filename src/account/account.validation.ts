@@ -70,7 +70,7 @@ export function validateTransferAccountsB2B(source: IBusiness, dest: IBusiness, 
         logger.params("validateTransferAccountsB2B", { source, dest, amount, FX });
 
         validateTransferAccounts(source, dest, amount, 10000, FX);
-        checkLimitTransfer("B2B", amount, source.company_name, dest.company_name);
+        checkLimitTransfer("B2B", amount, source.company_id, dest.company_id);
 
         logger.funcRet("validateTransferAccountsB2B", "void");
     } catch (error) {

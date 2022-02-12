@@ -23,49 +23,62 @@ import { convertTupelsToArray } from "../utils/utils.js";
 import logger from "../utils/logger.js";
 // import { validateFamilyAccounts } from "./family.validator.js";
 
-export async function createFamilyAccount(family: Partial<IFamily>, owners: [number, number][],
+export async function createFamilyAccount(family_create: Partial<IFamily>,owners: [number, number][],
     currency: string): Promise<any> {
     try {
-        logger.params("createFamilyAccount", { family, owners, currency });
-        const familyId = await DB_FAMILY.createFamilyAccount(family); //return account id
-        let ans = addIndividualsToFamilyAccount(familyId, owners, "full");
-        logger.funcRet("createFamilyAccount", ans);
-        return ans;
-    } catch (error) {
-        logger.error("createFamilyAccount", error as Error);
-        throw error;
-    }
+    logger.params("createFamilyAccount", {family_create,owners,currency});
+   
+    const individualIds = convertTupelsToArray(owners);
+    const accounts: IIndividual[] =await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);   
+    
+    validateAddToFamily(accounts, owners, currency);
+
+    const familyId = await DB_FAMILY.createFamilyAccount(family_create);
+    const family = await getFamilyAccountByIdShort(familyId);
+    let ans = execAddToFamily(individualIds,accounts ,owners,family,"full");      
+    logger.funcRet("createFamilyAccount",ans);
+    return ans;
+} catch (error) {
+    logger.error("createFamilyAccount", error as Error);
+   throw error;
 }
-export async function addIndividualsToFamilyAccount(
-    familyId: number,
-    owners: [number, number][],
+}
+
+
+async function execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[number,number][],family:IFamily,format:string):Promise<IFamily>{
+    let IndividualSBalance: [number, number][] = accounts.map((account) => {
+        const owner = owners.find((own) => own[0] === account.account_id) as [number,number];
+        return [owner[0], account.balance - owner[1]];
+    });
+    const familyBalance: [number, number] = [
+        family.account_id,
+        owners.reduce((prev, owner) => owner[1] + prev, family.balance),
+    ];
+    IndividualSBalance.push(familyBalance);
+    await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
+    await DB_FAMILY.addIndividualsToFamilyAccount(family.account_id,individualIds);
+    let ans =
+    format === "full"
+            ? await DB_FAMILY.getFamilyAccountByIdFull(family.account_id)
+            : await DB_FAMILY.getFamilyAccountByIdShort(family.account_id);
+    return ans;
+}
+
+
+export async function addIndividualsToFamilyAccount(familyId: number,owners: [number, number][],
     format: string
 ): Promise<any> {
     try {
         logger.params("addIndividualsToFamilyAccount", { familyId, owners, format })
         const family = await getFamilyAccountByIdShort(familyId);
+        
         const individualIds = convertTupelsToArray(owners);
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
         validateAddToFamily(accounts, owners, family.currency);
-        let IndividualSBalance: [number, number][] = accounts.map((account) => {
-            const owner = owners.find((own) => own[0] === account.account_id) as [
-                number,
-                number
-            ];
-            return [owner[0], account.balance - owner[1]];
-        });
-        const familyBalance: [number, number] = [
-            family.account_id,
-            owners.reduce((prev, owner) => owner[1] + prev, family.balance),
-        ];
-        IndividualSBalance.push(familyBalance);
-        await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
-        await DB_FAMILY.addIndividualsToFamilyAccount(family.account_id, individualIds);
-        let ans = 
-            format === "full"
-                ? await DB_FAMILY.getFamilyAccountByIdFull(familyId)
-                : await DB_FAMILY.getFamilyAccountByIdShort(familyId);
-        logger.funcRet("addIndividualsToFamilyAccount", ans);
+       
+        let ans = execAddToFamily(individualIds,accounts ,owners,family,format);
+        
+        logger.funcRet("addIndividualsToFamilyAccount",ans);
         return ans;
     } catch (error) {
         logger.error("addIndividualsToFamilyAccount", error as Error);
