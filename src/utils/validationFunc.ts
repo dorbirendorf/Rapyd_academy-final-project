@@ -3,7 +3,7 @@
 import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
-
+validEntityId
 export function validEntityId(id_length: number, id: number): void {
    try {
       logger.params("validEntityId",{id_length,id})

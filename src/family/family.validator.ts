@@ -32,9 +32,9 @@ export function validateFamilyModel(req:Request,res:Response,next:NextFunction):
 export function validateAddToFamily(accounts:IIndividual[],owners:[number,number][],currency:string):void {
   try{
       logger.params("validateAddToFamily",{accounts,owners,currency});
-    accountsExist(accounts,owners);
-   accountsActive(accounts);
-   accountsCurrency(accounts,currency);
+      accountsExist(accounts,owners);
+      accountsActive(accounts);
+      accountsCurrency(accounts,currency);
    accounts.map((account)=>{
        const owner = owners.find(own => own[0] === account.account_id)
        if(!owner){

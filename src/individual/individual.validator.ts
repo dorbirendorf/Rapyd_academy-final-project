@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 import { validateAccountMandatoryFields } from "../account/account.validation.js";
 import {INDIVIDUAL_ID_LENGTH,MISSING_REQUIRED_FIELD, INVALID_FILED, INVALID_FILED_VALUE} from '../types/constants.js';
 import { IIndividual } from "../types/types.d.js";
-import { validEntityId } from "../utils/validationFunc.js";
+import { validEntityId} from "../utils/validationFunc.js";
 
 
 export async function validateIndividualModel(req:Request,res:Response,next:NextFunction):Promise<void> {
