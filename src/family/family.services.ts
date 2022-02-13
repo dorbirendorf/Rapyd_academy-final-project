@@ -14,6 +14,7 @@ import {
     validateRemoveFromFamily,
 } from "./family.validator.js";
 import {
+    ACCOUNT_STATUS_FIELD,
     INVALID_FILED_VALUE,
     MIN_FAMILY_BALANCE,
     SOMTHING_WENT_WRONG,
@@ -27,15 +28,12 @@ export async function createFamilyAccount(family_create: Partial<IFamily>,owners
     currency: string): Promise<any> {
     try {
     logger.params("createFamilyAccount", {family_create,owners,currency});
-   
     const individualIds = convertTupelsToArray(owners);
     const accounts: IIndividual[] =await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);   
-    
     validateAddToFamily(accounts, owners, currency);
-
     const familyId = await DB_FAMILY.createFamilyAccount(family_create);
     const family = await getFamilyAccountByIdShort(familyId);
-    let ans = execAddToFamily(individualIds,accounts ,owners,family,"full");      
+    let ans = await execAddToFamily(individualIds,accounts ,owners,family,"full");      
     logger.funcRet("createFamilyAccount",ans);
     return ans;
 } catch (error) {
@@ -116,19 +114,18 @@ export async function closeFamilyAccount(familyId: number): Promise<any> {
     try{
     logger.params("closeFamilyAccount", { familyId });
     const family = await getFamilyAccountByIdFull(familyId);
-    if (family.status === false) {
+    if (family.status == false) {
         throw new Error(
             `${INVALID_FILED_VALUE}- family ${family.account_id} accout is alreay close`
         );
     }
     if ((family.owners as IIndividual[]).length > 0) {
         throw new Error(
-            `${SOMTHING_WENT_WRONG}- family ${family.account_id} still have owners`
+            `${ACCOUNT_STATUS_FIELD}- family ${family.account_id} still have owners`
         );
     }
-    let ans = await DB_ACCOUNT.updateAccountsStatus([Number(familyId)], false);
-    logger.funcRet("closeFamilyAccount",ans);
-    return ans;
+    await DB_ACCOUNT.updateAccountsStatus([Number(familyId)], false);
+    logger.funcRet("closeFamilyAccount","void");
     }catch (error) {
             logger.error("closeFamilyAccount", error as Error);
            throw error;
@@ -145,22 +142,19 @@ export async function removeIndividualsFromFamilyAccount(
         logger.params("removeIndividualsFromFamilyAccount", {familyId,owners,format});
         const family = await getFamilyAccountByIdFull(familyId);
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(convertTupelsToArray(owners));
-        validateRemoveFromFamily(accounts, owners, family);
+        await validateRemoveFromFamily(accounts, owners, family);
         let removeBalance = 0;
         if ((family.owners as IIndividual[]).length === owners.length) {
-            removeBalance = sumFamilyAmounts(owners, 0); //should be >=0
+            removeBalance = sumFamilyAmounts(owners, family.balance, false); //should be >=0
         }
         if ((family.owners as IIndividual[]).length > owners.length) {
-            removeBalance = sumFamilyAmounts(owners, MIN_FAMILY_BALANCE); //should be >=5000
+            removeBalance = sumFamilyAmounts(owners, family.balance - MIN_FAMILY_BALANCE, false); //should be >=5000
         }
         let IndividualSBalance: [number, number][] = accounts.map((account) => {
             const owner = owners.find((own) => own[0] === account.account_id) as [number,number];
             return [owner[0], account.balance + owner[1]];
         });
-        const familyBalance: [number, number] = [
-            family.account_id,
-            family.balance - removeBalance,
-        ];
+        const familyBalance: [number, number] = [family.account_id,family.balance - removeBalance];
         IndividualSBalance.push(familyBalance);
         await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
         await DB_FAMILY.removeIndividualsFromFamilyAccount(
@@ -168,7 +162,7 @@ export async function removeIndividualsFromFamilyAccount(
             owners
         );
         let ans =format === "full" ?
-        await DB_FAMILY.getFamilyAccountByIdFull:await DB_FAMILY.getFamilyAccountByIdShort;
+        await DB_FAMILY.getFamilyAccountByIdFull(familyId):await DB_FAMILY.getFamilyAccountByIdShort(familyId);
         logger.funcRet("removeIndividualsFromFamilyAccount", ans);
         return ans;
     }

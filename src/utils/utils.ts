@@ -17,10 +17,8 @@ export function generateID():string{
 }
 
 export function convertTupelsToArray(tupels:[number,number][]):number[]{
-  
   logger.params("convertTupelsToArray",{tupels});
-  const arr=tupels.map((tupel: [number, number]) => tupel[0]); 
-  
+  const arr=tupels.map((tupel: [number, number]) => Number(tupel[0])); 
   logger.funcRet("convertTupelsToArray",{arr});
   return arr
 }

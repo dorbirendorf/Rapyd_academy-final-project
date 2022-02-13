@@ -8,6 +8,7 @@ export const ACCOUNT_BALLANCE_LOW="Account ballance too low"
 export const DATA_NOT_FOUND="Data not found"
 export const SOMTHING_WENT_WRONG="somthing went wrong"
 export const NOT_AUTHORIZED="you are not autorized to accsess this route" 
+export const ACCOUNT_STATUS_FIELD="Account status cant be chenge" 
 
 
 export const INVALID_AMOUNT_VALUE = "Invalid amount";

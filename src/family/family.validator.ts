@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -12,12 +13,12 @@ import { convertTupelsToArray } from "../utils/utils.js";
 import logger from "../utils/logger.js";
 
 
-export function validateFamilyModel(req:Request,res:Response,next:NextFunction):void {
+export async function validateFamilyModel(req:Request,res:Response,next:NextFunction):Promise<void> {
     let {owners ,currency,balance=0,context=null,agent_id} = req.body;
     if(!(owners && owners.length>0)){
         throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
     }
-    const tupelsValid : boolean = owners.every((owner: number[])=>(!(isNaN(Number(owner[0])))&&(isNaN(Number(owner[1])))&&(owner[1]>0)));
+    const tupelsValid : boolean = owners.every((owner:[number,number])=>(!(isNaN(Number(owner[0])))&&!(isNaN(Number(owner[1])))&&(Number(owner[1])>0  && typeof owner[0] === "number" && typeof owner[1] === "number")));
      if (!tupelsValid){
        throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
     }
@@ -25,7 +26,6 @@ export function validateFamilyModel(req:Request,res:Response,next:NextFunction):
     sumFamilyAmounts(owners,MIN_FAMILY_BALANCE);
     const account= {currency,balance,status:true,type:"family",context,owners_id:[],agent_id};
     req.accounts=[account];
-    console.log(account);
     next()
 }
 
@@ -36,7 +36,7 @@ export function validateAddToFamily(accounts:IIndividual[],owners:[number,number
       accountsActive(accounts);
       accountsCurrency(accounts,currency);
    accounts.map((account)=>{
-       const owner = owners.find(own => own[0] === account.account_id)
+       const owner = owners.find(own => own[0] == account.account_id)
        if(!owner){
         throw new Error(`${ACCOUNT_NOT_EXIST}- not all account exsits in individual table`)
     }
@@ -50,7 +50,7 @@ export function validateAddToFamily(accounts:IIndividual[],owners:[number,number
 }
 
 }
-export function validateRemoveFromFamily(accounts:IIndividual[],owners:[number,number][],family:IFamily):void {
+export async function validateRemoveFromFamily(accounts:IIndividual[],owners:[number,number][],family:IFamily):Promise<void> {
     try{
         logger.params("validateRemoveFromFamily",{accounts,owners,family}); 
         accountsExist(accounts,owners);
@@ -63,17 +63,18 @@ export function validateRemoveFromFamily(accounts:IIndividual[],owners:[number,n
 }
 }
 
-export function validateUpdateAccounts(req:Request,res:Response,next:NextFunction):void {
+export async function validateUpdateAccounts(req:Request,res:Response,next:NextFunction):Promise<void> {
     let {owners,account_id} = req.body;
-    if((account_id === "undefined")||(isNaN(Number(account_id)))){
+    if((account_id === "undefined")||typeof account_id !== "number"){
         throw new Error(`${INVALID_FILED_VALUE} - account id isnt accept`)
      }
      if(!(owners && owners.length>0)){
         throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
     }
-    const tupelsValid : boolean = owners.every((owner: number[])=>(!(isNaN(Number(owner[0])))&&(isNaN(Number(owner[1])))&&(owner[1]>0)));
-     if (!tupelsValid){
-       throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
-    }    next()
+    const tupelsValid : boolean = owners.every((owner:[number,number])=>(!(isNaN(Number(owner[0])))&&!(isNaN(Number(owner[1])))&&(Number(owner[1])>0  && typeof owner[0] === "number" && typeof owner[1] === "number")));
+    if (!tupelsValid){
+      throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
+   }
+        next()
 }
 
