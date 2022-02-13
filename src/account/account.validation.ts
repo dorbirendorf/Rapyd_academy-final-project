@@ -4,7 +4,7 @@
 import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import { amountPositive } from "../utils/validationFunc.js";
-import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
+import { IAccount, IBusiness, transferType } from "../types/types.js";
 import { accountsActive, accountsCurrency, accountsTypes, allowTransfers, checkLimitTransfer, checkProperState } from "../utils/validationService.js";
 import logger from "../utils/logger.js";
 
@@ -40,58 +40,16 @@ export async function validateTransferModel(req: Request, res: Response, next: N
     next();
 }
 
-export function validateTransferAccountsB2I(source: IBusiness, dest: IIndividual, amount: number): void {
-    try {
-        logger.params("validateTransferAccountsB2I", { source, dest, amount });
-
-        validateTransferAccounts(source, dest, amount, 10000);
-        checkLimitTransfer("B2I", amount);
-        logger.funcRet("validateTransferAccountsB2I", "void");
-    } catch (error) {
-        logger.error("validateTransferAccountsB2I", error as Error);
-        throw error;
-    }
+export function validateTransferAccounts(source: IAccount, dest: IAccount, amount: number, limit: number,type:transferType, FX = false): void {
+    accountsActive([source, dest]);
+    accountsCurrency([source], dest.currency, FX);
+    allowTransfers([source], amount, limit);
+    type === "B2B" ? 
+    checkLimitTransfer("B2B", amount, (source as IBusiness).company_id , (dest as IBusiness).company_id)
+    : checkLimitTransfer(type, amount);
 }
 
-export function validateTransferAccountsF2B(source: IFamily, dest: IBusiness, amount: number): void {
-    try {
-        logger.params("validateTransferAccountsF2B", { source, dest, amount });
 
-        validateTransferAccounts(source, dest, amount, 5000);
-        checkLimitTransfer("F2B", amount);
-        logger.funcRet("validateTransferAccountsF2B", "void");
-    } catch (error) {
-        logger.error("validateTransferAccountsF2B", error as Error);
-        throw error;
-    }
-}
-export function validateTransferAccountsB2B(source: IBusiness, dest: IBusiness, amount: number, FX = false): void {
-    try {
-        logger.params("validateTransferAccountsB2B", { source, dest, amount, FX });
-
-        validateTransferAccounts(source, dest, amount, 10000, FX);
-        checkLimitTransfer("B2B", amount, source.company_id, dest.company_id);
-
-        logger.funcRet("validateTransferAccountsB2B", "void");
-    } catch (error) {
-        logger.error("validateTransferAccountsB2B", error as Error);
-        throw error;
-    }
-}
-export function validateTransferAccounts(source: IAccount, dest: IAccount, amount: number, limit: number, FX = false): void {
-    try {
-        logger.params("validateTransferAccounts", { source, dest, amount, limit, FX });
-
-        accountsActive([source, dest]);
-        accountsCurrency([source], dest.currency, FX);
-        allowTransfers([source], amount, limit);
-        logger.funcRet("validateTransferAccounts", "void");
-    } catch (error) {
-        logger.error("validateTransferAccounts", error as Error);
-        throw error;
-    }
-
-}
 export async function validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { accounts, action } = req.body;
     if (!(accounts && action != undefined && accounts.length > 0)) {

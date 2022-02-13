@@ -13,7 +13,7 @@ import * as DB_BUSINESS from "../business/business.db.js"
 import * as DB_INDIVIDUAL from "../individual/individual.db.js"
 
 import * as DB_FAMILY from "../family/family.db.js"
-import { validateTransferAccountsB2B, validateTransferAccountsB2I, validateTransferAccountsF2B, validateStatusAccounts } from "./account.validation.js";
+import { validateTransferAccounts } from "./account.validation.js";
 
 
 export async function transferB2B(payload: ITransfer): Promise<string> {
@@ -21,8 +21,7 @@ export async function transferB2B(payload: ITransfer): Promise<string> {
       let { source, destination, amount } = payload;
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
-
-      validateTransferAccountsB2B(sourceTransfer, destTransfer, amount);
+      validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B");      
       let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
       return ans;
    } catch (error) {
@@ -38,7 +37,7 @@ export async function transferB2BFX(payload: ITransfer): Promise<string> {
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
 
       const FX = await getRate(destTransfer.currency, sourceTransfer.currency);
-      validateTransferAccountsB2B(sourceTransfer, destTransfer, amount, true);
+      validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B",true);
       let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount, FX);
       return await ans;
    } catch (error) {
@@ -52,8 +51,7 @@ export async function transferB2I(payload: ITransfer): Promise<string> {
       let { source, destination, amount } = payload;
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_INDIVIDUAL.getAllIndividualsAccountsById([destination]))[0];
-      
-      validateTransferAccountsB2I(sourceTransfer, destTransfer, amount);
+      validateTransferAccounts(sourceTransfer, destTransfer, amount, 1000,"B2I");
       let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
       return ans;
    } catch (error) {
@@ -67,7 +65,7 @@ export async function transferF2B(payload: ITransfer): Promise<string> {
       let { source, destination, amount } = payload;
       let sourceTransfer =  await DB_FAMILY.getFamilyAccountByIdShort(source);
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
-      validateTransferAccountsF2B(sourceTransfer, destTransfer, amount);
+      validateTransferAccounts(sourceTransfer, destTransfer, amount, 5000,"F2B");
       let ans = exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
       return ans;
    } catch (error) {
@@ -75,11 +73,6 @@ export async function transferF2B(payload: ITransfer): Promise<string> {
       throw error;
    }
 }
-
-//   export async function getSecretKeyByAccessKey(accessKey):Promise<KeyObject>{
-//      console.log(accessKey);
-//      throw new Error("not implemeted yet")
-//   }
 
 
 export async function exectueTransfer(srcId: number, srcBalance: number, destId: number, srcCurr: string, destCurr: string, destBalance: number, amount: number, FX = 1): Promise<string> {
