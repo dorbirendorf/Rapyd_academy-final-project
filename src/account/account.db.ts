@@ -3,7 +3,8 @@
 // /* eslint-disable prefer-const */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { sqlRes, updateMultipleRowsById, createRow, selectRowById } from "../db.utils.js";
+import { sqlRes } from "../db.utils.js";
+import DbHandler from "../db.utils.js";
 import { IAccount, IAddress } from "../types/types.js";
 import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
@@ -15,7 +16,7 @@ export async function updateAccountsStatus(primary_ids: number[], status: boolea
         logger.params("updateAccountsStatus", { primary_ids, status })
         const idsArray = primary_ids.map(primary_id => { return { primary_id } })
         const statusArray = primary_ids.map(() => { return { status } })
-        const res = await updateMultipleRowsById("account", statusArray, idsArray);
+        const res = await DbHandler.updateMultipleRowsById("account", statusArray, idsArray);
          logger.funcRet("updateAccountsStatus", res)
         return res
     } catch (error) {
@@ -29,7 +30,7 @@ export async function updateAccountsBalance(idsAndBalances: [number, number][]):
          logger.params("updateAccountsBalance", { idsAndBalances });
         const idsArray = idsAndBalances.map(pair => { return { primary_id: pair[0] } })
         const balanceArray = idsAndBalances.map(pair => { return { balance: pair[1] } })
-        const res = await updateMultipleRowsById("account", balanceArray, idsArray);
+        const res = await DbHandler.updateMultipleRowsById("account", balanceArray, idsArray);
          logger.funcRet("updateAccountsBalance", res);
         return res
     } catch (error) {
@@ -60,7 +61,7 @@ export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]
 export async function createAccount(account: Partial<IAccount>, type: string): Promise<number> {
     try {
          logger.params("createAccount", { account, type });
-        const res = await createRow("account", { currency: account.currency, agent_id: account.agent_id, balance: account.balance, status: true, type })
+        const res = await DbHandler.createMultipleRows("account", [{ currency: account.currency, agent_id: account.agent_id, balance: account.balance, status: true, type }])
         const id = (res as OkPacket).insertId
          logger.funcRet("createAccount", id);
 
@@ -76,15 +77,12 @@ export async function createAddress(address?: IAddress|null): Promise<number | n
          logger.params("createAddress", { address });
 
         if (address) {
-            console.log(address,1);
-            const res = await createRow("address", address)
+            const res = await DbHandler.createMultipleRows("address", [address])
             const id = (res as OkPacket).insertId
              logger.funcRet("createAddress", id);
             return id
         } else {
-            console.log(address,12);
              logger.funcRet("createAddress", null);
-             console.log(address,12);
             return null;
         }
     } catch (error) {
@@ -97,8 +95,7 @@ export async function getSecretKeyByAccessKey(access_key: string): Promise<strin
     try {
         logger.params("getSecretKeyByAccessKey", { access_key });
 
-        const rows = await selectRowById("agent", { access_key });
-        console.log(rows);
+        const rows = await DbHandler.selectRowById("agent", { access_key });
         if (!(rows[0])) {
             throw new Error("Data not found")
         }
