@@ -99,16 +99,16 @@ describe("validation service functions ", () => {
         });         
 
         it("should return true if accounts with the same company name allow to trnafer 10000 from B2B ", () => {
-            expect(checkLimitTransfer("B2B",10000,"Rapyd","Rapyd")).to.equal(true);
+            expect(checkLimitTransfer("B2B",10000,1,1)).to.equal(true);
         });
         it("should throw error if accounts with the same company name dont allow to trnafer 10001 from B2B", () => {
-            expect(()=>checkLimitTransfer("B2B",10001,"Rapyd","Rapyd")).to.throw();
+            expect(()=>checkLimitTransfer("B2B",10001,1,1)).to.throw();
         });
         it("should throw error if accounts with different company name dont allow to trnafer 1001 from B2B", () => {
-            expect(()=>checkLimitTransfer("B2B",1001,"Rapyd","Google")).to.throw();
+            expect(()=>checkLimitTransfer("B2B",1001,1,2)).to.throw();
         });
         it("should return true if accounts with different company name allow to trnafer 1000 from B2B ", () => {
-            expect(checkLimitTransfer("B2B",1000,"Rapyd","Google")).to.equal(true);
+            expect(checkLimitTransfer("B2B",1000,1,2)).to.equal(true);
         });
         
        it("should return true if account allow trasfer the money from B2I", () => {
