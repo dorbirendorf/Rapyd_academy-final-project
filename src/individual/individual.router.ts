@@ -5,9 +5,10 @@
 import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
  import * as individual_service from "./individual.services.js";
-import {httpResponseMessage, IIndividual} from "../types/types.js"
+import {IIndividual} from "../types/types.js"
 import { validateIndividualModel } from "./individual.validator.js";
 import { validateAccountId } from "../utils/validationFunc.js";
+import responseFactory from "../responses/responseFactory.js";
 const router = express.Router();
 
 
@@ -16,22 +17,15 @@ const router = express.Router();
 router.post("/",raw(validateIndividualModel),raw( async (req:Request, res:Response) => {
   const id = await individual_service.createIndividualAccount(req.accounts[0] as Partial<IIndividual>);
   const ans = await individual_service.getIndividualByAccountId(id.toString());
-  const resMessage : httpResponseMessage ={
-    status: 201,
-    message: "Account created",
-    data: ans}; 
-    res.status(201).json(resMessage);
+  const resMessage= responseFactory.createResponse(ans,"Account created",201);
+    res.status(resMessage.status).json(resMessage);
 }) );
 
 // GET FULL INDIVIDUAL_ACOUNT BY ID
 router.get("/:id",raw(validateAccountId) ,raw( async (req:Request, res:Response) => {
   const ans = await individual_service.getIndividualByAccountId(req.params.id);
-  const resMessage : httpResponseMessage ={
-    status: 200,
-    message: "Account found",
-    data: ans};
-    res.status(200).json(resMessage);
+  const resMessage= responseFactory.createResponse(ans,"Account found",201);
+    res.status(resMessage.status).json(resMessage);
 }));
-
   export default router;
   
