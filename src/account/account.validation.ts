@@ -3,12 +3,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
-import { amountPositive } from "../utils/validationFunc.js";
+import validation_func from "../utils/validationFunc.js";
 import { IAccount, IBusiness, transferType } from "../types/types.js";
-import { accountsActive, accountsCurrency, accountsTypes, allowTransfers, checkLimitTransfer, checkProperState } from "../utils/validationService.js";
+import utils from "../utils/validationService.js";
 import logger from "../utils/logger.js";
 
-export function validateAccountMandatoryFields(currency: string, balance: number,agent_id:number): void {
+
+class AccountValidation{
+validateAccountMandatoryFields(currency: string, balance: number,agent_id:number): void {
 
     try {
         logger.params("validateAccountMandatoryFields", { currency, balance });
@@ -31,26 +33,26 @@ export function validateAccountMandatoryFields(currency: string, balance: number
     }
 }
 
-export async function validateTransferModel(req: Request, res: Response, next: NextFunction): Promise<void> {
+ async  validateTransferModel(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { source, destination, amount } = req.body;
     if (!(source && destination && amount)) {
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
-    amountPositive(amount as number);
+    validation_func.amountPositive(amount as number);
     next();
 }
 
-export function validateTransferAccounts(source: IAccount, dest: IAccount, amount: number, limit: number,type:transferType, FX = false): void {
-    accountsActive([source, dest]);
-    accountsCurrency([source], dest.currency, FX);
-    allowTransfers([source], amount, limit);
+  validateTransferAccounts(source: IAccount, dest: IAccount, amount: number, limit: number,type:transferType, FX = false): void {
+    utils.accountsActive([source, dest]);
+    utils.accountsCurrency([source], dest.currency, FX);
+    utils.allowTransfers([source], amount, limit);
     type === "B2B" ? 
-    checkLimitTransfer("B2B", amount, (source as IBusiness).company_id , (dest as IBusiness).company_id)
-    : checkLimitTransfer(type, amount);
+    utils.checkLimitTransfer("B2B", amount, (source as IBusiness).company_id , (dest as IBusiness).company_id)
+    : utils.checkLimitTransfer(type, amount);
 }
 
 
-export async function validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
+ async  validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { accounts, action } = req.body;
     if (!(accounts && action != undefined && accounts.length > 0)) {
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
@@ -62,12 +64,12 @@ export async function validateStatus(req: Request, res: Response, next: NextFunc
     next();
 }
 
-export function validateStatusAccounts(accounts: IAccount[], action: boolean): void {
+validateStatusAccounts(accounts: IAccount[], action: boolean): void {
     try {
         logger.params("validateStatusAccounts", { accounts, action });
 
-        accountsTypes(accounts, ["individual", "business"]);
-        checkProperState(accounts, !action);
+        utils.accountsTypes(accounts, ["individual", "business"]);
+        utils.checkProperState(accounts, !action);
         logger.funcRet("validateStatusAccounts", "void");
     } catch (error) {
         logger.error("validateStatusAccounts", error as Error);
@@ -75,3 +77,7 @@ export function validateStatusAccounts(accounts: IAccount[], action: boolean): v
     }
 }
 
+}
+
+const accountValidation = new AccountValidation();
+export default accountValidation

@@ -1,24 +1,46 @@
-// import { expect } from "chai";
-// import { getBusinessAccountById,createBusinessAccount } from "../../src/business/business.services.js";
-// import {connectDb} from "../../src/db/sql/sql.connection.js"
+import { expect } from "chai";
+import { getBusinessAccountById,createBusinessAccount } from "../../src/business/business.services.js";
+import { IBusiness } from "../../src/types/types.js";
+import sinon from "sinon";
+import * as DB_BUSINESS from "../../src/business/business.db.js"
 
-// before(async()=>{
-//    await connectDb()
-// })
+describe("Testing business.servise ", () => {
 
-// describe("business service  functions ", () => {
-//     context("getBusinessAccountById ", () => {
-  
-//         it("should be function", () => {
-//             expect(getBusinessAccountById).to.be.a("Function");
-//         });
-//         it("should return undefined if ok ", async () => {
-//             const res = await getBusinessAccountById(11);
-//             expect(res).to.be.undefined
-//             //expect(()=>getBusinessAccountById(11)).to.throw("bal")
-//         });
+
+describe("#getBusinessAccountById", () => {
+
+    const businesses:IBusiness[] = [{"account_id": 24,
+    "currency": "USD",
+    "agent_id": 2,
+    "balance": 599432,
+    "status": 1,
+    "type": "business",
+    "company_id": 12345678,
+    "company_name": "Dearman Inc",
+    "context": "treasury",
+    "address": {
+        "address_id": 2,
+        "country_name": "Israel",
+        "country_code": "IL",
+        "postal_code": 12345,
+        "city": "Haifa",
+        "region": "North",
+        "street_name": "Hertzel",
+        "street_number": 12
+    }
+}]
+
+
+    context("throwing error when getAllBusinessAccountById return empty array", () => {
+        const db = sinon.mock(DB_BUSINESS);
+        db.expects("getAllBusinessAccountById").resolves([])
+        it("should be function", () => {
+            expect(getBusinessAccountById("1")).to.be.eql(businesses);
+        });
        
-//     });
+       
+    });
 
 
-// });
+    });
+});

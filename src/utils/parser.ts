@@ -1,5 +1,5 @@
-import {IIndividualFromDB,IIndividual,IFamily,IBusiness,IBusinessFromDb} from "./types/types.js"
-import logger from "./utils/logger.js";
+import {IIndividualFromDB,IIndividual,IFamily,IBusiness,IBusinessFromDb} from "../types/types.js"
+import logger from "./logger.js";
 class Parser {
     parseIndividualFromObj(obj: IIndividualFromDB): IIndividual {
         try {
