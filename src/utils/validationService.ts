@@ -39,7 +39,7 @@ export function checkProperState(accounts: IAccount[], action: boolean): boolean
    try {
       logger.params("checkProperState", {accounts,action})
 
-      const allStatusProper: boolean = accounts.every(acc => acc.status === action);
+      const allStatusProper: boolean = accounts.every(acc => acc.status == action);
       if (!allStatusProper) {
          throw new Error(`${INVALID_FILED_VALUE}- not all accounts ${action}`)
       }

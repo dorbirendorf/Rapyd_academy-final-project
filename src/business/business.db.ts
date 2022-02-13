@@ -38,6 +38,7 @@ export async function getAllBusinessAccountById(accounts_id: number[]): Promise<
         throw error;
     }
 }
+
 function extractBusinessFromObj(obj: IBusinessFromDb): IBusiness {
     try {
         logger.params("extractBusinessFromObj", { obj });

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { INVALID_FILED, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import { amountPositive } from "../utils/validationFunc.js";
 import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
@@ -94,7 +94,7 @@ export function validateTransferAccounts(source: IAccount, dest: IAccount, amoun
 }
 export async function validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { accounts, action } = req.body;
-    if (!(accounts && action && accounts.length > 0)) {
+    if (!(accounts && action != undefined && accounts.length > 0)) {
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
     const allNumber: boolean = accounts.every((acc: any) => (typeof acc === "number"));
