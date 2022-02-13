@@ -38,20 +38,20 @@ router.get("/full/:id",raw(validateAccountId),raw( async (req:Request, res:Respo
   }));
 
     // CLOSE FAMILY_ACOUNT BY ID - only if account empty 
-    router.post("/close/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
-        const ans = await family_service.closeFamilyAccount(Number(req.params.id));
-        res.status(200).json(ans);
+    router.patch("/close/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
+        await family_service.closeFamilyAccount(Number(req.params.id));
+        res.status(200).json("success closing family");
       }));
 
     // ADD INDIVIDUALS TO FAMILY_ACOUNT BY ID -  SOHRT/FULL
-router.put("/add/:fid",raw(validateUpdateAccounts),raw( async (req:Request, res:Response) => {
-    let ans = await family_service.addIndividualsToFamilyAccount(Number(req.params.id),req.body.owners, req.body.format);
+router.post("/add/:format",raw(validateUpdateAccounts),raw( async (req:Request, res:Response) => {
+    const ans = await family_service.addIndividualsToFamilyAccount(req.body.account_id,req.body.owners,req.params.format);
     res.status(200).json(ans);
   }));
 
     // REMOVE INDIVIDUALS TO FAMILY_ACOUNT BY ID -  SOHRT/FULL
-    router.put("/remove/:fid",raw(validateUpdateAccounts),raw( async (req:Request, res:Response) => {
-    const ans = await family_service.removeIndividualsFromFamilyAccount(Number(req.params.id),req.body.owners, req.body.format);
+    router.put("/remove/:format",raw(validateUpdateAccounts),raw( async (req:Request, res:Response) => {
+      const ans = await family_service.removeIndividualsFromFamilyAccount(req.body.account_id,req.body.owners,req.params.format);
       res.status(200).json(ans);
     }));
    export default router;

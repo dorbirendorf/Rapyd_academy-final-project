@@ -50,14 +50,22 @@ export function amountPositive(amount: number): void {
 }
 
 
-export function sumFamilyAmounts(tupels: [number, number][], minBalance: number): number {
+export function sumFamilyAmounts(tupels: [number, number][], minBalance: number,min = true): number {
    try {
       logger.params("sumFamilyAmounts", {tupels,minBalance})
 
       const sum: number = tupels.reduce((prev, tupel) => tupel[1] + prev, 0);
-      if (sum < minBalance) {
-         throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amount is to low`)
+      if(min){
+         if (sum < minBalance) {
+            throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amounts should be ${minBalance}`)
+         }
+      } else {
+         if (sum > minBalance) {
+            throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amounts can't be more then ${minBalance}`)
+         }
       }
+
+      
       logger.funcRet("sumFamilyAmounts", sum)
 
       return sum;

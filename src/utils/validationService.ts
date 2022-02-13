@@ -75,7 +75,7 @@ export function accountsCurrency(accounts: IAccount[], currency: string, FX = fa
       if (FX) return true;
       const allCurrency: boolean = accounts.every(acc => acc.currency.toLowerCase() === currency.toLowerCase());
       if (!allCurrency) {
-         throw new Error(`${INVALID_FILED_VALUE}- not all accounts dont have same currency`)
+         throw new Error(`${INVALID_FILED_VALUE}- not all accounts have same currency`)
       }
       logger.funcRet("accountsCurrency", true)
 
@@ -89,9 +89,9 @@ export function accountsBelongToFamily(owners: IIndividual[], accounts: number[]
    try {
       logger.params("accountsBelongToFamily", {owners,accounts})
 
-      const check = owners.every(owner => accounts.includes(owner.account_id));
+      const check = accounts.every(id => owners.some(owner=> owner.account_id === id));
       if (!check) {
-         throw new Error(`${SOMTHING_WENT_WRONG}- msg...`)
+         throw new Error(`${INVALID_FILED_VALUE}- not all account belong to this family...`)
       }
 
       logger.funcRet("accountsBelongToFamily", true)
