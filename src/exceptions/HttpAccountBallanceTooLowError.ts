@@ -3,7 +3,7 @@ import { HttpError } from "./httpError.js";
 export class HttpAccountBallanceTooLowError extends HttpError {
  
     constructor(public description: string) {
-        super("Account ballance too low",404);
+        super("Account balance too low",404);
     }
 
     toString(): string {
