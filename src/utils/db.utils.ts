@@ -1,6 +1,6 @@
 import { OkPacket, RowDataPacket, ResultSetHeader } from "mysql2";
-import { db } from "./db/sql/sql.connection.js";
-import logger from "./utils/logger.js";
+import { db } from "../db/sql/sql.connection.js"
+import logger from "./logger.js";
 export type sqlRes = RowDataPacket[] | RowDataPacket[][] | OkPacket | OkPacket[] | ResultSetHeader
 
 class DbHandler {

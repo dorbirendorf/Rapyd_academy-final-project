@@ -3,15 +3,15 @@
 // /* eslint-disable prefer-const */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { sqlRes } from "../db.utils.js";
-import DbHandler from "../db.utils.js";
+import { sqlRes } from "../utils/db.utils.js";
+import DbHandler from "../utils/db.utils.js";
 import { IAccount, IAddress } from "../types/types.js";
 import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import logger from "../utils/logger.js"
 
-
-export async function updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
+class AccountDb{
+ async  updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
     try {
         logger.params("updateAccountsStatus", { primary_ids, status })
         const idsArray = primary_ids.map(primary_id => { return { primary_id } })
@@ -25,7 +25,7 @@ export async function updateAccountsStatus(primary_ids: number[], status: boolea
     }
 }
 
-export async function updateAccountsBalance(idsAndBalances: [number, number][]): Promise<sqlRes> {
+ async  updateAccountsBalance(idsAndBalances: [number, number][]): Promise<sqlRes> {
     try {
          logger.params("updateAccountsBalance", { idsAndBalances });
         const idsArray = idsAndBalances.map(pair => { return { primary_id: pair[0] } })
@@ -39,7 +39,7 @@ export async function updateAccountsBalance(idsAndBalances: [number, number][]):
     }
 }
 
-export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]> {
+ async getAccountsById(accounts_id: number[]): Promise<IAccount[]> {
     try {
         logger.params("getAccountsById", {accounts_id});
 
@@ -58,7 +58,7 @@ export async function getAccountsById(accounts_id: number[]): Promise<IAccount[]
     }
 }
 
-export async function createAccount(account: Partial<IAccount>, type: string): Promise<number> {
+ async createAccount(account: Partial<IAccount>, type: string): Promise<number> {
     try {
          logger.params("createAccount", { account, type });
         const res = await DbHandler.createMultipleRows("account", [{ currency: account.currency, agent_id: account.agent_id, balance: account.balance, status: true, type }])
@@ -72,7 +72,7 @@ export async function createAccount(account: Partial<IAccount>, type: string): P
     }
 }
 
-export async function createAddress(address?: IAddress|null): Promise<number | null> {
+async createAddress(address?: IAddress|null): Promise<number | null> {
     try {
          logger.params("createAddress", { address });
 
@@ -91,7 +91,7 @@ export async function createAddress(address?: IAddress|null): Promise<number | n
     }
 }
 
-export async function getSecretKeyByAccessKey(access_key: string): Promise<string> {
+async getSecretKeyByAccessKey(access_key: string): Promise<string> {
     try {
         logger.params("getSecretKeyByAccessKey", { access_key });
 
@@ -107,6 +107,8 @@ export async function getSecretKeyByAccessKey(access_key: string): Promise<strin
         throw error;
     }
 }
+}
 
-
+const account_db = new AccountDb()
+export default account_db;
 

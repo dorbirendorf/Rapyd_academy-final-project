@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 // import { INVALID_FILED_VALUE } from "../types/constants.js";
-import * as DB_INDIVIDUAL from "./individual.db.js";
+import DB_INDIVIDUAL from "./individual.db.js";
 import { IIndividual } from "../types/types.js";
 import { INVALID_FILED_VALUE } from "../types/constants.js";
 import logger from "../utils/logger.js";
 
-
-export async function createIndividualAccount(
+class IndividualService
+{ async createIndividualAccount(
     individual: Partial<IIndividual>
 ): Promise<any> {
     try {
         logger.params("createIndividualAccount", { individual });
-        await checkIfIndivdualExistByIndividualId(
+        await this.checkIfIndivdualExistByIndividualId(
             individual.individual_id as number
         );
 
@@ -24,7 +24,7 @@ export async function createIndividualAccount(
     }
 }
 
-export async function getIndividualByAccountId(
+ async  getIndividualByAccountId(
     accountId: string
 ): Promise<IIndividual> {
     try {
@@ -44,7 +44,7 @@ export async function getIndividualByAccountId(
     }
 }
 
-export async function checkIfIndivdualExistByIndividualId(
+ async  checkIfIndivdualExistByIndividualId(
     individualId: number
 ): Promise<any> {
     logger.params("getIndividualByIndividualId", { individualId });
@@ -55,3 +55,7 @@ export async function checkIfIndivdualExistByIndividualId(
         throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
     }
 }
+}
+
+const service = new IndividualService()
+export default service;

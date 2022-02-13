@@ -3,8 +3,11 @@
 import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
-validEntityId
-export function validEntityId(id_length: number, id: number): void {
+
+class ValidationFunctions
+{
+
+  validEntityId(id_length: number, id: number): void {
    try {
       logger.params("validEntityId",{id_length,id})
 
@@ -19,7 +22,7 @@ export function validEntityId(id_length: number, id: number): void {
    }
 }
 
-export function checkBalance(minimalBalance: number, balance: number): void {
+  checkBalance(minimalBalance: number, balance: number): void {
    try {
       logger.params("checkBalance", {minimalBalance,balance})
 
@@ -34,7 +37,7 @@ export function checkBalance(minimalBalance: number, balance: number): void {
    }
 }
 
-export function amountPositive(amount: number): void {
+  amountPositive(amount: number): void {
    try {
       logger.params("amountPositive", amount)
 
@@ -50,7 +53,7 @@ export function amountPositive(amount: number): void {
 }
 
 
-export function sumFamilyAmounts(tupels: [number, number][], minBalance: number,min = true): number {
+  sumFamilyAmounts(tupels: [number, number][], minBalance: number,min = true): number {
    try {
       logger.params("sumFamilyAmounts", {tupels,minBalance})
 
@@ -77,7 +80,7 @@ export function sumFamilyAmounts(tupels: [number, number][], minBalance: number,
   
 
 
-export function initRequiredParams(): Map<string, string[]> {
+  initRequiredParams(): Map<string, string[]> {
    try {
       logger.params("initRequiredParams",{})
 
@@ -93,7 +96,7 @@ export function initRequiredParams(): Map<string, string[]> {
       throw err
    }
 }
-export async function validateAccountId(req: Request, res: Response, next: NextFunction): Promise<void> {
+ async  validateAccountId(req: Request, res: Response, next: NextFunction): Promise<void> {
    try {
       logger.params("validateAccountId",{})
 
@@ -109,3 +112,7 @@ export async function validateAccountId(req: Request, res: Response, next: NextF
       throw err
    }
 }
+}
+
+const validation = new ValidationFunctions()
+export default validation

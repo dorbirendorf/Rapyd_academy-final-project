@@ -1,30 +1,37 @@
 import { IBusiness } from "../types/types.js";
 import logger from "../utils/logger.js";
-import * as DB_BUSINESS from "./business.db.js"
+import  DB_BUSINESS from "./business.db.js"
+class BusinessService {
+    async createBusinessAccount(business: Partial<IBusiness>): Promise<any> {
+      try {
+        logger.params("createBusinessAccount", { business })
+        const businessAccount = await DB_BUSINESS.createBusinessAccount(business);
+        logger.funcRet("createBusinessAccount", businessAccount)
+        return businessAccount;
+      } catch (err) {
+        logger.error("createBusinessAccount", err as Error)
+        throw err
 
-  export async function createBusinessAccount(business:Partial<IBusiness>):Promise<any>{
-    try{
-      logger.params("createBusinessAccount",{business})
-      const businessAccount = await DB_BUSINESS.createBusinessAccount(business);
-      logger.funcRet("createBusinessAccount",businessAccount)
-      return businessAccount;
-    }catch(err){
-      logger.error("createBusinessAccount",err as Error)
-      throw err
-
+      }
     }
-   }
-   
-   export async function getBusinessAccountById(accountId:string):Promise<any>{
-    try{
-      logger.params("service-getBusinessAccountById",{accountId})
-      const business=await DB_BUSINESS.getAllBusinessAccountById([Number(accountId)]);
-      logger.funcRet("getBusinessAccountById",{business})
+
+  async getBusinessAccountById(accountId: string): Promise<any> {
+    try {
+      logger.params("service-getBusinessAccountById", { accountId })
+      const business = await DB_BUSINESS.getAllBusinessAccountById([Number(accountId)]);
+      if (!business || business.length === 0) {
+        throw new Error("Data not found")
+      }
+      logger.funcRet("getBusinessAccountById", { business })
       return business
-    }catch(err){
-      logger.error("service-createBusinessAccount",err as Error)
+    } catch (err) {
+      logger.error("service-createBusinessAccount", err as Error)
       throw err
 
     }
-   }
+  }
 
+}
+
+const service = new BusinessService()
+export default service;
