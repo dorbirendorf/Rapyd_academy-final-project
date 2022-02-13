@@ -10,10 +10,9 @@ import { httpResponseMessage } from "../types/types.js";
 
  const router = express.Router();
 
-// parse json req.body on post routes
 
 //ACTIVATE/DEACTIVATE ACCOUNT
-router.post("/",raw(validateStatus),raw( async (req:Request, res:Response) => {
+router.patch("/",raw(validateStatus),raw( async (req:Request, res:Response) => {
     const ans = await account_service.updateAccountStatus(req.body.accounts,req.body.action);
     const resMessage : httpResponseMessage ={
       status: 201,

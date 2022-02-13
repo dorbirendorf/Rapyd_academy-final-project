@@ -39,7 +39,7 @@ export function checkProperState(accounts: IAccount[], action: boolean): boolean
    try {
       logger.params("checkProperState", {accounts,action})
 
-      const allStatusProper: boolean = accounts.every(acc => acc.status === action);
+      const allStatusProper: boolean = accounts.every(acc => acc.status == action);
       if (!allStatusProper) {
          throw new Error(`${INVALID_FILED_VALUE}- not all accounts ${action}`)
       }
@@ -119,9 +119,9 @@ export function allowTransfers(accounts: IAccount[], amount: number, minBalance:
       throw err
    }
 }
-export function checkLimitTransfer(type: transferType, amount: number, sourceName?: string, destName?: string): boolean {
+export function checkLimitTransfer(type: transferType, amount: number, sourceId?: number, destId?: number): boolean {
    try {
-      logger.params("checkLimitTransfer", { type, amount, sourceName, destName })
+      logger.params("checkLimitTransfer", { type, amount, sourceId, destId })
 
       const max_tranfare = {
          "F2B": 5000,
@@ -132,7 +132,7 @@ export function checkLimitTransfer(type: transferType, amount: number, sourceNam
          }
       }
       let limitTransfer = (type === "B2B") ?
-         ((sourceName === destName) ? max_tranfare[type].SC : max_tranfare[type].DC) :
+         ((sourceId === destId) ? max_tranfare[type].SC : max_tranfare[type].DC) :
          max_tranfare[type];
 
       if (amount > limitTransfer) {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { INVALID_FILED, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
 import { Request, Response, NextFunction } from "express";
 import { amountPositive } from "../utils/validationFunc.js";
 import { IAccount, IBusiness, IFamily, IIndividual } from "../types/types.js";
@@ -70,7 +70,7 @@ export function validateTransferAccountsB2B(source: IBusiness, dest: IBusiness, 
         logger.params("validateTransferAccountsB2B", { source, dest, amount, FX });
 
         validateTransferAccounts(source, dest, amount, 10000, FX);
-        checkLimitTransfer("B2B", amount, source.company_name, dest.company_name);
+        checkLimitTransfer("B2B", amount, source.company_id, dest.company_id);
 
         logger.funcRet("validateTransferAccountsB2B", "void");
     } catch (error) {
@@ -94,7 +94,7 @@ export function validateTransferAccounts(source: IAccount, dest: IAccount, amoun
 }
 export async function validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { accounts, action } = req.body;
-    if (!(accounts && action && accounts.length > 0)) {
+    if (!(accounts && action != undefined && accounts.length > 0)) {
         throw new Error(`${MISSING_REQUIRED_FIELD}`);
     }
     const allNumber: boolean = accounts.every((acc: any) => (typeof acc === "number"));
