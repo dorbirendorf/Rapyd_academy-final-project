@@ -15,7 +15,7 @@ import DB_INDIVIDUAL from "../individual/individual.db.js"
 import DB_FAMILY from "../family/family.db.js"
 import accountValidation from "./account.validation.js";
 
-class AccountServise{
+class AccountService{
  async  transferB2B(payload: ITransfer): Promise<string> {
    try {
       let { source, destination, amount } = payload;
@@ -129,5 +129,5 @@ class AccountServise{
 }
 }
 
-const accountService = new AccountServise();
+const accountService = new AccountService();
 export default accountService;
