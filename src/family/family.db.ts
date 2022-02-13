@@ -1,19 +1,21 @@
 // /* eslint-disable prefer-const */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
-import DbHandler from "../db.utils.js";
-import {sqlRes} from "../db.utils.js";
+import DbHandler from "../utils/db.utils.js";
+import {sqlRes} from "../utils/db.utils.js";
 
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import { IAccount, IFamily, IIndividual, IIndividualFromDB } from "../types/types.js";
-import { createAccount } from "../account/account.db.js";
+import account_db from "../account/account.db.js";
 import logger from "../utils/logger.js";
-import parser from "../parser.js";
-export async function createFamilyAccount(family: Partial<IFamily>): Promise<number> {
+import parser from "../utils/parser.js";
+
+class FamilyDb
+{ async createFamilyAccount(family: Partial<IFamily>): Promise<number> {
     try {
         logger.params("createFamilyAccount", { family });
 
-        const account_id = await createAccount(family as IAccount, "family")
+        const account_id = await account_db.createAccount(family as IAccount, "family")
         await DbHandler.createMultipleRows("family", [{ account_id, context: family.context }])
         logger.funcRet("createFamilyAccount", account_id);
 
@@ -25,14 +27,14 @@ export async function createFamilyAccount(family: Partial<IFamily>): Promise<num
 }
 
 
-export async function getFamilyAccountByIdShort(accountId: number): Promise<IFamily> {
+ async  getFamilyAccountByIdShort(accountId: number): Promise<IFamily> {
     try {
         logger.params("getFamilyAccountByIdShort", { accountId });
         const accountRes = await DbHandler.selectRowByIdWithJoin("account", "family", { primary_id: accountId }, "primary_id", "account_id");
         if (!(accountRes[0])) {
             throw new Error("Data not found")
         }
-        const familyAccount = addOwners_idToFamily(parser.parseFamilyFromObj(accountRes[0] as IFamily))
+        const familyAccount = this.addOwners_idToFamily(parser.parseFamilyFromObj(accountRes[0] as IFamily))
         logger.funcRet("getFamilyAccountByIdShort", familyAccount);
         return familyAccount;
     } catch (error) {
@@ -41,11 +43,11 @@ export async function getFamilyAccountByIdShort(accountId: number): Promise<IFam
     }
 }
 
-async function addOwners_idToFamily(account: IFamily): Promise<IFamily> {
+async  addOwners_idToFamily(account: IFamily): Promise<IFamily> {
     try {
         logger.params("addOwners_idToFamily", { account });
 
-        account.owners_id = await getAllFamilyMembersId(account.account_id);
+        account.owners_id = await this.getAllFamilyMembersId(account.account_id);
         logger.funcRet("addOwners_idToFamily", account);
 
         return account
@@ -55,7 +57,7 @@ async function addOwners_idToFamily(account: IFamily): Promise<IFamily> {
     }
 }
 
-export async function getAllFamilyMembersId(familyId: number): Promise<{ account_id: number }[]> {
+ async  getAllFamilyMembersId(familyId: number): Promise<{ account_id: number }[]> {
     try {
         logger.params("getAllFamilyMembersId", { familyId });
         const rows = await DbHandler.selectRowById("family_individuals",{family_id:familyId},["individual_id"]) 
@@ -69,7 +71,7 @@ export async function getAllFamilyMembersId(familyId: number): Promise<{ account
     }
 }
 
-export async function getFamilyAccountByIdFull(familyId: number): Promise<IFamily> {
+ async  getFamilyAccountByIdFull(familyId: number): Promise<IFamily> {
     try {
         logger.params("getFamilyAccountByIdFull", { familyId });
         const accountRes = await DbHandler.selectRowByIdWithJoin("account", "family", { primary_id: familyId }, "primary_id", "account_id");
@@ -77,7 +79,7 @@ export async function getFamilyAccountByIdFull(familyId: number): Promise<IFamil
             throw new Error("Data not found")
         }
 
-        const familyAccount = addOwnersToFamily(parser.parseFamilyFromObj((accountRes)[0] as IFamily))
+        const familyAccount = this.addOwnersToFamily(parser.parseFamilyFromObj((accountRes)[0] as IFamily))
         logger.funcRet("getFamilyAccountByIdFull", familyAccount);
         return familyAccount;
     } catch (error) {
@@ -86,11 +88,11 @@ export async function getFamilyAccountByIdFull(familyId: number): Promise<IFamil
     }
 }
 
-async function addOwnersToFamily(account: IFamily): Promise<IFamily> {
+async  addOwnersToFamily(account: IFamily): Promise<IFamily> {
     try {
         logger.params("addOwnersToFamily", { account });
 
-        account.owners = await getAllFamilyMembers(account.account_id);
+        account.owners = await this.getAllFamilyMembers(account.account_id);
         logger.funcRet("addOwnersToFamily", account);
 
         return account
@@ -100,7 +102,7 @@ async function addOwnersToFamily(account: IFamily): Promise<IFamily> {
     }
 }
 
-export async function getAllFamilyMembers(familyId: number): Promise<IIndividual[]> {
+ async  getAllFamilyMembers(familyId: number): Promise<IIndividual[]> {
     try {
         logger.params("getAllFamilyMembers", { familyId });
 
@@ -125,7 +127,7 @@ export async function getAllFamilyMembers(familyId: number): Promise<IIndividual
 }
 
 
-export async function addIndividualsToFamilyAccount(family_id: number, payload: number[]): Promise<sqlRes> {
+ async  addIndividualsToFamilyAccount(family_id: number, payload: number[]): Promise<sqlRes> {
     try {
         logger.params("addIndividualsToFamilyAccount", { family_id, payload });
 
@@ -140,7 +142,7 @@ export async function addIndividualsToFamilyAccount(family_id: number, payload: 
     }
 }
 
-export async function removeIndividualsFromFamilyAccount(familyId: number, payload: [number, number][]): Promise<sqlRes> {
+ async removeIndividualsFromFamilyAccount(familyId: number, payload: [number, number][]): Promise<sqlRes> {
     try {
         logger.params("removeIndividualsFromFamilyAccount", { familyId, payload });
         const orString = payload.map(pair => "individual_id = " + String(pair[0])).join(" OR ")
@@ -153,3 +155,7 @@ export async function removeIndividualsFromFamilyAccount(familyId: number, paylo
     }
 }
 
+}
+
+const db_family = new FamilyDb()
+export default db_family;

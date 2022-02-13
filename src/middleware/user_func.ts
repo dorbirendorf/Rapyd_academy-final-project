@@ -1,18 +1,21 @@
 /* eslint-disable semi */
 import fs from "fs";
 import { NextFunction, RequestHandler, Request, Response } from "express";
-import { generateID, getTimeString } from "../utils/utils.js";
+import utils from "../utils/utils.js";
 
-
-export function addIdToReq(req:Request, res:Response, next:NextFunction):void {
-    req.id = generateID();
+class UserFunctions
+{ addIdToReq(req:Request, res:Response, next:NextFunction):void {
+    req.id = utils.generateID();
     next(); 
 }
 
-export function logRequest() : RequestHandler {
+  logRequest() : RequestHandler {
     const requestsFileLogger = fs.createWriteStream("./src/log/http.log", { flags: 'a+' });
     return function (req: Request, res: Response, next: NextFunction) : void {
-        requestsFileLogger.write(`${req.method} , ${req.originalUrl} , ${req.id} -- ${getTimeString()}\n`);
+        requestsFileLogger.write(`${req.method} , ${req.originalUrl} , ${req.id} -- ${utils.getTimeString()}\n`);
         next();
     };
-  }
+  }}
+
+  const func = new UserFunctions();
+  export default func;
