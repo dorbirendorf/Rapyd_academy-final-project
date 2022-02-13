@@ -62,9 +62,9 @@ export async function validateStatus(req: Request, res: Response, next: NextFunc
     next();
 }
 
-export function validateStatusAccounts(accounts: IAccount[], accountsId: number[], action: boolean): void {
+export function validateStatusAccounts(accounts: IAccount[], action: boolean): void {
     try {
-        logger.params("validateStatusAccounts", { accounts, accountsId, action });
+        logger.params("validateStatusAccounts", { accounts, action });
 
         accountsTypes(accounts, ["individual", "business"]);
         checkProperState(accounts, !action);

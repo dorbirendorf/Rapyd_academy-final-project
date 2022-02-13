@@ -13,7 +13,7 @@ import * as DB_BUSINESS from "../business/business.db.js"
 import * as DB_INDIVIDUAL from "../individual/individual.db.js"
 
 import * as DB_FAMILY from "../family/family.db.js"
-import { validateTransferAccounts } from "./account.validation.js";
+import { validateStatusAccounts, validateTransferAccounts } from "./account.validation.js";
 
 
 export async function transferB2B(payload: ITransfer): Promise<string> {
@@ -91,7 +91,7 @@ export async function updateAccountStatus(accountsId: number[], action: boolean)
    try {
       let accounts:IAccount[] = await DB_ACCOUNT.getAccountsById(accountsId);
       //if some of the accounts not exists throw error
-      validateStatusAccounts(accounts, accountsId, action);
+      validateStatusAccounts(accounts, action);
       //add function that update all list of statuses
       await DB_ACCOUNT.updateAccountsStatus(accountsId, action);
       return `acounts: ${accountsId} changed to status ${action}`;
