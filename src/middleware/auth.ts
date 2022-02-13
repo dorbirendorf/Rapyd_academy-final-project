@@ -29,6 +29,7 @@ export const auth =
             logger.error("auth-middleware",err as Error)
             throw err
         }
+        logger.funcRet("auth-middleware","authenticated")
     };
 
 
