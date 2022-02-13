@@ -17,7 +17,6 @@ import {
     ACCOUNT_STATUS_FIELD,
     INVALID_FILED_VALUE,
     MIN_FAMILY_BALANCE,
-    SOMTHING_WENT_WRONG,
 } from "../types/constants.js";
 import { sumFamilyAmounts } from "../utils/validationFunc.js";
 import { convertTupelsToArray } from "../utils/utils.js";
@@ -41,7 +40,6 @@ export async function createFamilyAccount(family_create: Partial<IFamily>,owners
    throw error;
 }
 }
-
 
 async function execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[number,number][],family:IFamily,format:string):Promise<IFamily>{
     let IndividualSBalance: [number, number][] = accounts.map((account) => {
