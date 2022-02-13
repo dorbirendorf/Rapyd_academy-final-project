@@ -5,54 +5,54 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express, { Response, Request } from "express";
 import raw from "../middleware/route.async.wrapper.js";
-import { httpResponseMessage, IFamily } from "../types/types.js";
+import responseFactory from "../responses/responseFactory.js";
+import { IFamily } from "../types/types.js";
 import { validateAccountId } from "../utils/validationFunc.js";
  import * as family_service from "./family.services.js";
  import { validateFamilyModel, validateUpdateAccounts } from "./family.validator.js"
 
 const router = express.Router();
 
-
-
 // CREATES A NEW FAMILY_ACOUNT
 router.post("/",raw(validateFamilyModel),raw( async (req:Request, res:Response) => {
 const ans = await family_service.createFamilyAccount(req.accounts[0] as Partial<IFamily>,req.body.owners,req.body.currency);
-const resMessage : httpResponseMessage ={
-  status: 201,
-  message: "Account created",
-  data: ans}; 
-  res.status(201).json(resMessage);
+const resMessage= responseFactory.createResponse(ans,"Account created",201);
+  res.status(resMessage.status).json(resMessage);
   }));
 
   // GET FULL FAMILY_ACOUNT BY ID
 router.get("/full/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
     const ans = await family_service.getFamilyAccountByIdFull(Number(req.params.id));
-    res.status(200).json(ans);
+    const resMessage= responseFactory.createResponse(ans,"Account found",201);
+    res.status(resMessage.status).json(resMessage);
   }));
 
   // GET SHORT FAMILY_ACOUNT BY ID
   router.get("/short/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
-    console.log("enter Route")
     const ans = await family_service.getFamilyAccountByIdShort(Number(req.params.id));
-    res.status(200).json(ans);
+    const resMessage= responseFactory.createResponse(ans,"Account found",201);
+    res.status(resMessage.status).json(resMessage);
   }));
 
     // CLOSE FAMILY_ACOUNT BY ID - only if account empty 
     router.patch("/close/:id",raw(validateAccountId),raw( async (req:Request, res:Response) => {
         await family_service.closeFamilyAccount(Number(req.params.id));
-        res.status(200).json("success closing family");
+        const resMessage= responseFactory.createResponse("","success closing family",201);
+        res.status(resMessage.status).json(resMessage);
       }));
 
     // ADD INDIVIDUALS TO FAMILY_ACOUNT BY ID -  SOHRT/FULL
 router.post("/add/:format",raw(validateUpdateAccounts),raw( async (req:Request, res:Response) => {
     const ans = await family_service.addIndividualsToFamilyAccount(req.body.account_id,req.body.owners,req.params.format);
-    res.status(200).json(ans);
+    const resMessage= responseFactory.createResponse(ans,"success add inidividuals to family",201);
+    res.status(resMessage.status).json(resMessage);
   }));
 
-    // REMOVE INDIVIDUALS TO FAMILY_ACOUNT BY ID -  SOHRT/FULL
+  // REMOVE INDIVIDUALS TO FAMILY_ACOUNT BY ID -  SOHRT/FULL
     router.put("/remove/:format",raw(validateUpdateAccounts),raw( async (req:Request, res:Response) => {
       const ans = await family_service.removeIndividualsFromFamilyAccount(req.body.account_id,req.body.owners,req.params.format);
-      res.status(200).json(ans);
+      const resMessage= responseFactory.createResponse(ans,"remove add inidividuals from family",201);
+      res.status(resMessage.status).json(resMessage);
     }));
    export default router;
   

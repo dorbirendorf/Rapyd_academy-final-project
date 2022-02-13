@@ -5,47 +5,32 @@ import crypto from "crypto";
 
 
 describe("utils  functions ", () => {
-    
-
-
     context("createsignature ", () => {
-  
+        const req =  {
+            first_name:"dor",
+            last_name:"birendorf",
+            currency:"usd",
+            individual_id:1234567
+        }
         it("should be function", () => {
             expect(createsignature).to.be.a("Function");
         });
 
         it("should generate signature with time ", async () => {
-            const req = 
-                {
-                    first_name:"dor",
-                    last_name:"birendorf",
-                    currency:"usd",
-                    individual_id:1234567
-                }
             const res = await createsignature(req,"bla",Date.now().toString());
             expect(res).to.be.string;
         });
 
         it("should generate signature without time ", async () => {
-            const req = 
-                {
-                    first_name:"dor",
-                    last_name:"birendorf",
-                    currency:"usd",
-                    individual_id:1234567
-                }
-
             const res = await createsignature(req,"bla",Date.now().toString());
             expect(res).to.be.string;
         });
        
     });
-     context("generateID ", () => {
-        it("should be function", () => {
-            expect(generateID).to.be.a("Function");
-        });
+     context("generateID ",  () => {
+         const res = generateID();
+        it("should be function", () => {expect(generateID).to.be.a("Function");});
         it("should generate ID", async () => {
-            const res = await generateID();
             expect(res).to.be.string;
         });    
     });

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -37,7 +39,7 @@ class Api {
         this.app.use(morgan("dev"));
         this.app.use(addIdToReq);
         this.app.use(logRequest());
-        //this.app.use(raw(auth))
+        this.app.use(raw(auth))
     }
 
     routing() {
