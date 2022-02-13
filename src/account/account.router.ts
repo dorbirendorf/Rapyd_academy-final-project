@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -14,7 +15,6 @@ class AccountRouter{
   constructor(){
     this.router = express.Router();
     //ACTIVATE/DEACTIVATE ACCOUNT
-// eslint-disable-next-line @typescript-eslint/unbound-method
 this.router.patch("/",raw(accountValidation.validateStatus),raw( async (req:Request, res:Response) => {
   const ans = await account_service.updateAccountStatus(req.body.accounts,req.body.action);
   const resMessage= responseFactory.createResponse(ans,"accounts status update comleted",201);

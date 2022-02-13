@@ -21,6 +21,9 @@ class AccountServise{
       let { source, destination, amount } = payload;
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
+      if (!sourceTransfer||!destTransfer) {
+         throw new Error("Data not found")
+     }
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B");      
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
       return ans;
@@ -35,7 +38,9 @@ class AccountServise{
       let { source, destination, amount } = payload;
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
-
+      if (!sourceTransfer||!destTransfer) {
+         throw new Error("Data not found")
+     }
       const FX = await utils.getRate(destTransfer.currency, sourceTransfer.currency);
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B",true);
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount, FX);
@@ -51,6 +56,9 @@ class AccountServise{
       let { source, destination, amount } = payload;
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_INDIVIDUAL.getAllIndividualsAccountsById([destination]))[0];
+      if (!sourceTransfer||!destTransfer) {
+         throw new Error("Data not found")
+     }
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 1000,"B2I");
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
       return ans;
@@ -65,6 +73,9 @@ class AccountServise{
       let { source, destination, amount } = payload;
       let sourceTransfer =  await DB_FAMILY.getFamilyAccountByIdShort(source);
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
+      if (!sourceTransfer||!destTransfer) {
+         throw new Error("Data not found")
+     }
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 5000,"F2B");
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
       return ans;
@@ -104,7 +115,10 @@ class AccountServise{
  async getSecretKeyByAccessKey(access_key: string) {
    try {
       logger.params("getSecretKeyByAccessKey", { access_key })
-      const secret_key = DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
+      const secret_key = await DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
+      if (!secret_key) {
+         throw new Error("Data not found")
+     }
       logger.funcRet("getSecretKeyByAccessKey", secret_key);
       return secret_key;
 

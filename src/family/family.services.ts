@@ -47,7 +47,9 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
     await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
     await DB_FAMILY.addIndividualsToFamilyAccount(family.account_id,individualIds);
     let FamilyAccount =await this.getFamilyAccountById(family.account_id,format);
-    
+        if (!FamilyAccount) {
+            throw new Error("Data not found")
+        }
     logger.funcRet("execAddToFamily",FamilyAccount)
     return FamilyAccount;
 }
@@ -57,9 +59,14 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
         logger.params("addIndividualsToFamilyAccount", { familyId, owners, format })
        
         const family = await this.getFamilyAccountByIdShort(familyId);
+        if (!family) {
+            throw new Error("Data not found")
+        }
         const individualIds = utils.convertTupelsToArray(owners);
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
-        
+        if (!accounts||accounts.length === 0 || accounts.length < owners.length) {
+            throw new Error("Data not found")
+        }
         family_validator.validateAddToFamily(accounts, owners, family.currency);
         let updatedFamily = this.execAddToFamily(individualIds,accounts ,owners,family,format);
         
@@ -77,6 +84,9 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
         logger.params("getFamilyAccountByIdShort", { familyId });
 
         let familyAccount = await DB_FAMILY.getFamilyAccountByIdShort(Number(familyId));
+        if (!familyAccount) {
+            throw new Error("Data not found")
+        }
         logger.funcRet("getFamilyAccountByIdShort", familyAccount);
         return familyAccount;
 
@@ -91,7 +101,9 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
         logger.params("getFamilyAccountByIdFull", { familyId });
 
         let familyAccount = await DB_FAMILY.getFamilyAccountByIdFull(Number(familyId));
-
+if (!familyAccount) {
+            throw new Error("Data not found")
+        }
         logger.funcRet("getFamilyAccountByIdFull", familyAccount);
         return familyAccount;
 
@@ -106,6 +118,9 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
     logger.params("closeFamilyAccount", { familyId });
 
     const family = await this.getFamilyAccountByIdFull(familyId);
+    if (!family) {
+        throw new Error("Data not found")
+    }
     if (family.status == false) {
         throw new Error(
             `${INVALID_FILED_VALUE}- family ${family.account_id} accout is alreay close`
@@ -131,8 +146,13 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
         logger.params("removeIndividualsFromFamilyAccount", { familyId, owners, format });
         
         const family = await this.getFamilyAccountByIdFull(familyId);
+        if (!family) {
+            throw new Error("Data not found")
+        }
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(utils.convertTupelsToArray(owners));
-        
+        if (!accounts||accounts.length === 0 || accounts.length < owners.length) {
+            throw new Error("Data not found")
+        }
         await family_validator.validateRemoveFromFamily(accounts, owners, family);
         let removeBalance = 0;
         
@@ -161,7 +181,9 @@ async  getFamilyAccountById(familyId:number,format: string  ) {
         format === "full" ?
         await DB_FAMILY.getFamilyAccountByIdFull(familyId) :
         await DB_FAMILY.getFamilyAccountByIdShort(familyId);
-
+    if(!ans){
+        throw new Error("Data not found")
+    }
     logger.funcRet("getFamilyAccountById", ans);
     return ans;
 
@@ -180,7 +202,10 @@ async  execRemoveFromFamily(accounts: IIndividual[],owners:[number, number][],fa
     await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
     await DB_FAMILY.removeIndividualsFromFamilyAccount(family.account_id,owners);
    
-    let family_account = this.getFamilyAccountById(familyId,format);
+    let family_account = await this.getFamilyAccountById(familyId,format);
+    if (!family_account) {
+        throw new Error("Data not found")
+    }
     logger.funcRet("execRemoveFromFamily",family_account)
     return family_account
 }}
