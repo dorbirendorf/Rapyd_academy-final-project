@@ -9,26 +9,26 @@ import fetch from "node-fetch";
   import Crypto from "crypto-js";
 import logger from "./logger.js";
 
-
-
-export function generateID():string{
+class Utils
+{
+  generateID():string{
     // return Math.random().toString(32).slice(2);
     return uuid.v4();
 }
 
-export function convertTupelsToArray(tupels:[number,number][]):number[]{
+  convertTupelsToArray(tupels:[number,number][]):number[]{
   logger.params("convertTupelsToArray",{tupels});
   const arr=tupels.map((tupel: [number, number]) => Number(tupel[0])); 
   logger.funcRet("convertTupelsToArray",{arr});
   return arr
 }
 
-export function getTimeString():string {
+  getTimeString():string {
     const date = new Date();
     return `${date.toDateString()} ${date.toTimeString()}`;
 }
 
-export async function getRate(base:string, currency:string):Promise<number>{
+ async  getRate(base:string, currency:string):Promise<number>{
     logger.params("getRate",{base,currency})
      try{
        const base_url = `http://api.exchangeratesapi.io/latest`;
@@ -51,7 +51,7 @@ export async function getRate(base:string, currency:string):Promise<number>{
      }
    }
 
-export  function createsignature(data:Object,secret:string,time?:string):string {
+   createsignature(data:Object,secret:string,time?:string):string {
   try{
     logger.params("createsignature",{data,secret,time})
     const payload = {data,time};
@@ -66,7 +66,7 @@ export  function createsignature(data:Object,secret:string,time?:string):string 
 }
 
 
-export function hasTimeout(timeStamp:number,timeOutLength:number):boolean{
+  hasTimeout(timeStamp:number,timeOutLength:number):boolean{
   try{
 
     logger.params("hasTimeout",{timeStamp,timeOutLength});
@@ -81,6 +81,10 @@ export function hasTimeout(timeStamp:number,timeOutLength:number):boolean{
     throw err
   }
 }
+}
+
+const utils = new Utils()
+export default utils;
 // export async function backupDB() {
 //         console.log("backing up...");
 //         const p = exec(

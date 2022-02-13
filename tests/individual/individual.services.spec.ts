@@ -36,11 +36,12 @@ describe("Individual Service module", () => {
 
 
     context("#getIndividualByAccountId()", () => {
+        const individual_id = 1
+        
         it("should return individual <seccess>", () => {
 
             sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
             //sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
-            const individual_id = 1
             const actual = Iservice.getIndividualByAccountId(individual_id);
 
             expect(actual).to.deep.equal(individual_account);
@@ -51,6 +52,7 @@ describe("Individual Service module", () => {
 
     context("#createIndividualAccount()", () => {
         const newId=777
+        
         it("should return new individualId <seccess>", () => {
 
             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
@@ -65,6 +67,19 @@ describe("Individual Service module", () => {
             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").throws();
             
             const actual = Iservice.createIndividualAccount(individual_account);
+            expect(actual).to.throw
+        });
+        
+    });
+
+    context("#checkIfIndivdualExistByIndividualId()", () => {
+        const id = 666;
+        
+        it("should throw error if individualId is taken <fail>", () => {
+
+            sinon.stub(DB_INDIVIDUAL, "checkIfIndivdualExistByIndividualId").throws();
+            
+            const actual = Iservice.checkIfIndivdualExistByIndividualId(id);
             expect(actual).to.throw
         });
         
