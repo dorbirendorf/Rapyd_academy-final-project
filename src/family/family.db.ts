@@ -6,10 +6,9 @@ import {sqlRes} from "../db.utils.js";
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import { IAccount, IFamily, IIndividual, IIndividualFromDB } from "../types/types.js";
-import { extractIndividualFromObj } from "../individual/individual.db.js"
 import { createAccount } from "../account/account.db.js";
 import logger from "../utils/logger.js";
-
+import parser from "../parser.js";
 export async function createFamilyAccount(family: Partial<IFamily>): Promise<number> {
     try {
         logger.params("createFamilyAccount", { family });
@@ -33,7 +32,7 @@ export async function getFamilyAccountByIdShort(accountId: number): Promise<IFam
         if (!(accountRes[0])) {
             throw new Error("Data not found")
         }
-        const familyAccount = addOwners_idToFamily(extractFamilyFromObj(accountRes[0] as IFamily))
+        const familyAccount = addOwners_idToFamily(parser.parseFamilyFromObj(accountRes[0] as IFamily))
         logger.funcRet("getFamilyAccountByIdShort", familyAccount);
         return familyAccount;
     } catch (error) {
@@ -78,7 +77,7 @@ export async function getFamilyAccountByIdFull(familyId: number): Promise<IFamil
             throw new Error("Data not found")
         }
 
-        const familyAccount = addOwnersToFamily(extractFamilyFromObj((accountRes)[0] as IFamily))
+        const familyAccount = addOwnersToFamily(parser.parseFamilyFromObj((accountRes)[0] as IFamily))
         logger.funcRet("getFamilyAccountByIdFull", familyAccount);
         return familyAccount;
     } catch (error) {
@@ -114,7 +113,7 @@ export async function getAllFamilyMembers(familyId: number): Promise<IIndividual
 
             return []
         } else {
-            const individuals = (rows as IIndividualFromDB[]).map(extractIndividualFromObj)
+            const individuals = (rows as IIndividualFromDB[]).map((account) => parser.parseIndividualFromObj(account))
             logger.funcRet("getAllFamilyMembers", individuals);
 
             return individuals;
@@ -154,16 +153,3 @@ export async function removeIndividualsFromFamilyAccount(familyId: number, paylo
     }
 }
 
-export function extractFamilyFromObj(obj: IFamily): IFamily {
-    try {
-        logger.params("extractFamilyFromObj", { obj });
-
-        const { account_id, currency, balance, status, agent_id, type, context, } = obj
-        const family: IFamily = { account_id, currency, balance, agent_id, status, type, context };
-        logger.funcRet("extractFamilyFromObj", family);
-        return family
-    } catch (error) {
-        logger.error("extractFamilyFromObj", error as Error);
-        throw error;
-    }
-}
