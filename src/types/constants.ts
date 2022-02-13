@@ -19,4 +19,11 @@ export const MIN_INDIVIDUAL_BALANCE = 1000;
 export const MIN_BUSINESS_BALANCE = 10000;
 export const MIN_FAMILY_BALANCE = 5000;
 
+export const TRANSFER_LIMIT_F2B = 5000;
+export const TRANSFER_LIMIT_B2I = 1000;
+export const TRANSFER_LIMIT_B2BD = 1000;
+export const TRANSFER_LIMIT_B2BS = 10000;
+
+
+
 
