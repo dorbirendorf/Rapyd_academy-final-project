@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { IAccount, IIndividual, transferType } from "../types/types.js";
-import { ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE, SOMTHING_WENT_WRONG } from '../types/constants.js';
+import { ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE } from '../types/constants.js';
 import logger from "./logger.js";
 
 export function accountsExist(accounts: IAccount[], tuples: [number, number][]): boolean {
