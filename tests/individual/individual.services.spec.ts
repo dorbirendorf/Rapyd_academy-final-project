@@ -10,12 +10,12 @@ import DB_INDIVIDUAL from "../../src/individual/individual.db.js";
 describe("Individual Service module", () => {
 
     const individual_account = {
-        // account_id: 60,
+         account_id: 60,
         agent_id: 1,
         currency: "usd",
         balance: 7000,
-        // status: 1,
-        // type: "individual",
+         status: 1,
+         type: "individual",
         individual_id: 4444444,
         first_name: "dor",
         last_name: "birendorf",
@@ -36,13 +36,13 @@ describe("Individual Service module", () => {
 
 
     context("#getIndividualByAccountId()", () => {
-        const individual_id = 1
+        const individual_id = "60"
         
-        it("should return individual <seccess>", () => {
+        it("should return individual <seccess>", async () => {
 
             sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
             //sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
-            const actual = Iservice.getIndividualByAccountId(individual_id);
+            const actual =await Iservice.getIndividualByAccountId(individual_id);
 
             expect(actual).to.deep.equal(individual_account);
         });
@@ -53,21 +53,21 @@ describe("Individual Service module", () => {
     context("#createIndividualAccount()", () => {
         const newId=777
         
-        it("should return new individualId <seccess>", () => {
+        it("should return new individualId <seccess>",async () => {
 
             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
             sinon.stub(DB_INDIVIDUAL, "createIndividualAccount").resolves(newId);
             
-            const actual = Iservice.createIndividualAccount(individual_account);
+            const actual =await  Iservice.createIndividualAccount(individual_account);
             expect(actual).to.deep.equal(newId);
         });
 
-        it("should throw error if individualId is taken <fail>", () => {
+        it("should throw error if individualId is taken <fail>",async () => {
 
             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").throws();
             
-            const actual = Iservice.createIndividualAccount(individual_account);
-            expect(actual).to.throw
+            const actual =await Iservice.createIndividualAccount(individual_account);
+            expect(actual).to.throw();
         });
         
     });
@@ -79,8 +79,7 @@ describe("Individual Service module", () => {
 
             sinon.stub(DB_INDIVIDUAL, "checkIfIndivdualExistByIndividualId").throws();
             
-            const actual = Iservice.checkIfIndivdualExistByIndividualId(id);
-            expect(actual).to.throw
+            expect(Iservice.checkIfIndivdualExistByIndividualId(id)).to.throw();
         });
         
     });

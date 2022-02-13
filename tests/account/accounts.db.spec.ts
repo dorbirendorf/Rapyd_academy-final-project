@@ -1,5 +1,5 @@
 // import { expect } from "chai";
-// import { updateAccountsStatus,updateAccountsBalance,getAccountsById,createAccount,createAddress,getSecretKeyByAccessKey} from "../../src/account/account.db.js";
+// import AccountDB from "../../src/account/account.db.js";
 // import {connectDb} from "../../src/db/sql/sql.connection.js"
 
 // before(async()=>{
@@ -9,10 +9,10 @@
 //     context("updateAccountsStatus ", () => {
   
 //         it("should be function", () => {
-//             expect(updateAccountsStatus).to.be.a("Function");
+//             expect(AccountDB.updateAccountsStatus).to.be.a("Function");
 //         });
 //         it("should return OkPacket if ok", async () => {
-//             const res = await updateAccountsStatus([2,4,6],true);
+//             const res = await AccountDB.updateAccountsStatus([2,4,6],true);
 //             expect(res).to.be.eqls({fieldCount: 0,
 //                 affectedRows: 3,
 //                 insertId: 0,
@@ -28,10 +28,10 @@
 //    context("updateAccountsBalance ", () => {
   
 //         it("should be function", () => {
-//             expect(updateAccountsBalance).to.be.a("Function");
+//             expect(AccountDB.updateAccountsBalance).to.be.a("Function");
 //         });
 //         it("should return OkPacket if ok ", async() => {
-//             const res = await updateAccountsBalance([[1,20000],[2,20000],[3,20000],[4,20000],[5,20000]]);
+//             const res = await AccountDB.updateAccountsBalance([[1,20000],[2,20000],[3,20000],[4,20000],[5,20000]]);
 //             expect(res).to.be.eql({fieldCount: 0,
 //                 affectedRows: 5,
 //                 insertId: 0,
@@ -48,10 +48,10 @@
 //    context("getAccountsById ", () => {
   
 //         it("should be function", () => {
-//             expect(getAccountsById).to.be.a("Function");
+//             expect(AccountDB.getAccountsById).to.be.a("Function");
 //         });
 //         it("should return the account_id if ok ", async () => {
-//             const accounts = await getAccountsById([1,2])
+//             const accounts = await AccountDB.getAccountsById([1,2])
 //             console.log(accounts);
 //             expect(accounts.length).to.be.equal(2)
 //         });
@@ -66,10 +66,10 @@
 //     context("createAccount ", () => {
   
 //         it("should be function", () => {
-//             expect(createAccount).to.be.a("Function");
+//             expect(AccountDB.createAccount).to.be.a("Function");
 //         });
 //         it("should return number of account_id if ok ", async () => {
-//             const accounts = await createAccount({balance:2000,currency:"USD",agent_id:1,type:"individual",status:true},"individual")
+//             const accounts = await AccountDB.createAccount({balance:2000,currency:"USD",agent_id:1,type:"individual",status:true},"individual")
 //             console.log(accounts);
 //             expect(accounts).to.be.equal(45)
 //         });
@@ -84,10 +84,10 @@
 //     context("createAddress ", () => {
   
 //         it("should be function", () => {
-//             expect(createAddress).to.be.a("Function");
+//             expect(AccountDB.createAddress).to.be.a("Function");
 //         });
 //         it("should return the number of address_id if ok ", async () => {
-//             const accounts = await createAddress({street_number:2000,street_name:"AAAA",country_code:"US",country_name:"USA",region:"America",postal_code:14141,city:"California"})
+//             const accounts = await AccountDB.createAddress({street_number:2000,street_name:"AAAA",country_code:"US",country_name:"USA",region:"America",postal_code:14141,city:"California"})
       
 //             expect(accounts).to.be.equal(5)
 //         });
@@ -102,10 +102,10 @@
 //     context("getSecretKeyByAccessKey ", () => {
   
 //         it("should be function", () => {
-//             expect(getSecretKeyByAccessKey).to.be.a("Function");
+//             expect(AccountDB.getSecretKeyByAccessKey).to.be.a("Function");
 //         });
 //         it("should return secret_key if ok ", async () => {
-//             const secret_key = await getSecretKeyByAccessKey("lkdj23iojd320")
+//             const secret_key = await AccountDB.getSecretKeyByAccessKey("lkdj23iojd320")
       
 //             expect(secret_key).to.be.equal("d2ldkk023d32d3o2jdi32j9983j2d9sd32d2d2f9")
 //         });

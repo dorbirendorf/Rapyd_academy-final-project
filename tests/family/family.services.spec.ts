@@ -66,21 +66,21 @@ describe("validation middelware functions ", () => {
         })
     });
 
-    context("createFamilyAccount ", () => {
-        it("should be function", () => {
-            expect(family_service.createFamilyAccount).to.be.a("Function");
-        });
-        it('should create family account', async () => {
-            sinon.stub(DB_,"convertTupelsToArray").resolves([1,2]);
-            sinon.stub(objFamily,"getAllIndividualsAccountsById").resolves(individual_accounts);
-            sinon.stub(objFamily,"validateAddToFamily").resolves();
-            sinon.stub(objFamily,"createFamilyAccount").resolves(individual_accounts);
-            sinon.stub(service,"getFamilyAccountByIdShort").resolves(individual_accounts);
-            sinon.stub(objFamily,"execAddToFamily").resolves(individual_accounts);
-            sinon.stub(objFamily,"execAddToFamily").resolves();
-            expect(family_service.createFamilyAccount(family)).deep.equal(family_full);
-        })
-    });
+    // context("createFamilyAccount ", () => {
+    //     it("should be function", () => {
+    //         expect(family_service.createFamilyAccount).to.be.a("Function");
+    //     });
+    //     it('should create family account', async () => {
+    //         sinon.stub(DB_,"convertTupelsToArray").resolves([1,2]);
+    //         sinon.stub(objFamily,"getAllIndividualsAccountsById").resolves(individual_accounts);
+    //         sinon.stub(objFamily,"validateAddToFamily").resolves();
+    //         sinon.stub(objFamily,"createFamilyAccount").resolves(individual_accounts);
+    //         sinon.stub(service,"getFamilyAccountByIdShort").resolves(individual_accounts);
+    //         sinon.stub(objFamily,"execAddToFamily").resolves(individual_accounts);
+    //         sinon.stub(objFamily,"execAddToFamily").resolves();
+    //         expect(family_service.createFamilyAccount(family)).deep.equal(family_full);
+    //     })
+    // });
 
 });
 

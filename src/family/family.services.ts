@@ -24,7 +24,7 @@ class FamilyService
 
     const familyId = await DB_FAMILY.createFamilyAccount(family_create);
     const family = await this.getFamilyAccountByIdShort(familyId);
-    let ans = await this.execAddToFamily(individualIds,accounts ,owners,family,"full");      
+    let ans = await this.execAddToFamily(individualIds as number[],accounts ,owners,family,"full");      
     logger.funcRet("createFamilyAccount",ans);
     return ans;
 } catch (error) {
@@ -61,7 +61,7 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
         
         family_validator.validateAddToFamily(accounts, owners, family.currency);
-        let updatedFamily = this.execAddToFamily(individualIds,accounts ,owners,family,format);
+        let updatedFamily = this.execAddToFamily(individualIds as number[],accounts ,owners,family,format);
         
         logger.funcRet("addIndividualsToFamilyAccount",updatedFamily);
         return updatedFamily;
