@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createRow, selectRowById } from "../db.utils.js";
+import DbHandler from "../db.utils.js";
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import { IIndividual, IIndividualFromDB } from "../types/types.js";
@@ -12,7 +12,7 @@ export async function createIndividualAccount(individual: Partial<IIndividual>):
        logger.params("createIndividualAccount", { individual });
       const account_id = await createAccount(individual, "individual");
       const address_id = await createAddress(individual.address);
-      await createRow("individual", { account_id, individual_id: individual.individual_id, first_name: individual.first_name, last_name: individual.last_name, email: individual.email, address_id })
+      await DbHandler.createMultipleRows("individual", [{ account_id, individual_id: individual.individual_id, first_name: individual.first_name, last_name: individual.last_name, email: individual.email, address_id }])
        logger.funcRet("createIndividualAccount", account_id);
       return account_id;
    } catch (error) {
@@ -48,7 +48,7 @@ export async function checkIfIndivdualExistByIndividualId(individual_id: number)
     logger.params("checkIfIndivdualExistByIndividualId", { individual_id });
 
    try {
-      const rows = await selectRowById("individual", { individual_id });
+      const rows = await DbHandler.selectRowById("individual", { individual_id });
       const exist = rows.length > 0;
        logger.funcRet("checkIfIndivdualExistByIndividualId", exist);
 
