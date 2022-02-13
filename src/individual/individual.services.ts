@@ -44,9 +44,7 @@ export async function getIndividualByAccountId(
     }
 }
 
-export async function checkIfIndivdualExistByIndividualId(
-    individualId: number
-): Promise<any> {
+export async function checkIfIndivdualExistByIndividualId(  individualId: number): Promise<void> {
     logger.params("getIndividualByIndividualId", { individualId });
     let individual = await DB_INDIVIDUAL.checkIfIndivdualExistByIndividualId(
         individualId
