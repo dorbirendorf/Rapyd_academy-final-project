@@ -15,7 +15,7 @@ describe("#createBusinessAccount", () => {
         company_id:12345678,
         company_name:"meir",
         agent_id:1,
-        status:1,
+        status:"active",
 
     }
     
@@ -39,7 +39,7 @@ describe("#getBusinessAccountById", () => {
         "currency": "USD",
         "agent_id": 2,
         "balance": 599432,
-        "status": 1,
+        "status": "active",
         "type": "business",
         "company_id": 12345678,
         "company_name": "Dearman Inc",

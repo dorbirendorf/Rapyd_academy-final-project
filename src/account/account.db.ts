@@ -2,10 +2,11 @@
 
 import { sqlRes } from "../utils/db.utils.js";
 import DbHandler from "../utils/db.utils.js";
-import { IAccount, IAddress } from "../types/types.js";
+import { IAccount, IAddress, IAccountFromDb } from "../types/types.js";
 import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import logger from "../utils/logger.js"
+import parser from "../utils/parser.js";
 
 class AccountDb{
  async  updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
@@ -43,10 +44,10 @@ class AccountDb{
         const orString = accounts_id.map(id => "primary_id = " + id.toString()).join(" OR ")
         const [rows] = (await db.query(`SELECT primary_id, status, balance, type, currency
     FROM account WHERE ${orString}`)) as RowDataPacket[][]
-       
-        logger.funcRet("getAccountsById",rows);
+        const accounts: IAccount[] = (rows as IAccountFromDb[]).map((account)=>parser.ParseAccountFromObj(account))
+        logger.funcRet("getAccountsById",accounts);
 
-        return (rows) as IAccount[]
+        return accounts;
     } catch (error) {
          logger.error("getAccountsById", error as Error);
         throw error;

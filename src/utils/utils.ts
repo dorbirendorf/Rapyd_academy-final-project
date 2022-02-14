@@ -8,6 +8,7 @@ import uuid from "uuid";
 import fetch from "node-fetch";
   import Crypto from "crypto-js";
 import logger from "./logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class Utils
 {
@@ -42,7 +43,7 @@ class Utils
         return rate
       }
       else {
-        throw new Error(`currency: ${currency} doesn't exist in results.`);
+        throw new InformativeError(`currency: ${currency} doesn't exist in results.`);
       }
     }
     catch(error){

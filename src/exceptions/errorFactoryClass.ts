@@ -9,13 +9,13 @@ import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.j
 import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
 import config from "../config.js"
-const {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG,NOT_AUTHORIZED, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} =config
+const {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} =config
 import { HttpChangeStatusFailed } from "./HttpChangeStatusFailed.js";
+import { InformativeError } from "./InformativeError.js";
 class httpErrorFactoryClass{
-    createError(message:string):HttpError{
-        const spliteMessage = message.split("-");
-        const type = spliteMessage[0].trim();
-        const description = spliteMessage[1]?.trim()||"";
+    createError(error:InformativeError):HttpError{
+        const type = error.message
+        const description = error.description
 
         switch(type) { 
             case INVALID_FILED: { 
@@ -43,7 +43,7 @@ class httpErrorFactoryClass{
                 return new HttpChangeStatusFailed(description);
             } 
             default: { 
-               return new HttpError(SOMTHING_WENT_WRONG,500);
+               return new HttpError(String(SOMTHING_WENT_WRONG),500);
             } 
          }
     }

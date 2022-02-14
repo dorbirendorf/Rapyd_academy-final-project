@@ -1,3 +1,4 @@
+import { InformativeError } from "../exceptions/InformativeError.js";
 import { IBusiness } from "../types/types.js";
 import logger from "../utils/logger.js";
 import  DB_BUSINESS from "./business.db.js"
@@ -20,7 +21,7 @@ class BusinessService {
       logger.params("service-getBusinessAccountById", { accountId })
       const business = await DB_BUSINESS.getAllBusinessAccountById([Number(accountId)]);
       if (!business || business.length === 0) {
-        throw new Error("Data not found")
+        throw new InformativeError("Data not found","")
       }
       logger.funcRet("getBusinessAccountById", { business })
       return business

@@ -4,6 +4,7 @@ import { IIndividual } from "../types/types.js";
 import config from "../config.js";
 const { INVALID_FILED_VALUE } =config
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class IndividualService
 { async createIndividualAccount(
@@ -29,7 +30,7 @@ class IndividualService
 ): Promise<IIndividual> {
     try {
         logger.params("getIndividualByAccountId", { accountId });
-
+        console.log(config);
         const individual = (
             await DB_INDIVIDUAL.getAllIndividualsAccountsById([
                 Number(accountId),
@@ -37,7 +38,7 @@ class IndividualService
         )[0];
 
         if (!individual) {
-            throw new Error("Data not found")
+            throw new InformativeError("Data not found")
         }
 
         logger.funcRet("getIndividualByAccountId", { individual });
@@ -56,7 +57,7 @@ class IndividualService
         individualId
     );
     if (individual) {
-        throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
+        throw new InformativeError(INVALID_FILED_VALUE,`individual id already exist`);
     }
 }
 }

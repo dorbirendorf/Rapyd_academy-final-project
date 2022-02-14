@@ -12,16 +12,17 @@ import validation_func from "../utils/validationFunc.js";
 import validation_service from "../utils/validationService.js";
 import utils from "../utils/utils.js";
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class FamilyValidator {
         async validateFamilyModel(req: Request, res: Response, next: NextFunction): Promise<void> {
             let { owners, currency, balance = 0, context = null, agent_id } = req.body;
             if (!(owners && owners.length > 0)) {
-                throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
+                throw new InformativeError(MISSING_REQUIRED_FIELD,`we must get list of owners`);
             }
             const tupelsValid: boolean = owners.every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
             if (!tupelsValid) {
-                throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
+                throw new InformativeError(INVALID_FILED_VALUE,`not all tupels list are valid`)
             }
             console.log(owners)
             owners = owners.map((pair: [number, number]) => [Number(pair[0]), Number(pair[1])])
@@ -42,7 +43,7 @@ class FamilyValidator {
             accounts.map((account) => {
                 const owner = owners.find(own => own[0] == account.account_id)
                 if (!owner) {
-                    throw new Error(`${ACCOUNT_NOT_EXIST}- not all account exsits in individual table`)
+                    throw new InformativeError(ACCOUNT_NOT_EXIST,`not all account exsits in individual table`)
                 }
                 const amount = owner[1];
                 validation_service.allowTransfers([account], amount, 1000);
@@ -70,14 +71,14 @@ class FamilyValidator {
     async validateUpdateAccounts(req: Request, res: Response, next: NextFunction): Promise<void> {
         let { owners, account_id } = req.body;
         if ((account_id === "undefined") || typeof account_id !== "number") {
-            throw new Error(`${INVALID_FILED_VALUE} - account id isnt accept`)
+            throw new InformativeError(INVALID_FILED_VALUE,`account id isnt accept`)
         }
         if (!(owners && owners.length > 0)) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
+            throw new InformativeError(MISSING_REQUIRED_FIELD,`we must get list of owners`);
         }
         const tupelsValid: boolean = owners.every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
         if (!tupelsValid) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
+            throw new InformativeError(INVALID_FILED_VALUE,` not all tupels list are valid`)
         }
         next()
     }

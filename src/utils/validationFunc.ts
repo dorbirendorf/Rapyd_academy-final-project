@@ -4,6 +4,7 @@ import config from "../config.js"
 const { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } =config;
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class ValidationFunctions
 {
@@ -13,7 +14,7 @@ class ValidationFunctions
       logger.params("validEntityId",{id_length,id})
 
       if (String(id).length !== id_length) {
-         throw new Error(`${INVALID_FILED_VALUE} -  id not valid`);
+         throw new InformativeError(INVALID_FILED_VALUE,`id not valid`);
       }
       logger.funcRet("validEntityId","void")
 
@@ -28,7 +29,7 @@ class ValidationFunctions
       logger.params("checkBalance", {minimalBalance,balance})
 
       if (balance < minimalBalance) {
-         throw new Error(ACCOUNT_BALLANCE_LOW);
+         throw new InformativeError(ACCOUNT_BALLANCE_LOW);
       }
       logger.funcRet("checkBalance", "void")
 
@@ -43,7 +44,7 @@ class ValidationFunctions
       logger.params("amountPositive", amount)
 
       if (typeof amount !== "number" || amount <= 0) {
-         throw new Error(`${INVALID_FILED_VALUE} - msg.. `)
+         throw new InformativeError(INVALID_FILED_VALUE,` msg.. `)
       }
       logger.funcRet("amountPositive", "void")
    } catch (err) {
@@ -61,11 +62,11 @@ class ValidationFunctions
       const sum: number = tupels.reduce((prev, tupel) => tupel[1] + prev, 0);
       if(min){
          if (sum < minBalance) {
-            throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amounts should be ${minBalance}`)
+            throw new InformativeError(ACCOUNT_BALLANCE_LOW,`sum of all amounts should be ${minBalance}`)
          }
       } else {
          if (sum > minBalance) {
-            throw new Error(`${ACCOUNT_BALLANCE_LOW} - sum of all amounts can't be more then ${minBalance}`)
+            throw new InformativeError(ACCOUNT_BALLANCE_LOW,` sum of all amounts can't be more then ${minBalance}`)
          }
       }
 
@@ -104,7 +105,7 @@ class ValidationFunctions
       const { id } = req.params;
 
       if ((id === "undefined") || (isNaN(Number(id)))) {
-         throw new Error(`${INVALID_FILED_VALUE} - id is not valid!`)
+         throw new InformativeError(INVALID_FILED_VALUE,` id is not valid!`)
       }
       logger.funcRet("validateAccountId", "void")
       next()

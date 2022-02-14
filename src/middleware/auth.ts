@@ -4,6 +4,7 @@ import { Request,Response,NextFunction } from "express";
 import config from "../config.js"
 const { NOT_AUTHORIZED } =config;
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class Auth
 {
@@ -25,7 +26,7 @@ class Auth
             const serverSignature =  utils.createsignature((req.body || {} )as Object,secret ,timeStamp as string);
             const signaturesMatch = (reqSignature===serverSignature);
             if (timeout || !reqSignature || !access_key  || !signaturesMatch){
-                throw new Error(NOT_AUTHORIZED as string)
+                throw new InformativeError(NOT_AUTHORIZED)
     
              }
             next();
