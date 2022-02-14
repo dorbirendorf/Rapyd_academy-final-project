@@ -25,7 +25,7 @@ class IndividualValidator
         throw new InformativeError(config.errors.INVALID_FILED,`account_id must not be provided!`);
     }    
     //console.log("INDIVIDUAL_ID_LENGTH",config.configurations.INDIVIDUAL_ID_LENGTH,config.constants.INDIVIDUAL_ID_LENGTH);
-    validtion_func.validEntityId (Number(config.configurations.INDIVIDUAL_ID_LENGTH),individual_id as number);
+    validtion_func.validEntityId (Number(config.constants.INDIVIDUAL_ID_LENGTH),individual_id as number);
     const account:Partial <IIndividualFromReq> = {first_name,last_name,currency,individual_id,email,address,balance,status:true,agent_id};
     req.accounts=[account];
     next()}catch(error){

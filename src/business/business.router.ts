@@ -25,8 +25,9 @@ this.router.post("/",business_validator.validateBusinessModel,raw( async (req:Re
     const id = await business_service.createBusinessAccount(req.accounts[0] as Partial<IBusiness>);
     const ans = await business_service.getBusinessAccountById(id);
     const resMessage= responseFactory.createResponse(ans,"Account created",201);
-    await idempotency_Db.createInstanceOfResponse(resMessage,req.idempotency_key,req.agent_id);
-
+    if (req.idempotency_key) {
+      await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+    }
     res.status(resMessage.status).json(resMessage);
   }) );
 

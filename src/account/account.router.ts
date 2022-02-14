@@ -18,8 +18,9 @@ class AccountRouter {
     this.router.patch("/", accountValidation.validateStatus, raw(async (req: Request, res: Response) => {
       const ans = await account_service.updateAccountStatus(req.body.accounts, req.body.action);
       const resMessage = responseFactory.createResponse(ans, "accounts status update comleted", 201);
-      await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
-
+      if (req.idempotency_key) {
+        await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+      }
       res.status(resMessage.status).json(resMessage);
     }));
 
@@ -27,8 +28,9 @@ class AccountRouter {
     this.router.post("/transfer/b2b", accountValidation.validateTransferModel, raw(async (req: Request, res: Response) => {
       let ans = await account_service.transferB2B(req.body);
       const resMessage = responseFactory.createResponse(ans, "transfer B2B comleted", 201);
-      await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
-
+      if (req.idempotency_key) {
+        await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+      }
       res.status(resMessage.status).json(resMessage);
     }));
 
@@ -36,8 +38,9 @@ class AccountRouter {
     this.router.post("/transfer/b2bfx", accountValidation.validateTransferModel, raw(async (req: Request, res: Response) => {
       const ans = await account_service.transferB2BFX(req.body);
       const resMessage = responseFactory.createResponse(ans, "transfer B2BFX comleted", 201);
-      await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
-
+      if (req.idempotency_key) {
+        await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+      }
       res.status(resMessage.status).json(resMessage);
     }));
 
@@ -45,8 +48,9 @@ class AccountRouter {
     this.router.post("/transfer/b2i", accountValidation.validateTransferModel, raw(async (req: Request, res: Response) => {
       const ans = await account_service.transferB2I(req.body);
       const resMessage = responseFactory.createResponse(ans, "transfer B2I comleted", 201);
-      await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
-
+      if (req.idempotency_key) {
+        await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+      }
       res.status(resMessage.status).json(resMessage);
     }));
 
@@ -54,8 +58,9 @@ class AccountRouter {
     this.router.post("/transfer/f2b", accountValidation.validateTransferModel, raw(async (req: Request, res: Response) => {
       const ans = await account_service.transferF2B(req.body);
       const resMessage = responseFactory.createResponse(ans, "transfer F2B comleted", 201);
-      await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
-
+      if (req.idempotency_key) {
+        await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+      }
       res.status(resMessage.status).json(resMessage);
     }));
 

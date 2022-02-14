@@ -25,8 +25,9 @@ this.router.post("/",individual_validator.validateIndividualModel,raw( async (re
   const id = await individual_service.createIndividualAccount(req.accounts[0] as Partial<IIndividual>);
   const ans = await individual_service.getIndividualByAccountId(id.toString());
   const resMessage= responseFactory.createResponse(ans,"Account created",201);
-  await idempotency_Db.createInstanceOfResponse(resMessage,req.idempotency_key,req.agent_id);
-    res.status(resMessage.status).json(resMessage);
+  if (req.idempotency_key) {
+    await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+  }    res.status(resMessage.status).json(resMessage);
 }) );
 
 // GET FULL INDIVIDUAL_ACOUNT BY ID

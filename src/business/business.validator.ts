@@ -19,7 +19,7 @@ class BusinessValidator
         if (account_id !== undefined) {
             throw new InformativeError(String(config.errors.INVALID_FILED),`account_id must not be provided!`);
         }  
-        validation_func.validEntityId(Number(config.configurations.COMPANY_ID_LENGTH),company_id as number);
+        validation_func.validEntityId(Number(config.constants.COMPANY_ID_LENGTH),company_id as number);
         
         const account:Partial <IBusinessFromReq> = {company_id,company_name,currency,context,address,balance,status:true,agent_id};
         req.accounts=[account];
