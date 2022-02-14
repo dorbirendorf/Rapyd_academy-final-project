@@ -24,7 +24,7 @@ class FamilyService
 
     const familyId = await DB_FAMILY.createFamilyAccount(family_create);
     const family = await this.getFamilyAccountByIdShort(familyId);
-    let ans = await this.execAddToFamily(individualIds as number[],accounts ,owners,family,"full");      
+    let ans = await this.execAddToFamily(individualIds,accounts ,owners,family,"full");      
     logger.funcRet("createFamilyAccount",ans);
     return ans;
 } catch (error) {
@@ -46,8 +46,7 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
     IndividualSBalance.push(familyBalance);
     await DB_ACCOUNT.updateAccountsBalance(IndividualSBalance);
     await DB_FAMILY.addIndividualsToFamilyAccount(family.account_id,individualIds);
-    let FamilyAccount =await this.getFamilyAccountById(family.account_id,format);
-    
+    let FamilyAccount = await this.getFamilyAccountById(family.account_id,format);
     logger.funcRet("execAddToFamily",FamilyAccount)
     return FamilyAccount;
 }
@@ -61,7 +60,7 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
         
         family_validator.validateAddToFamily(accounts, owners, family.currency);
-        let updatedFamily = this.execAddToFamily(individualIds as number[],accounts ,owners,family,format);
+        let updatedFamily = this.execAddToFamily(individualIds,accounts ,owners,family,format);
         
         logger.funcRet("addIndividualsToFamilyAccount",updatedFamily);
         return updatedFamily;
@@ -101,7 +100,7 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
     }
 }
 
- async  closeFamilyAccount(familyId: number): Promise<any> {
+ async  closeFamilyAccount(familyId: number): Promise<void> {
     try{
     logger.params("closeFamilyAccount", { familyId });
 
