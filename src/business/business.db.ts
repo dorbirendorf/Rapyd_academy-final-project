@@ -1,5 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RowDataPacket } from "mysql2";
 import DbHandler from "../utils/db.utils.js";
 import { IBusiness, IBusinessFromDb } from "../types/types.js";

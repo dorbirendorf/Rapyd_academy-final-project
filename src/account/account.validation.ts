@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+
+import config from "../config.js";
+const { INVALID_FILED_VALUE , MISSING_REQUIRED_FIELD }  = config
 import { Request, Response, NextFunction } from "express";
 import validation_func from "../utils/validationFunc.js";
-import { IAccount, IBusiness, transferType } from "../types/types.js";
+import { IAccount, IAccountFromReq, IBusiness, transferType } from "../types/types.js";
 import utils from "../utils/validationService.js";
 import logger from "../utils/logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
@@ -16,16 +15,16 @@ validateAccountMandatoryFields(currency: string, balance: number,agent_id:number
     try {
         logger.params("validateAccountMandatoryFields", { currency, balance });
         if (currency === undefined) {
-            throw new InformativeError(MISSING_REQUIRED_FIELD,`please provide currency`)
+            throw new InformativeError(String(MISSING_REQUIRED_FIELD),`please provide currency`)
         }
         if (balance === undefined) {
-            throw new InformativeError(MISSING_REQUIRED_FIELD,`please provide balance`)
+            throw new InformativeError(String(MISSING_REQUIRED_FIELD),`please provide balance`)
         }
         if (balance < 0) {
-            throw new InformativeError(INVALID_FILED_VALUE, `balance cant be negative`)
+            throw new InformativeError(String(INVALID_FILED_VALUE), `balance cant be negative`)
         }
         if (agent_id === undefined) {
-            throw new InformativeError(MISSING_REQUIRED_FIELD,`must provide agent_id`)
+            throw new InformativeError(String(MISSING_REQUIRED_FIELD),`must provide agent_id`)
         }
         logger.funcRet("validateAccountMandatoryFields", "void");
     } catch (error) {
@@ -37,7 +36,7 @@ validateAccountMandatoryFields(currency: string, balance: number,agent_id:number
  async  validateTransferModel(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { source, destination, amount } = req.body;
     if (!(source && destination && amount)) {
-        throw new InformativeError(MISSING_REQUIRED_FIELD,"");
+        throw new InformativeError(String(MISSING_REQUIRED_FIELD),"");
     }
     validation_func.amountPositive(amount as number);
     next();
@@ -55,15 +54,15 @@ validateAccountMandatoryFields(currency: string, balance: number,agent_id:number
 
  async  validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { accounts, action } = req.body;
-    if (!(accounts && action !== undefined && accounts.length > 0)) {
-        throw new InformativeError(MISSING_REQUIRED_FIELD,"");
+    if (!(accounts && action !== undefined && (accounts as IAccountFromReq[]).length > 0)) {
+        throw new InformativeError(String(MISSING_REQUIRED_FIELD),"");
     }
-    const allNumber: boolean = accounts.every((acc: any) => (typeof acc === "number"));
+    const allNumber: boolean = (accounts as IAccountFromReq[]).every((acc: any) => (typeof acc === "number"));
     if (!allNumber) {
-        throw new InformativeError(INVALID_FILED_VALUE,` not all accounts are type number`)
+        throw new InformativeError(String(INVALID_FILED_VALUE),` not all accounts are type number`)
     }
     if (action!=="active"&&action!=="inactive") {
-        throw new InformativeError(INVALID_FILED_VALUE,`action field must be active or inactive`)
+        throw new InformativeError(String(INVALID_FILED_VALUE),`action field must be active or inactive`)
     }
 
     next();

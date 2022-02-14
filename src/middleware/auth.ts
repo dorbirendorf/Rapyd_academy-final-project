@@ -1,7 +1,8 @@
 import utils from "../utils/utils.js"
 import account_service from "../account/account.services.js"
 import { Request,Response,NextFunction } from "express";
-import { NOT_AUTHORIZED } from "../types/constants.js";
+import config from "../config.js"
+const { NOT_AUTHORIZED } =config;
 import logger from "../utils/logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
 

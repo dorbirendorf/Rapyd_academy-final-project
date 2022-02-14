@@ -9,7 +9,8 @@ import  DB_ACCOUNT from "../account/account.db.js";
 import DB_FAMILY from "../family/family.db.js";
 import DB_INDIVIDUAL from "../individual/individual.db.js";
 import family_validator from "./family.validator.js";
-import {ACCOUNT_STATUS_FIELD,INVALID_FILED_VALUE,MIN_FAMILY_BALANCE} from "../types/constants.js";
+import config from "../config.js"
+const {ACCOUNT_STATUS_FIELD,INVALID_FILED_VALUE,MIN_FAMILY_BALANCE} = config;
 import validation_func from "../utils/validationFunc.js";
 import utils from "../utils/utils.js";
 import logger from "../utils/logger.js";

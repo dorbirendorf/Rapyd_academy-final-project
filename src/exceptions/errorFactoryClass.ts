@@ -8,7 +8,8 @@ import {HttpMissingRequieredFieldError} from "./HttpMissingRequieredFieldError.j
 import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.js"
 import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
-import {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} from "../types/constants.js"
+import config from "../config.js"
+const {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} =config
 import { HttpChangeStatusFailed } from "./HttpChangeStatusFailed.js";
 import { InformativeError } from "./InformativeError.js";
 class httpErrorFactoryClass{
@@ -42,7 +43,7 @@ class httpErrorFactoryClass{
                 return new HttpChangeStatusFailed(description);
             } 
             default: { 
-               return new HttpError(SOMTHING_WENT_WRONG,500);
+               return new HttpError(String(SOMTHING_WENT_WRONG),500);
             } 
          }
     }

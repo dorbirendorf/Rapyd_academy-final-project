@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/require-await */
-// /* eslint-disable prefer-const */
-// /* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 import { sqlRes } from "../utils/db.utils.js";
 import DbHandler from "../utils/db.utils.js";

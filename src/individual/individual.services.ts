@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-// import { INVALID_FILED_VALUE } from "../types/constants.js";
 import DB_INDIVIDUAL from "./individual.db.js";
 import { IIndividual } from "../types/types.js";
-import { INVALID_FILED_VALUE } from "../types/constants.js";
+import config from "../config.js";
+const { INVALID_FILED_VALUE } =config
 import logger from "../utils/logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
 
@@ -30,7 +30,7 @@ class IndividualService
 ): Promise<IIndividual> {
     try {
         logger.params("getIndividualByAccountId", { accountId });
-
+        console.log(config);
         const individual = (
             await DB_INDIVIDUAL.getAllIndividualsAccountsById([
                 Number(accountId),

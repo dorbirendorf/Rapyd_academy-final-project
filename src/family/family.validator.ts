@@ -5,7 +5,8 @@
 
 import { Request, Response, NextFunction } from "express";
 import { IFamily, IIndividual, } from "../types/types.js";
-import { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MIN_FAMILY_BALANCE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import config from "../config.js"
+const { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MIN_FAMILY_BALANCE, MISSING_REQUIRED_FIELD } = config;
 import account_validation from "../account/account.validation.js";
 import validation_func from "../utils/validationFunc.js";
 import validation_service from "../utils/validationService.js";

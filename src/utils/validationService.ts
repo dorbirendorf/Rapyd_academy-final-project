@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { IAccount, IIndividual, transferType } from "../types/types.js";
-import { ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE } from '../types/constants.js';
+import config from "../config.js"
+const { ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE } = config;
 import logger from "./logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
 

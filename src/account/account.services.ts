@@ -1,10 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { KeyObject } from "crypto";
+
 import { ITransfer, IAccount } from "../types/types.js";
 import logger from "../utils/logger.js";
 import utils from "../utils/utils.js";
@@ -107,7 +101,7 @@ class AccountService{
       //add function that update all list of statuses
       const status =  action === "active" ? true: false;
       await DB_ACCOUNT.updateAccountsStatus(accountsId, status);
-      return `acounts: ${accountsId} changed to status ${action}`;
+      return `acounts: ${String(accountsId)} changed to status ${action}`;
    } catch (error) {
       logger.error("transferB2BFX", error as Error);
       throw error;
