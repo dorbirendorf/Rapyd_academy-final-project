@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable no-useless-catch */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable no-console */
-// import jwt from "jsonwebtoken";
+
 import uuid from "uuid";
 import fetch from "node-fetch";
   import Crypto from "crypto-js";
