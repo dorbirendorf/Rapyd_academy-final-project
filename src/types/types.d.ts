@@ -119,6 +119,8 @@ export interface IBusinessFromDb extends IAccountFromDb{
         configurations:{[key: string]: string}
         errors:{[key: string]: string},
         constants:{[key: string]: number},
+        flags:{[key: string]: boolean},
+
     }
     export interface ITransfer{
         source: number;
