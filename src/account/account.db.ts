@@ -2,7 +2,7 @@
 
 import { sqlRes } from "../utils/db.utils.js";
 import DbHandler from "../utils/db.utils.js";
-import { IAccount, IAddress, IAccountFromDb } from "../types/types.js";
+import { IAccount, IAddress, IAccountFromDb, IAgentKey } from "../types/types.js";
 import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import logger from "../utils/logger.js"
@@ -87,14 +87,18 @@ async createAddress(address?: IAddress|null): Promise<number | null> {
     }
 }
 
-async getSecretKeyByAccessKey(access_key: string): Promise<string> {
+async getSecretKeyByAccessKey(access_key: string): Promise<IAgentKey> {
     try {
         logger.params("getSecretKeyByAccessKey", { access_key });
 
         const rows = await DbHandler.selectRowById("agent", { access_key });
-        const secret_key = String(rows[0].secret_key);
-        logger.funcRet("getSecretKeyByAccessKey", secret_key);
-        return secret_key
+        let agent_key = {secret:undefined,agent_id:undefined}
+        if(rows[0]){
+            agent_key.secret = rows[0].secret;
+            agent_key.agent_id = rows[0].agent_id;
+        }
+        logger.funcRet("getSecretKeyByAccessKey", agent_key);
+        return agent_key
     } catch (error) {
         logger.error("getSecretKeyByAccessKey", error as Error);
         throw error;

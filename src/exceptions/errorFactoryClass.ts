@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
+
 import { HttpAccountDoesNotExistError} from "./HttpAccountDoesNotExistError.js";
 import {HttpError} from "./httpError.js";
 import {HttpInvalidFieldError} from "./HttpInvalidFieldError.js"

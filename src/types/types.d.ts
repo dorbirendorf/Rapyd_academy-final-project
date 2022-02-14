@@ -129,11 +129,18 @@ export interface IBusinessFromDb extends IAccountFromDb{
     }
     export type transferType = "B2B" | "B2I" | "F2B" ;
    
+
+    export interface IAgentKey{
+        agent_id?: number;
+        secret?: string;
+    }
 declare global {
     namespace Express {
         interface Request {
             accounts:Partial<IAccountFromReq>[];
             id: string;
+            agent_id:number;
+            idempotency_key:string;
         }
     }
 }

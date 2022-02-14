@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import DB_INDIVIDUAL from "./individual.db.js";
 import { IIndividual } from "../types/types.js";
 import config from "../config.js";
-const { INVALID_FILED_VALUE } =config
 import logger from "../utils/logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
 
