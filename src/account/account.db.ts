@@ -43,9 +43,7 @@ class AccountDb{
         const orString = accounts_id.map(id => "primary_id = " + id.toString()).join(" OR ")
         const [rows] = (await db.query(`SELECT primary_id, status, balance, type, currency
     FROM account WHERE ${orString}`)) as RowDataPacket[][]
-        if (!(rows[0]) || rows.length != accounts_id.length) {
-            throw new Error("Data not found")
-        }
+       
         logger.funcRet("getAccountsById",rows);
 
         return (rows) as IAccount[]
@@ -93,9 +91,6 @@ async getSecretKeyByAccessKey(access_key: string): Promise<string> {
         logger.params("getSecretKeyByAccessKey", { access_key });
 
         const rows = await DbHandler.selectRowById("agent", { access_key });
-        if (!(rows[0])) {
-            throw new Error("Data not found")
-        }
         const secret_key = String(rows[0].secret_key);
         logger.funcRet("getSecretKeyByAccessKey", secret_key);
         return secret_key
