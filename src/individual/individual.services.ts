@@ -36,6 +36,10 @@ class IndividualService
             ])
         )[0];
 
+        if (!individual) {
+            throw new Error("Data not found")
+        }
+
         logger.funcRet("getIndividualByAccountId", { individual });
         return individual;
     } catch (err) {
