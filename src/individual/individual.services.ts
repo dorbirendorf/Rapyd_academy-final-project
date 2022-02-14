@@ -4,6 +4,7 @@ import DB_INDIVIDUAL from "./individual.db.js";
 import { IIndividual } from "../types/types.js";
 import { INVALID_FILED_VALUE } from "../types/constants.js";
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class IndividualService
 { async createIndividualAccount(
@@ -37,7 +38,7 @@ class IndividualService
         )[0];
 
         if (!individual) {
-            throw new Error("Data not found")
+            throw new InformativeError("Data not found")
         }
 
         logger.funcRet("getIndividualByAccountId", { individual });
@@ -56,7 +57,7 @@ class IndividualService
         individualId
     );
     if (individual) {
-        throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
+        throw new InformativeError(INVALID_FILED_VALUE,`individual id already exist`);
     }
 }
 }

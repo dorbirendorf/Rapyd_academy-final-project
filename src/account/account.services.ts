@@ -14,6 +14,7 @@ import DB_INDIVIDUAL from "../individual/individual.db.js"
 
 import DB_FAMILY from "../family/family.db.js"
 import accountValidation from "./account.validation.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class AccountService{
  async  transferB2B(payload: ITransfer): Promise<string> {
@@ -22,7 +23,7 @@ class AccountService{
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
       if (!sourceTransfer||!destTransfer) {
-         throw new Error("Data not found")
+         throw new InformativeError("Data not found","");
      }
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B");      
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
@@ -39,7 +40,7 @@ class AccountService{
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
       if (!sourceTransfer||!destTransfer) {
-         throw new Error("Data not found")
+         throw new InformativeError("Data not found","")
      }
       const FX = await utils.getRate(destTransfer.currency, sourceTransfer.currency);
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B",true);
@@ -57,7 +58,7 @@ class AccountService{
       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
       let destTransfer = (await DB_INDIVIDUAL.getAllIndividualsAccountsById([destination]))[0];
       if (!sourceTransfer||!destTransfer) {
-         throw new Error("Data not found")
+         throw new InformativeError("Data not found","")
      }
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 1000,"B2I");
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
@@ -74,7 +75,7 @@ class AccountService{
       let sourceTransfer =  await DB_FAMILY.getFamilyAccountByIdShort(source);
       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
       if (!sourceTransfer||!destTransfer) {
-         throw new Error("Data not found")
+         throw new InformativeError("Data not found","")
      }
       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 5000,"F2B");
       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
@@ -98,13 +99,14 @@ class AccountService{
    }
 }
 
- async updateAccountStatus(accountsId: number[], action: boolean): Promise<string> {
+ async updateAccountStatus(accountsId: number[], action: "active"|"inactive"): Promise<string> {
    try {
       let accounts:IAccount[] = await DB_ACCOUNT.getAccountsById(accountsId);
       //if some of the accounts not exists throw error
       accountValidation.validateStatusAccounts(accounts, action);
       //add function that update all list of statuses
-      await DB_ACCOUNT.updateAccountsStatus(accountsId, action);
+      const status =  action === "active" ? true: false;
+      await DB_ACCOUNT.updateAccountsStatus(accountsId, status);
       return `acounts: ${accountsId} changed to status ${action}`;
    } catch (error) {
       logger.error("transferB2BFX", error as Error);
@@ -117,7 +119,7 @@ class AccountService{
       logger.params("getSecretKeyByAccessKey", { access_key })
       const secret_key = await DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
       if (!secret_key) {
-         throw new Error("Data not found")
+         throw new InformativeError("Data not found","")
      }
       logger.funcRet("getSecretKeyByAccessKey", secret_key);
       return secret_key;

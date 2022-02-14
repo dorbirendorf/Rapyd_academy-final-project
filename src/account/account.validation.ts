@@ -7,6 +7,7 @@ import validation_func from "../utils/validationFunc.js";
 import { IAccount, IBusiness, transferType } from "../types/types.js";
 import utils from "../utils/validationService.js";
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 
 class AccountValidation{
@@ -15,16 +16,16 @@ validateAccountMandatoryFields(currency: string, balance: number,agent_id:number
     try {
         logger.params("validateAccountMandatoryFields", { currency, balance });
         if (currency === undefined) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - please provide currency`)
+            throw new InformativeError(MISSING_REQUIRED_FIELD,`please provide currency`)
         }
         if (balance === undefined) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - please provide balance`)
+            throw new InformativeError(MISSING_REQUIRED_FIELD,`please provide balance`)
         }
         if (balance < 0) {
-            throw new Error(`${INVALID_FILED_VALUE} - balance cant be negative`)
+            throw new InformativeError(INVALID_FILED_VALUE, `balance cant be negative`)
         }
         if (agent_id === undefined) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - must provide agent_id`)
+            throw new InformativeError(MISSING_REQUIRED_FIELD,`must provide agent_id`)
         }
         logger.funcRet("validateAccountMandatoryFields", "void");
     } catch (error) {
@@ -36,7 +37,7 @@ validateAccountMandatoryFields(currency: string, balance: number,agent_id:number
  async  validateTransferModel(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { source, destination, amount } = req.body;
     if (!(source && destination && amount)) {
-        throw new Error(`${MISSING_REQUIRED_FIELD}`);
+        throw new InformativeError(MISSING_REQUIRED_FIELD,"");
     }
     validation_func.amountPositive(amount as number);
     next();
@@ -54,22 +55,27 @@ validateAccountMandatoryFields(currency: string, balance: number,agent_id:number
 
  async  validateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
     let { accounts, action } = req.body;
-    if (!(accounts && action != undefined && accounts.length > 0)) {
-        throw new Error(`${MISSING_REQUIRED_FIELD}`);
+    if (!(accounts && action !== undefined && accounts.length > 0)) {
+        throw new InformativeError(MISSING_REQUIRED_FIELD,"");
     }
     const allNumber: boolean = accounts.every((acc: any) => (typeof acc === "number"));
     if (!allNumber) {
-        throw new Error(`${INVALID_FILED_VALUE}- not all accounts are type number`)
+        throw new InformativeError(INVALID_FILED_VALUE,` not all accounts are type number`)
     }
+    if (action!=="active"&&action!=="inactive") {
+        throw new InformativeError(INVALID_FILED_VALUE,`action field must be active or inactive`)
+    }
+
     next();
 }
 
-validateStatusAccounts(accounts: IAccount[], action: boolean): void {
+validateStatusAccounts(accounts: IAccount[], action: "active"|"inactive"): void {
     try {
         logger.params("validateStatusAccounts", { accounts, action });
 
         utils.accountsTypes(accounts, ["individual", "business"]);
-        utils.checkProperState(accounts, !action);
+        const opposite = action === "active"? "inactive": "active";
+        utils.checkProperState(accounts, opposite);
         logger.funcRet("validateStatusAccounts", "void");
     } catch (error) {
         logger.error("validateStatusAccounts", error as Error);

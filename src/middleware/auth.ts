@@ -3,6 +3,7 @@ import account_service from "../account/account.services.js"
 import { Request,Response,NextFunction } from "express";
 import { NOT_AUTHORIZED } from "../types/constants.js";
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class Auth
 {
@@ -24,7 +25,7 @@ class Auth
             const serverSignature =  utils.createsignature((req.body || {} )as Object,secret ,timeStamp as string);
             const signaturesMatch = (reqSignature===serverSignature);
             if (timeout || !reqSignature || !access_key  || !signaturesMatch){
-                throw new Error(NOT_AUTHORIZED)
+                throw new InformativeError(NOT_AUTHORIZED)
     
              }
             next();

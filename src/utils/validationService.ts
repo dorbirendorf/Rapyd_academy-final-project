@@ -4,6 +4,7 @@
 import { IAccount, IIndividual, transferType } from "../types/types.js";
 import { ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE } from '../types/constants.js';
 import logger from "./logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class ValidationService {
       accountsExist(accounts: IAccount[], tuples: [number, number][]): boolean {
@@ -11,7 +12,7 @@ class ValidationService {
             logger.params("accountsExist", { accounts, tuples })
 
             if (tuples.length !== accounts.length) {
-               throw new Error(`${INVALID_FILED_VALUE}- not all accounts are exsits`)
+               throw new InformativeError(INVALID_FILED_VALUE,` not all accounts are exsits`)
             }
             logger.funcRet("accountsExist", true)
 
@@ -24,9 +25,9 @@ class ValidationService {
    accountsActive(accounts: IAccount[]): boolean {
       try {
          logger.params("accountsActive", { accounts })
-         const allActive: boolean = accounts.every(acc => acc.status == true);
+         const allActive: boolean = accounts.every(acc => acc.status === "active");
          if (!allActive) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all accounts are active`)
+            throw new InformativeError(INVALID_FILED_VALUE,` not all accounts are active`)
          }
          logger.funcRet("accountsActive", true)
 
@@ -36,13 +37,12 @@ class ValidationService {
          throw err
       }
    }
-   checkProperState(accounts: IAccount[], action: boolean): boolean {
+   checkProperState(accounts: IAccount[], action: "active"|"inactive"): boolean {
       try {
          logger.params("checkProperState", { accounts, action })
-
          const allStatusProper: boolean = accounts.every(acc => acc.status == action);
          if (!allStatusProper) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all accounts ${action}`)
+            throw new InformativeError(INVALID_FILED_VALUE,` not all accounts ${action}`)
          }
          logger.funcRet("checkProperState", true)
 
@@ -59,7 +59,7 @@ class ValidationService {
 
          const allAccepttype: boolean = accounts.every(acc => (acc.type === type[0] || acc.type === type[1]));
          if (!allAccepttype) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all accounts are the type ${type[0]} or ${type[1]} `)
+            throw new InformativeError(INVALID_FILED_VALUE,`not all accounts are the type ${type[0]} or ${type[1]} `)
          }
          logger.funcRet("accountsTypes", true)
 
@@ -76,7 +76,7 @@ class ValidationService {
          if (FX) return true;
          const allCurrency: boolean = accounts.every(acc => acc.currency.toLowerCase() === currency.toLowerCase());
          if (!allCurrency) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all accounts have same currency`)
+            throw new InformativeError(INVALID_FILED_VALUE,`not all accounts have same currency`)
          }
          logger.funcRet("accountsCurrency", true)
 
@@ -92,7 +92,7 @@ class ValidationService {
 
          const check = accounts.every(id => owners.some(owner => owner.account_id === id));
          if (!check) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all account belong to this family...`)
+            throw new InformativeError(INVALID_FILED_VALUE,`not all account belong to this family...`)
          }
 
          logger.funcRet("accountsBelongToFamily", true)
@@ -110,7 +110,7 @@ class ValidationService {
 
          const allTransfers: boolean = accounts.every(acc => (acc.balance - amount > minBalance));
          if (!allTransfers) {
-            throw new Error(`${ACCOUNT_BALLANCE_LOW}- not all accounts have enought balance`)
+            throw new InformativeError(ACCOUNT_BALLANCE_LOW,` not all accounts have enought balance`)
          }
          logger.funcRet("allowTransfers", true)
 
@@ -137,7 +137,7 @@ class ValidationService {
             max_tranfare[type];
 
          if (amount > limitTransfer) {
-            throw new Error(`${INVALID_AMOUNT_VALUE}- transfer is limited to ${limitTransfer}`);
+            throw new InformativeError(INVALID_AMOUNT_VALUE,`transfer is limited to ${limitTransfer}`);
          }
          logger.funcRet("checkLimitTransfer", true)
 
