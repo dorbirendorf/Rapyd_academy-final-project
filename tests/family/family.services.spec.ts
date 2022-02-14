@@ -23,7 +23,7 @@ describe("family service functions ", () => {
         "currency": "EUR",
         "balance": 8000,
         "agent_id": 1,
-        "status": 1,
+        "status": "active",
         "type": "family",
         "context": "travel",
         "owners": []
@@ -34,7 +34,7 @@ describe("family service functions ", () => {
             "currency" : "EUR",  
             "balance": 12000,
             "agent_id":2,
-            "status": true,
+            "status": "active",
             "type":"individual",
             "individual_id":1,
             "first_name": "Meir",
@@ -47,7 +47,7 @@ describe("family service functions ", () => {
             "currency" : "EUR",  
             "balance": 12000,
             "agent_id":2,
-            "status": true,
+            "status": "active",
             "type":"individual",
             "individual_id":1,
             "first_name": "Meir",
@@ -59,7 +59,7 @@ describe("family service functions ", () => {
             "currency": "EUR",
             "balance": 8000,
             "agent_id": 1,
-            "status": 1,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners_id": [{ account_id: 1}]
@@ -69,7 +69,7 @@ describe("family service functions ", () => {
             "currency": "EUR",
             "balance": 8001,
             "agent_id": 1,
-            "status": 1,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners_id": [{ account_id: 1},{ account_id: 2}]
@@ -79,7 +79,7 @@ describe("family service functions ", () => {
             "currency": "EUR",
             "balance": 5000,
             "agent_id": 1,
-            "status": 1,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners": individual_accounts      
@@ -89,7 +89,7 @@ describe("family service functions ", () => {
                     "currency": "EUR",
                     "balance": 5000,
                     "agent_id": 1,
-                    "status": 1,
+                    "status": "active",
                     "type": "family",
                     "context": "travel",
                     "owners": []      
@@ -101,7 +101,7 @@ describe("family service functions ", () => {
             "currency": "EUR",
             "balance": 5000,
             "agent_id": 1,
-            "status": 0,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners": individual_accounts      
@@ -213,7 +213,7 @@ describe("family service functions ", () => {
                let ans = await family_service.closeFamilyAccount(52);
            }
            catch(error:any){
-               expect(error.message).to.equal("Account status cant be chenge- family 52 still have owners");
+               expect(error.message).to.equal("Account status cant be chenge");
            }
         }) 
         it('should throw error if family already close ', async () => {  
@@ -222,7 +222,7 @@ describe("family service functions ", () => {
                let ans = await family_service.closeFamilyAccount(52);
            }
            catch(error:any){
-               expect(error.message).to.equal("Invalid filed value- family 52 accout is alreay close");
+               expect(error.message).to.equal("Account status cant be chenge");
            }
         }) 
     });

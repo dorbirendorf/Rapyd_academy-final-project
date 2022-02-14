@@ -1,33 +1,35 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 
 import { Request, Response, NextFunction } from "express";
 import { IFamily, IIndividual, } from "../types/types.js";
-import { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MIN_FAMILY_BALANCE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import config from "../config.js"
 import account_validation from "../account/account.validation.js";
 import validation_func from "../utils/validationFunc.js";
 import validation_service from "../utils/validationService.js";
 import utils from "../utils/utils.js";
 import logger from "../utils/logger.js";
-
+import { InformativeError } from "../exceptions/InformativeError.js";
+import errorFactory from "../exceptions/errorFactoryClass.js";
 class FamilyValidator {
-        async validateFamilyModel(req: Request, res: Response, next: NextFunction): Promise<void> {
-            let { owners, currency, balance = 0, context = null, agent_id } = req.body;
-            if (!(owners && owners.length > 0)) {
-                throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
+        validateFamilyModel(req: Request, res: Response, next: NextFunction): void {
+            try{let { owners, currency, balance = 0, context = null, agent_id } = req.body;
+            if (!(owners && (owners as [number,number][]).length > 0)) {
+                throw new InformativeError(config.errors.MISSING_REQUIRED_FIELD,`we must get list of owners`);
             }
-            const tupelsValid: boolean = owners.every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
+            const tupelsValid: boolean = (owners as [number,number][]).every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
             if (!tupelsValid) {
-                throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
+                throw new InformativeError(config.errors.INVALID_FILED_VALUE,`not all tupels list are valid`)
             }
-            owners = owners.map((pair: [number, number]) => [Number(pair[0]), Number(pair[1])])
+            // console.log(owners)
+            // owners = owners.map((pair: [number, number]) => [Number(pair[0]), Number(pair[1])])
+            // console.log(owners)
             account_validation.validateAccountMandatoryFields(currency as string, balance as number, agent_id as number);
-            validation_func.sumFamilyAmounts(owners, MIN_FAMILY_BALANCE);
+            validation_func.sumFamilyAmounts(owners as [number,number][], config.constants.MIN_FAMILY_BALANCE);
             const account = { currency, balance, status: true, type: "family", context, owners_id: [], agent_id };
             req.accounts = [account];
-            next()
+            next()}catch(error){
+                next(errorFactory.createError(error as InformativeError))
+            }
         }
 
     validateAddToFamily(accounts: IIndividual[], owners: [number, number][], currency: string): void {
@@ -39,7 +41,7 @@ class FamilyValidator {
             accounts.map((account) => {
                 const owner = owners.find(own => own[0] == account.account_id)
                 if (!owner) {
-                    throw new Error(`${ACCOUNT_NOT_EXIST}- not all account exsits in individual table`)
+                    throw new InformativeError(config.errors.ACCOUNT_NOT_EXIST,`not all account exsits in individual table`)
                 }
                 const amount = owner[1];
                 validation_service.allowTransfers([account], amount, 1000);
@@ -51,7 +53,7 @@ class FamilyValidator {
         }
 
     }
-    async validateRemoveFromFamily(accounts: IIndividual[], owners: [number, number][], family: IFamily): Promise<void> {
+    validateRemoveFromFamily(accounts: IIndividual[], owners: [number, number][], family: IFamily): void {
         try {
             logger.params("validateRemoveFromFamily", { accounts, owners, family });
             validation_service.accountsExist(accounts, owners);
@@ -64,19 +66,21 @@ class FamilyValidator {
         }
     }
 
-    async validateUpdateAccounts(req: Request, res: Response, next: NextFunction): Promise<void> {
-        let { owners, account_id } = req.body;
+    validateUpdateAccounts(req: Request, res: Response, next: NextFunction): void {
+        try{let { owners, account_id } = req.body;
         if ((account_id === "undefined") || typeof account_id !== "number") {
-            throw new Error(`${INVALID_FILED_VALUE} - account id isnt accept`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,`account id isnt accept`)
         }
-        if (!(owners && owners.length > 0)) {
-            throw new Error(`${MISSING_REQUIRED_FIELD} - we must get list of owners`);
+        if (!(owners && (owners as [number,number][]).length > 0)) {
+            throw new InformativeError(config.errors.MISSING_REQUIRED_FIELD,`we must get list of owners`);
         }
-        const tupelsValid: boolean = owners.every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
+        const tupelsValid: boolean = (owners as [number,number][]).every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
         if (!tupelsValid) {
-            throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,` not all tupels list are valid`)
         }
-        next()
+        next()}catch(error){
+            next(errorFactory.createError(error as InformativeError))
+        }
     }
 
 }

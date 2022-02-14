@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/require-await */
-// /* eslint-disable prefer-const */
-// /* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 import { sqlRes } from "../utils/db.utils.js";
 import DbHandler from "../utils/db.utils.js";
-import { IAccount, IAddress } from "../types/types.js";
+import { IAccount, IAddress, IAccountFromDb, IAgentKey } from "../types/types.js";
 import { RowDataPacket, OkPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
 import logger from "../utils/logger.js"
+import parser from "../utils/parser.js";
 
 class AccountDb{
  async  updateAccountsStatus(primary_ids: number[], status: boolean): Promise<sqlRes> {
@@ -46,10 +44,10 @@ class AccountDb{
         const orString = accounts_id.map(id => "primary_id = " + id.toString()).join(" OR ")
         const [rows] = (await db.query(`SELECT primary_id, status, balance, type, currency
     FROM account WHERE ${orString}`)) as RowDataPacket[][]
-       
-        logger.funcRet("getAccountsById",rows);
+        const accounts: IAccount[] = (rows as IAccountFromDb[]).map((account)=>parser.ParseAccountFromObj(account))
+        logger.funcRet("getAccountsById",accounts);
 
-        return (rows) as IAccount[]
+        return accounts;
     } catch (error) {
          logger.error("getAccountsById", error as Error);
         throw error;
@@ -89,14 +87,18 @@ async createAddress(address?: IAddress|null): Promise<number | null> {
     }
 }
 
-async getSecretKeyByAccessKey(access_key: string): Promise<string> {
+async getSecretKeyByAccessKey(access_key: string): Promise<IAgentKey> {
     try {
         logger.params("getSecretKeyByAccessKey", { access_key });
 
         const rows = await DbHandler.selectRowById("agent", { access_key });
-        const secret_key = String(rows[0].secret_key);
-        logger.funcRet("getSecretKeyByAccessKey", secret_key);
-        return secret_key
+        let agent_key = {secret:undefined,agent_id:undefined}
+        if(rows[0]){
+            agent_key.secret = rows[0].secret;
+            agent_key.agent_id = rows[0].agent_id;
+        }
+        logger.funcRet("getSecretKeyByAccessKey", agent_key);
+        return agent_key
     } catch (error) {
         logger.error("getSecretKeyByAccessKey", error as Error);
         throw error;

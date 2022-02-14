@@ -54,7 +54,7 @@ describe("family validadator functions ", () => {
             "currency" : "EUR",  
             "balance": 12000,
             "agent_id":2,
-            "status": true,
+            "status": "active",
             "type":"individual",
             "individual_id":1,
             "first_name": "Meir",
@@ -66,7 +66,7 @@ describe("family validadator functions ", () => {
         "currency": "EUR",
         "balance": 5000,
         "agent_id": 1,
-        "status": 1,
+        "status": "active",
         "type": "family",
         "context": "travel",
         "owners": individual_accounts      

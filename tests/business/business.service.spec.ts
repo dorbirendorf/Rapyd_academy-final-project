@@ -15,7 +15,7 @@ describe("#createBusinessAccount", () => {
         company_id:12345678,
         company_name:"meir",
         agent_id:1,
-        status:1,
+        status:"active",
 
     }
     
@@ -39,7 +39,7 @@ describe("#getBusinessAccountById", () => {
         "currency": "USD",
         "agent_id": 2,
         "balance": 599432,
-        "status": 1,
+        "status": "active",
         "type": "business",
         "company_id": 12345678,
         "company_name": "Dearman Inc",
@@ -63,7 +63,7 @@ describe("#getBusinessAccountById", () => {
             sinon.stub(DB_BUSINESS, "getAllBusinessAccountById").resolves([]);
 
             try {
-                await BusinessService.getBusinessAccountById("1");
+                await BusinessService.getBusinessAccountById(1);
             } catch (error) {
                 expect((error as Error).message).to.be.equal("Data not found");
             }
@@ -79,7 +79,7 @@ describe("#getBusinessAccountById", () => {
             sinon.stub(DB_BUSINESS, "getAllBusinessAccountById").resolves(undefined);
 
             try {
-                await BusinessService.getBusinessAccountById("1");
+                await BusinessService.getBusinessAccountById(1);
             } catch (error) {
                 expect((error as Error).message).to.be.equal("Data not found");
             }
@@ -92,7 +92,7 @@ describe("#getBusinessAccountById", () => {
     context("success run", () => {
         it("should return one buisness account", async () => {
             sinon.stub(DB_BUSINESS, "getAllBusinessAccountById").resolves(businesses);
-            const actual = await BusinessService.getBusinessAccountById("24");
+            const actual = await BusinessService.getBusinessAccountById(1);
             expect(actual).to.deep.equal(businesses);
         });
     });

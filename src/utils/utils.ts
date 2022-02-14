@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable no-useless-catch */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable no-console */
-// import jwt from "jsonwebtoken";
+
 import uuid from "uuid";
 import fetch from "node-fetch";
   import Crypto from "crypto-js";
 import logger from "./logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
+import { IExchange } from "../types/types.js";
 
 class Utils
 {
@@ -36,13 +33,13 @@ class Utils
    
        const res = await fetch(url);
        const json = await res.json();
-       if ((json as any).rates[currency]){
-         const rate = (json as any).rates[currency];
+       if ((json as IExchange).rates[currency]){
+         const rate = (json as IExchange).rates[currency];
          logger.funcRet("getRate",rate);
         return rate
       }
       else {
-        throw new Error(`currency: ${currency} doesn't exist in results.`);
+        throw new InformativeError(`currency: ${currency} doesn't exist in results.`);
       }
     }
     catch(error){

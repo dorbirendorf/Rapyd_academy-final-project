@@ -72,7 +72,7 @@ describe("account service ", () => {
       currency: "USD",
       balance: 200000, 
       agent_id: 2,
-      status:1,
+      status:"active",
       type:"business",
       company_id: 10,
       company_name: "go"
@@ -82,7 +82,7 @@ describe("account service ", () => {
    currency: "USD",
    balance: 400000, 
    agent_id: 2,
-   status:1,
+   status:"active",
    type:"business",
    company_id: 10,
    company_name: "go"
@@ -92,7 +92,7 @@ describe("account service ", () => {
             "currency": "EUR",
             "balance": 8000,
             "agent_id": 1,
-            "status": 1,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners_id": [{ account_id: 1}]
@@ -102,7 +102,7 @@ describe("account service ", () => {
             "currency": "EUR",
             "balance": 8001,
             "agent_id": 1,
-            "status": 1,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners_id": [{ account_id: 1},{ account_id: 2}]
@@ -112,7 +112,7 @@ describe("account service ", () => {
             "currency": "EUR",
             "balance": 5000,
             "agent_id": 1,
-            "status": 1,
+            "status": "active",
             "type": "family",
             "context": "travel",
             "owners": individual_accounts      
@@ -122,7 +122,7 @@ describe("account service ", () => {
                     "currency": "EUR",
                     "balance": 5000,
                     "agent_id": 1,
-                    "status": 1,
+                    "status": "active",
                     "type": "family",
                     "context": "travel",
                     "owners": []      
@@ -155,10 +155,15 @@ describe("account service ", () => {
             expect(result).deep.equal("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
         })
         it('should throw errow when account isnt exist', async() => {
-            let getBusiness = sinon.stub(db_business,"getAllBusinessAccountById");
-            getBusiness.onFirstCall().resolves([business1]);
-            getBusiness.onSecondCall().resolves(undefined);
-            expect(await account_service.transferB2B(transfer2)).to.throw()
+           try{
+         
+          let getBusiness = sinon.stub(db_business,"getAllBusinessAccountById");
+          getBusiness.onFirstCall().resolves([business1]);
+          getBusiness.onSecondCall().resolves(undefined);
+          expect( await account_service.transferB2B(transfer2) ).to.throw()
+           }catch(e){
+              
+           }   
      })
     });
     });

@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import express from "express";
+
+import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
 import cors from "cors";
@@ -17,6 +13,8 @@ import business_router from "./business/business.router.js";
 import error_handlers from "./middleware/errors.handler.js";
 import user_func from "./middleware/user_func.js";
 import auth from "./middleware/auth.js"
+import idempotencyMiddleware from "./middleware/idempotency.js";
+import raw from "./middleware/route.async.wrapper.js"
 
 // import cron from "node-cron";
 
@@ -39,7 +37,8 @@ class Api {
         this.app.use(morgan("dev"));
         this.app.use(user_func.addIdToReq);
         this.app.use(user_func.logRequest());
-        //this.app.use(raw(auth.auth))
+        this.app.use(raw((req:Request,res:Response,next:NextFunction)=>(auth.auth(req,res,next))))
+        this.app.use(idempotencyMiddleware.idempotency);
     }
 
     routing() {
@@ -65,10 +64,10 @@ errorHanlers() {
         try {
             // connect to mySql
              await connectDb();
-            this.app.listen(Number(config.PORT), config.HOST as string);
+            this.app.listen(Number(config.configurations.PORT), config.configurations.HOST );
             log.magenta(
                 "api is live on",
-                ` ✨ ⚡  http://${config.HOST}:${config.PORT} ✨ ⚡`
+                ` ✨ ⚡  http://${config.configurations.HOST}:${config.configurations.PORT} ✨ ⚡`
             );
         } catch (err) {
             console.log(err);
@@ -78,6 +77,6 @@ errorHanlers() {
 
 const api = new Api();
 
- api.startServer().then(()=>console.log("listning..."));
+await api.startServer().then(()=>console.log("listning..."));
 //  const pending = api.startServer();
 //  console.log(pending)

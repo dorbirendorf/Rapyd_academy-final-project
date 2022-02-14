@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-// import { INVALID_FILED_VALUE } from "../types/constants.js";
 import DB_INDIVIDUAL from "./individual.db.js";
 import { IIndividual } from "../types/types.js";
-import { INVALID_FILED_VALUE } from "../types/constants.js";
+import config from "../config.js";
 import logger from "../utils/logger.js";
+import { InformativeError } from "../exceptions/InformativeError.js";
 
 class IndividualService
 { async createIndividualAccount(
@@ -29,7 +28,7 @@ class IndividualService
 ): Promise<IIndividual> {
     try {
         logger.params("getIndividualByAccountId", { accountId });
-
+        console.log(config);
         const individual = (
             await DB_INDIVIDUAL.getAllIndividualsAccountsById([
                 Number(accountId),
@@ -37,7 +36,7 @@ class IndividualService
         )[0];
 
         if (!individual) {
-            throw new Error("Data not found")
+            throw new InformativeError("Data not found")
         }
 
         logger.funcRet("getIndividualByAccountId", { individual });
@@ -56,7 +55,7 @@ class IndividualService
         individualId
     );
     if (individual) {
-        throw new Error(`${INVALID_FILED_VALUE}- individual id already exist`);
+        throw new InformativeError(config.errors.INVALID_FILED_VALUE,`individual id already exist`);
     }
 }
 }
