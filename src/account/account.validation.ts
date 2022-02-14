@@ -2,7 +2,7 @@
 import config from "../config.js";
 import { Request, Response, NextFunction } from "express";
 import validation_func from "../utils/validationFunc.js";
-import { IAccount, IAccountFromReq, IBusiness, transferType } from "../types/types.js";
+import { IAccount, IAccountFromReq, IBusiness, IIndividual, transferType } from "../types/types.js";
 import utils from "../utils/validationService.js";
 import logger from "../utils/logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
@@ -50,9 +50,13 @@ class AccountValidation {
         utils.accountsActive([source, dest]);
         utils.accountsCurrency([source], dest.currency, FX);
         utils.allowTransfers([source], amount, limit);
+        if(type === "I2F") {
+            utils.checkIndividualBelongToFamily(source as IIndividual,dest)
+        }  else {  
         type === "B2B" ?
             utils.checkLimitTransfer("B2B", amount, (source as IBusiness).company_id, (dest as IBusiness).company_id)
             : utils.checkLimitTransfer(type, amount);
+        }
     }
 
     validateStatus(req: Request, res: Response, next: NextFunction): void {

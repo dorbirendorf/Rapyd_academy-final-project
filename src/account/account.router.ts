@@ -7,7 +7,7 @@ import accountValidation from "./account.validation.js";
 import account_service from "./account.services.js"
 import responseFactory from "../responses/responseFactory.js";
 import idempotency_Db from "../idempotency/idempotency.db.js";
-import { ITransfer } from "../types/types.js";
+import { ITransfer, IUpdateAcounts } from "../types/types.js";
 
 class AccountRouter {
   router: Router
@@ -15,7 +15,8 @@ class AccountRouter {
     this.router = express.Router();
     //ACTIVATE/DEACTIVATE ACCOUNT
     this.router.patch("/", (req: Request, res: Response, next: NextFunction) => {accountValidation.validateStatus(req,res,next)}, raw(async (req: Request, res: Response) => {
-      const ans = await account_service.updateAccountStatus(req.body.accounts as number[], req.body.action as "active"|"inactive");
+      const body = req.body as IUpdateAcounts
+      const ans = await account_service.updateAccountStatus(body.accounts, body.action);
       const resMessage = responseFactory.createResponse(ans, "accounts status update comleted", 201);
       if (req.idempotency_key) {
         await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
@@ -53,6 +54,15 @@ class AccountRouter {
     this.router.post("/transfer/f2b", (req: Request, res: Response, next: NextFunction) => {accountValidation.validateTransferModel(req,res,next)}, raw(async (req: Request, res: Response) => {
       const ans = await account_service.transferF2B(req.body as ITransfer);
       const resMessage = responseFactory.createResponse(ans, "transfer F2B comleted", 201);
+      if (req.idempotency_key) {
+        await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
+      }
+      res.status(resMessage.status).json(resMessage);
+    }));
+
+    this.router.post("/transfer/i2f", (req: Request, res: Response, next: NextFunction) => {accountValidation.validateTransferModel(req,res,next)}, raw(async (req: Request, res: Response) => {
+      const ans = await account_service.transferI2F(req.body as ITransfer);
+      const resMessage = responseFactory.createResponse(ans, "transfer I2F comleted", 201);
       if (req.idempotency_key) {
         await idempotency_Db.createInstanceOfResponse(resMessage, req.idempotency_key, req.agent_id);
       }
