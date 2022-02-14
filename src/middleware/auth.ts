@@ -5,6 +5,7 @@ import config from "../config.js"
 const { NOT_AUTHORIZED } =config;
 import logger from "../utils/logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
+import { IAgentKey } from "../types/types.js";
 
 class Auth
 {
@@ -22,13 +23,14 @@ class Auth
             const timeout = utils.hasTimeout(Number(timeStamp),1000);
     
     
-            const secret =await account_service.getSecretKeyByAccessKey(access_key as string);
-            const serverSignature =  utils.createsignature((req.body || {} )as Object,secret ,timeStamp as string);
+            const result:IAgentKey = await account_service.getSecretKeyByAccessKey(access_key as string);
+            const serverSignature =  utils.createsignature((req.body || {} )as Object,String(result.secret) ,timeStamp as string);
             const signaturesMatch = (reqSignature===serverSignature);
             if (timeout || !reqSignature || !access_key  || !signaturesMatch){
                 throw new InformativeError(NOT_AUTHORIZED)
     
              }
+             req.agent_id = Number(result.agent_id)
             next();
         }catch(err){
             logger.error("auth-middleware",err as Error)

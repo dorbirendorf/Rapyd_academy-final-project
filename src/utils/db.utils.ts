@@ -154,7 +154,7 @@ class DbHandler {
         try {
             logger.params("createWhereString", { key, value });
 
-            const whereString = `${key} = ${value}`;
+            const whereString = `${key} = "${value}"`;
             logger.funcRet("createWhereString", whereString);
 
             return whereString;

@@ -17,6 +17,8 @@ import business_router from "./business/business.router.js";
 import error_handlers from "./middleware/errors.handler.js";
 import user_func from "./middleware/user_func.js";
 import auth from "./middleware/auth.js"
+import idempotencyMiddleware from "./middleware/idempotency.js";
+import raw from "./middleware/route.async.wrapper.js"
 
 // import cron from "node-cron";
 
@@ -39,7 +41,8 @@ class Api {
         this.app.use(morgan("dev"));
         this.app.use(user_func.addIdToReq);
         this.app.use(user_func.logRequest());
-        //this.app.use(raw(auth.auth))
+        this.app.use(raw(auth.auth))
+        this.app.use(idempotencyMiddleware.idempotency);
     }
 
     routing() {

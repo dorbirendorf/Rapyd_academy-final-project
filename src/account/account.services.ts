@@ -1,5 +1,5 @@
 
-import { ITransfer, IAccount } from "../types/types.js";
+import { ITransfer, IAccount, IAgentKey } from "../types/types.js";
 import logger from "../utils/logger.js";
 import utils from "../utils/utils.js";
 import DB_ACCOUNT from "./account.db.js"
@@ -108,15 +108,13 @@ class AccountService{
    }
 }
 
- async getSecretKeyByAccessKey(access_key: string) {
+ async getSecretKeyByAccessKey(access_key:string): Promise<IAgentKey> {
    try {
       logger.params("getSecretKeyByAccessKey", { access_key })
-      const secret_key = await DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
-      if (!secret_key) {
-         throw new InformativeError("Data not found","")
-     }
-      logger.funcRet("getSecretKeyByAccessKey", secret_key);
-      return secret_key;
+      const agentIdAndSecretKey = await DB_ACCOUNT.getSecretKeyByAccessKey(access_key);
+      
+      logger.funcRet("getSecretKeyByAccessKey", agentIdAndSecretKey);
+      return agentIdAndSecretKey;
 
    } catch (error) {
       logger.error("getSecretKeyByAccessKey", error as Error);

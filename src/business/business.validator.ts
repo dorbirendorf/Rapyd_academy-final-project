@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await */
 import { Request, Response, NextFunction} from "express";
 import account_validation from "../account/account.validation.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
