@@ -7,7 +7,7 @@ import logger from "../utils/logger.js";
 import validation_func from "../utils/validationFunc.js";
 import errorFactory from "../exceptions/errorFactoryClass.js";
 class BusinessValidator
-{ validateBusinessModel(req:Request,res:Response,next:NextFunction):void {
+{  validateBusinessModel = (req:Request,res:Response,next:NextFunction):void =>{
     try{
 
         const {company_id,company_name,context=null,currency,account_id,address=null,balance=0,agent_id} = req.body;

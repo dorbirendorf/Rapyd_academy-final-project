@@ -3,7 +3,7 @@ import { IBusiness } from "../types/types.js";
 import logger from "../utils/logger.js";
 import  DB_BUSINESS from "./business.db.js"
 class BusinessService {
-    async createBusinessAccount(business: Partial<IBusiness>): Promise<any> {
+    async createBusinessAccount(business: Partial<IBusiness>): Promise<number> {
       try {
         logger.params("createBusinessAccount", { business })
         const businessAccount = await DB_BUSINESS.createBusinessAccount(business);
@@ -16,10 +16,10 @@ class BusinessService {
       }
     }
 
-  async getBusinessAccountById(accountId: string): Promise<any> {
+  async getBusinessAccountById(accountId: number): Promise<any> {
     try {
       logger.params("service-getBusinessAccountById", { accountId })
-      const business = await DB_BUSINESS.getAllBusinessAccountById([Number(accountId)]);
+      const business = await DB_BUSINESS.getAllBusinessAccountById([accountId]);
       if (!business || business.length === 0) {
         throw new InformativeError("Data not found","")
       }
