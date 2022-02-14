@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { IAccount, IIndividual, transferType } from "../types/types.js";
 import config from "../config.js"
-const { ACCOUNT_BALLANCE_LOW, INVALID_AMOUNT_VALUE, INVALID_FILED_VALUE } = config;
 import logger from "./logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
 
@@ -13,7 +12,7 @@ class ValidationService {
             logger.params("accountsExist", { accounts, tuples })
 
             if (tuples.length !== accounts.length) {
-               throw new InformativeError(INVALID_FILED_VALUE,` not all accounts are exsits`)
+               throw new InformativeError(config.errors.INVALID_FILED_VALUE,` not all accounts are exsits`)
             }
             logger.funcRet("accountsExist", true)
 
@@ -28,7 +27,7 @@ class ValidationService {
          logger.params("accountsActive", { accounts })
          const allActive: boolean = accounts.every(acc => acc.status === "active");
          if (!allActive) {
-            throw new InformativeError(INVALID_FILED_VALUE,` not all accounts are active`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,` not all accounts are active`)
          }
          logger.funcRet("accountsActive", true)
 
@@ -43,7 +42,7 @@ class ValidationService {
          logger.params("checkProperState", { accounts, action })
          const allStatusProper: boolean = accounts.every(acc => acc.status == action);
          if (!allStatusProper) {
-            throw new InformativeError(INVALID_FILED_VALUE,` not all accounts ${action}`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,` not all accounts ${action}`)
          }
          logger.funcRet("checkProperState", true)
 
@@ -60,7 +59,7 @@ class ValidationService {
 
          const allAccepttype: boolean = accounts.every(acc => (acc.type === type[0] || acc.type === type[1]));
          if (!allAccepttype) {
-            throw new InformativeError(INVALID_FILED_VALUE,`not all accounts are the type ${type[0]} or ${type[1]} `)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,`not all accounts are the type ${type[0]} or ${type[1]} `)
          }
          logger.funcRet("accountsTypes", true)
 
@@ -77,7 +76,7 @@ class ValidationService {
          if (FX) return true;
          const allCurrency: boolean = accounts.every(acc => acc.currency.toLowerCase() === currency.toLowerCase());
          if (!allCurrency) {
-            throw new InformativeError(INVALID_FILED_VALUE,`not all accounts have same currency`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,`not all accounts have same currency`)
          }
          logger.funcRet("accountsCurrency", true)
 
@@ -93,7 +92,7 @@ class ValidationService {
 
          const check = accounts.every(id => owners.some(owner => owner.account_id === id));
          if (!check) {
-            throw new InformativeError(INVALID_FILED_VALUE,`not all account belong to this family...`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,`not all account belong to this family...`)
          }
 
          logger.funcRet("accountsBelongToFamily", true)
@@ -111,7 +110,7 @@ class ValidationService {
 
          const allTransfers: boolean = accounts.every(acc => (acc.balance - amount > minBalance));
          if (!allTransfers) {
-            throw new InformativeError(ACCOUNT_BALLANCE_LOW,` not all accounts have enought balance`)
+            throw new InformativeError(config.errors.ACCOUNT_BALLANCE_LOW,` not all accounts have enought balance`)
          }
          logger.funcRet("allowTransfers", true)
 
@@ -126,11 +125,11 @@ class ValidationService {
          logger.params("checkLimitTransfer", { type, amount, sourceId, destId })
 
          const max_tranfare = {
-            "F2B": 5000,
-            "B2I": 1000,
+            "F2B": config.constants.TRANSFER_LIMIT_F2B,
+            "B2I": config.constants.TRANSFER_LIMIT_B2I,
             "B2B": {
-               "SC": 10000,
-               "DC": 1000
+               "SC": config.constants.TRANSFER_LIMIT_B2BS,
+               "DC": config.constants.TRANSFER_LIMIT_B2BD
             }
          }
          let limitTransfer = (type === "B2B") ?
@@ -138,7 +137,7 @@ class ValidationService {
             max_tranfare[type];
 
          if (amount > limitTransfer) {
-            throw new InformativeError(INVALID_AMOUNT_VALUE,`transfer is limited to ${limitTransfer}`);
+            throw new InformativeError(config.errors.INVALID_AMOUNT_VALUE,`transfer is limited to ${limitTransfer}`);
          }
          logger.funcRet("checkLimitTransfer", true)
 

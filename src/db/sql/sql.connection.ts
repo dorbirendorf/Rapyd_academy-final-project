@@ -10,7 +10,7 @@ const{
     DB_NAME="e_bank",
     DB_USER_NAME="root",
     DB_USER_PASSWORD="qwerty"
-} = config;
+} = config.configurations;
 
 export async function connectDb():Promise<mysql.Connection | void>{
   if(db) return db;

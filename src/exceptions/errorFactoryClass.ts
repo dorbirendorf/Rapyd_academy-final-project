@@ -9,41 +9,40 @@ import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.j
 import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
 import config from "../config.js"
-const {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} =config
 import { HttpChangeStatusFailed } from "./HttpChangeStatusFailed.js";
 import { InformativeError } from "./InformativeError.js";
 class httpErrorFactoryClass{
     createError(error:InformativeError):HttpError{
         const type = error.message
-        const description = error.description
+        const description = error.description as string
 
         switch(type) { 
-            case INVALID_FILED: { 
+            case config.errors.INVALID_FILED: { 
                return new HttpInvalidFieldError(description);
             } 
-            case INVALID_FILED_VALUE: { 
+            case config.errors.INVALID_FILED_VALUE: { 
                 return new HttpInvalidFieldValueError(description);
             } 
-            case MISSING_REQUIRED_FIELD: { 
+            case config.errors.MISSING_REQUIRED_FIELD: { 
                 return new HttpMissingRequieredFieldError(description);
             } 
-            case ACCOUNT_NOT_EXIST: { 
+            case config.errors.ACCOUNT_NOT_EXIST: { 
                 return new HttpAccountDoesNotExistError(description);
             } 
-            case ACCOUNT_BALLANCE_LOW: { 
+            case config.errors.ACCOUNT_BALLANCE_LOW: { 
                 return new HttpAccountBallanceTooLowError(description);
             }
-            case DATA_NOT_FOUND: {
+            case config.errors.DATA_NOT_FOUND: {
                 return new HttpDataNotFound(description);
             } 
-            case INVALID_AMOUNT_VALUE: { 
+            case config.errors.INVALID_AMOUNT_VALUE: { 
                 return new HttpInvalidAmountError(description);
             } 
-            case ACCOUNT_STATUS_FIELD: { 
+            case config.errors.ACCOUNT_STATUS_FIELD: { 
                 return new HttpChangeStatusFailed(description);
             } 
             default: { 
-               return new HttpError(String(SOMTHING_WENT_WRONG),500);
+               return new HttpError(String(config.errors.SOMTHING_WENT_WRONG),500);
             } 
          }
     }

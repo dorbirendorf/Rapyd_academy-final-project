@@ -4,8 +4,7 @@ import { Request, Response, NextFunction } from "express";
 import account_validation from "../account/account.validation.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
 import { IIndividualFromReq } from "../types/types.d.js";
-import config from "../config.js"
-const {INDIVIDUAL_ID_LENGTH,MISSING_REQUIRED_FIELD, INVALID_FILED, INVALID_FILED_VALUE} =config
+import config from "../config.js";
 import validtion_func from "../utils/validationFunc.js";
 
 class IndividualValidator
@@ -17,17 +16,17 @@ class IndividualValidator
     account_validation.validateAccountMandatoryFields(currency as string,balance as number,agent_id as number);
   
     if(!(first_name && last_name && currency && individual_id)){
-        throw new InformativeError(MISSING_REQUIRED_FIELD);
+        throw new InformativeError(config.errors.MISSING_REQUIRED_FIELD);
     }
     if(!(typeof first_name ==="string" && typeof last_name ==="string" && typeof currency === "string")){
-        throw new InformativeError(INVALID_FILED_VALUE,` type of first name, last name and currency should be string `);
+        throw new InformativeError(config.errors.INVALID_FILED_VALUE,` type of first name, last name and currency should be string `);
     }
 
     if (account_id) {
-        throw new InformativeError(INVALID_FILED,`account_id must not be provided!`);
+        throw new InformativeError(config.errors.INVALID_FILED,`account_id must not be provided!`);
     }    
-
-    validtion_func.validEntityId(INDIVIDUAL_ID_LENGTH,individual_id as number);
+    //console.log("INDIVIDUAL_ID_LENGTH",config.configurations.INDIVIDUAL_ID_LENGTH,config.constants.INDIVIDUAL_ID_LENGTH);
+    validtion_func.validEntityId (Number(config.configurations.INDIVIDUAL_ID_LENGTH),individual_id as number);
     const account:Partial <IIndividualFromReq> = {first_name,last_name,currency,individual_id,email,address,balance,status:true,agent_id};
     req.accounts=[account];
     next()
