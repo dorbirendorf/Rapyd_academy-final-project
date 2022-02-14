@@ -16,7 +16,10 @@
     "gen-d": "rm -rf typings && tsc",
     "test": "SWC_NODE_PROJECT='./tsconfig.test.json' mocha",
     "test-w": "SWC_NODE_PROJECT='./tsconfig.test.json' mocha --watch",
-    "coverage": "rm -rf coverage && SWC_NODE_PROJECT='./tsconfig.test.json' nyc mocha"
+    "coverage": "rm -rf coverage && SWC_NODE_PROJECT='./tsconfig.test.json' nyc mocha",
+    "t-i-service":"mocha ./tests/individual/individual.services.spec.ts",
+    "t-i-validator":"mocha ./tests/individual/individual.validator.spec.ts"
+
   },
   "keywords": [
     "typescript",

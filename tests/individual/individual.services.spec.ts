@@ -5,6 +5,9 @@ import sinon from "sinon";
 import {IIndividual} from "../../src/types/types.js"
 import Iservice from "../../src/individual/individual.services.js"
 import DB_INDIVIDUAL from "../../src/individual/individual.db.js";
+import config from "../../src/config.js"
+
+const {INVALID_FILED_VALUE} = config;
 
 
 describe("Individual Service module", () => {
@@ -35,57 +38,58 @@ describe("Individual Service module", () => {
     beforeEach(()=>sinon.restore())
 
 
-    context("#getIndividualByAccountId()", () => {
-        const individual_id = "60"
+    // context("#getIndividualByAccountId()", () => {
+    //     const individual_id = "60"
         
-        it("should return individual <seccess>", async () => {
+    //     it("should return individual <seccess>", async () => {
 
-            sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
-            const actual =await Iservice.getIndividualByAccountId(individual_id);
+    //         sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
+    //         const actual =await Iservice.getIndividualByAccountId(individual_id);
 
-            expect(actual).to.deep.equal(individual_account);
-        });
+    //         expect(actual).to.deep.equal(individual_account);
+    //     });
         
-    });
-
+    // });
 
     context("#createIndividualAccount()", () => {
-        const newId=777
+    //     const newId=777
         
-        it("should return new individualId <seccess>",async () => {
+    //     it("should return new individualId <seccess>",async () => {
 
-            sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
-            sinon.stub(DB_INDIVIDUAL, "createIndividualAccount").resolves(newId);
+    //         sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
+    //         sinon.stub(DB_INDIVIDUAL, "createIndividualAccount").resolves(newId);
             
-            const actual = await  Iservice.createIndividualAccount(individual_account);
-            expect(actual).to.deep.equal(newId);
+    //         const actual = await  Iservice.createIndividualAccount(individual_account);
+    //         expect(actual).to.deep.equal(newId);
+    //     });
+
+        it("should throw error if individualId is taken <fail>",async () => {
+
+            // sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").throws("individual id already existtt");
+            sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").rejects("individual id already existtt");
+            
+            // try{
+
+                // const actual = await Iservice.createIndividualAccount(individual_account)
+                expect( ()=> Iservice.createIndividualAccount(individual_account)).to.throw("individual id already existtt")
+            // }catch(err ){
+            //     expect((err as Error).message).to.be.equal("individual id already existtt")
+            // }
         });
-
-        // it("should throw error if individualId is taken <fail>",async () => {
-
-        //     sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").throws("error msg");
-            
-        //     try{
-
-        //         const actual = await Iservice.createIndividualAccount(individual_account)
-        //     }catch(err ){
-        //         expect((err as Error).message).to.be.equal("error msg")
-        //     }
-        // });
         
     });
 
-    context("#checkIfIndivdualExistByIndividualId()", () => {
-        const id = 666;
+    // context("#checkIfIndivdualExistByIndividualId()", () => {
+    //     const id = 666;
         
-        // it("should throw error if individualId is taken <fail>",async () => {
+    //     it("should throw error if individualId is taken <fail>",async () => {
 
-        //     sinon.stub(DB_INDIVIDUAL, "checkIfIndivdualExistByIndividualId").throws();
+    //         sinon.stub(DB_INDIVIDUAL, "checkIfIndivdualExistByIndividualId").throws();
             
-        //     expect(Iservice.checkIfIndivdualExistByIndividualId).to.throw();
-        // });
+    //         expect(Iservice.checkIfIndivdualExistByIndividualId(id)).to.throw();
+    //     });
         
-    });
+    // });
 });
 
 

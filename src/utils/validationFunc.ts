@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import config from "../config.js"
+const { ACCOUNT_BALLANCE_LOW, INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } =config;
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
 

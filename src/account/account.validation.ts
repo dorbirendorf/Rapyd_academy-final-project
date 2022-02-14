@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { INVALID_FILED_VALUE, MISSING_REQUIRED_FIELD } from "../types/constants.js";
+import config from "../config.js";
+const { INVALID_FILED_VALUE , MISSING_REQUIRED_FIELD }  = config
 import { Request, Response, NextFunction } from "express";
 import validation_func from "../utils/validationFunc.js";
 import { IAccount, IBusiness, transferType } from "../types/types.js";

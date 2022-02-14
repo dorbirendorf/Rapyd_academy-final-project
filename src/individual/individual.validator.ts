@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express";
 import account_validation from "../account/account.validation.js";
-import {INDIVIDUAL_ID_LENGTH,MISSING_REQUIRED_FIELD, INVALID_FILED, INVALID_FILED_VALUE} from '../types/constants.js';
+import config from "../config.js"
+const {INDIVIDUAL_ID_LENGTH,MISSING_REQUIRED_FIELD, INVALID_FILED, INVALID_FILED_VALUE} =config
 import { IIndividual } from "../types/types.d.js";
 import validtion_func from "../utils/validationFunc.js";
 

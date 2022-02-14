@@ -8,7 +8,8 @@ import {HttpMissingRequieredFieldError} from "./HttpMissingRequieredFieldError.j
 import {HttpAccountBallanceTooLowError} from "./HttpAccountBallanceTooLowError.js"
 import { HttpInvalidAmountError } from "./HttpInvalidAmountError.js";
 import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
-import {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG,NOT_AUTHORIZED, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} from "../types/constants.js"
+import config from "../config.js"
+const {INVALID_FILED,INVALID_AMOUNT_VALUE,MISSING_REQUIRED_FIELD,ACCOUNT_NOT_EXIST,ACCOUNT_BALLANCE_LOW,DATA_NOT_FOUND,SOMTHING_WENT_WRONG,NOT_AUTHORIZED, INVALID_FILED_VALUE, ACCOUNT_STATUS_FIELD} =config
 import { HttpChangeStatusFailed } from "./HttpChangeStatusFailed.js";
 class httpErrorFactoryClass{
     createError(message:string):HttpError{

@@ -4,7 +4,8 @@ import individualValidator from "../../src/individual/individual.validator.js";
 import account_validation from "../../src/account/account.validation.js"
 import validtion_func from "../../src/utils/validationFunc.js"
 import {Request,Response,NextFunction} from 'express';
-import {MISSING_REQUIRED_FIELD} from "../../src/types/constants.js"
+import config from "../../src/config.js"
+const {MISSING_REQUIRED_FIELD} = config
 
 describe("individual validadator  ", () => {
 
@@ -44,7 +45,7 @@ describe("individual validadator  ", () => {
 
             
             const nextInfo = sinon.spy(next)
-            individualValidator.validateIndividualModel(req,res,next); 
+            individualValidator.validateIndividualModel(req,res,nextInfo); 
             expect(nextInfo.called).to.equal(true);
         });
 
