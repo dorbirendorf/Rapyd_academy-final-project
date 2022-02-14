@@ -22,9 +22,7 @@ class FamilyValidator {
             if (!tupelsValid) {
                 throw new Error(`${INVALID_FILED_VALUE}- not all tupels list are valid`)
             }
-            console.log(owners)
             owners = owners.map((pair: [number, number]) => [Number(pair[0]), Number(pair[1])])
-            console.log(owners)
             account_validation.validateAccountMandatoryFields(currency as string, balance as number, agent_id as number);
             validation_func.sumFamilyAmounts(owners, MIN_FAMILY_BALANCE);
             const account = { currency, balance, status: true, type: "family", context, owners_id: [], agent_id };

@@ -40,8 +40,8 @@
         
 //         it("should return individual <seccess>", async () => {
 
-            sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
-            const actual =await Iservice.getIndividualByAccountId(individual_id);
+        //     sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
+        //     const actual =await Iservice.getIndividualByAccountId(individual_id);
 
 //             expect(actual).to.deep.equal(individual_account);
 //         });
@@ -57,9 +57,9 @@
 //             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
 //             sinon.stub(DB_INDIVIDUAL, "createIndividualAccount").resolves(newId);
             
-            const actual = await  Iservice.createIndividualAccount(individual_account);
-            expect(actual).to.deep.equal(newId);
-        });
+        //     const actual = await  Iservice.createIndividualAccount(individual_account);
+        //     expect(actual).to.deep.equal(newId);
+        // });
 
         // it("should throw error if individualId is taken <fail>",async () => {
 
