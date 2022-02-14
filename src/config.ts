@@ -6,7 +6,6 @@ import { Config } from "./types/types.js";
 let config:Config = JSON.parse(fs.readFileSync(path.join(process.cwd(), "src/config.json"), "utf-8"))
 
 const watcher = chokidar.watch('src/config.json').on('ready', function() {
-    console.log('Newly watched paths:', watcher.getWatched());
 });
 
 watcher.on('change',()=>
@@ -19,7 +18,6 @@ watcher.on('change',()=>
 
     console.log("config update!")
 });
-
 
 export default config;
 
