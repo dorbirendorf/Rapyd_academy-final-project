@@ -149,7 +149,7 @@ if (!familyAccount) {
         if (!accounts||accounts.length === 0 || accounts.length < owners.length) {
             throw new InformativeError("Data not found")
         }
-        await family_validator.validateRemoveFromFamily(accounts, owners, family);
+        family_validator.validateRemoveFromFamily(accounts, owners, family);
         let removeBalance = 0;
         
         if ((family.owners as IIndividual[]).length === owners.length) {  //remove all family memebers

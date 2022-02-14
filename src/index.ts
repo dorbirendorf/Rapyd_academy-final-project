@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
 import cors from "cors";
@@ -37,7 +37,7 @@ class Api {
         this.app.use(morgan("dev"));
         this.app.use(user_func.addIdToReq);
         this.app.use(user_func.logRequest());
-        this.app.use(raw(auth.auth))
+        this.app.use(raw((req:Request,res:Response,next:NextFunction)=>(auth.auth(req,res,next))))
         this.app.use(idempotencyMiddleware.idempotency);
     }
 
@@ -77,6 +77,6 @@ errorHanlers() {
 
 const api = new Api();
 
-api.startServer().then(()=>console.log("listning..."));
+await api.startServer().then(()=>console.log("listning..."));
 //  const pending = api.startServer();
 //  console.log(pending)

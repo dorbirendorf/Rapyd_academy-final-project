@@ -17,6 +17,11 @@ export interface IAccount {
     type:string;
 }
 
+export interface IUpdateAcounts {    
+    accounts : number[];
+    action: "active"|"inactive";
+}
+
 export interface IAccountFromReq {    
     account_id? : number;
     currency?: string;  
@@ -74,6 +79,10 @@ export interface IFamily extends IAccount {
     owners?:IIndividual[];
 }
 
+export interface IFamilyForCreation extends IFamilyFromDb {
+    owners:[number,number][];
+}
+
 export interface IFamilyFromDb extends IAccountFromDb {
     context?: string;
 }
@@ -129,6 +138,9 @@ export interface IBusinessFromDb extends IAccountFromDb{
     }
     export type transferType = "B2B" | "B2I" | "F2B" ;
    
+    export interface IExchange{
+        rates: {[key:string]:number}
+    }
 
     export interface IAgentKey{
         agent_id?: number;
