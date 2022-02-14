@@ -1,37 +1,46 @@
 {
-    "NODE_ENV": "development",
-    "HOST": "localhost",
-    "PORT": 3030,
+    "configurations":{
 
-    "DB_HOST": "localhost",
-    "DB_PORT":"3306",
-
-    "DB_USER": "root",
-    "DB_PASSWORD": "qwerty",
-    "DB_NAME": "e_bank",
-    "APP_SECRET": "supercalifragilisticexpialidocious",
-
-    "ACCESS_TOKEN_EXPIRATION": "2h",
-    "REFRESH_TOKEN_EXPIRATION": "60d",
-
+        "NODE_ENV": "development",
+        "HOST": "localhost",
+        "PORT": "3030",
     
-    "ACCOUNT_BALLANCE_LOW":"Account ballance too low",
-    "DATA_NOT_FOUND":"Data not found",
-    "SOMTHING_WENT_WRONG":"somthing went wrong",
-    "NOT_AUTHORIZED":"you are not autorized to accsess this route" ,
-    "ACCOUNT_STATUS_FIELD":"Account status cant be chenge" ,
-    "INVALID_AMOUNT_VALUE": "Invalid amount",
-
-    "INDIVIDUAL_ID_LENGTH": 7, 
-    "COMPANY_ID_LENGTH": 8,
-    "MIN_INDIVIDUAL_BALANCE": 1000,
-    "MIN_BUSINESS_BALANCE": 10000,
-    "MIN_FAMILY_BALANCE": 5000,
-
-    "TRANSFER_LIMIT_F2B": 5000,
-    "TRANSFER_LIMIT_B2I": 1000,
-    "TRANSFER_LIMIT_B2BD": 1000,
-    "TRANSFER_LIMIT_B2BS": 10000
+        "DB_HOST": "localhost",
+        "DB_PORT":"3306",
+    
+        "DB_USER": "root",
+        "DB_PASSWORD": "qwerty",
+        "DB_NAME": "e_bank",
+        "APP_SECRET": "supercalifragilisticexpialidocious",
+    
+        "ACCESS_TOKEN_EXPIRATION": "2h",
+        "REFRESH_TOKEN_EXPIRATION": "60d"
+    },
+    "errors":{
+        "ACCOUNT_BALLANCE_LOW":"Account ballance too low",
+        "DATA_NOT_FOUND":"Data not found",
+        "SOMTHING_WENT_WRONG":"somthing went wrong",
+        "NOT_AUTHORIZED":"you are not autorized to accsess this route" ,
+        "ACCOUNT_STATUS_FIELD":"Account status cant be chenge" ,
+        "INVALID_AMOUNT_VALUE": "Invalid amount",
+        "INVALID_FILED":"Invalid filed",
+        "INVALID_FILED_VALUE":"Invalid filed value",
+        "MISSING_REQUIRED_FIELD":"Missing requiered field",
+        "ACCOUNT_NOT_EXIST":"Account does not exist",
+        "ACCOUNT_ALREADY_EXIST":"only 1 individual Account per person is allowed"
+    },
+    "constants":{
+        "INDIVIDUAL_ID_LENGTH": 7, 
+        "COMPANY_ID_LENGTH": 8,
+        "MIN_INDIVIDUAL_BALANCE": 1000,
+        "MIN_BUSINESS_BALANCE": 10000,
+        "MIN_FAMILY_BALANCE": 5000,
+    
+        "TRANSFER_LIMIT_F2B": 5000,
+        "TRANSFER_LIMIT_B2I": 1000,
+        "TRANSFER_LIMIT_B2BD": 1000,
+        "TRANSFER_LIMIT_B2BS": 10000
+    }
 
 }
 

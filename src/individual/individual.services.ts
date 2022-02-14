@@ -57,7 +57,7 @@ class IndividualService
         individualId
     );
     if (individual) {
-        throw new InformativeError(INVALID_FILED_VALUE,`individual id already exist`);
+        throw new InformativeError(config.errors.INVALID_FILED_VALUE,`individual id already exist`);
     }
 }
 }

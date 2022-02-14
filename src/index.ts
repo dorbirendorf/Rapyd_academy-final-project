@@ -65,10 +65,10 @@ errorHanlers() {
         try {
             // connect to mySql
              await connectDb();
-            this.app.listen(Number(config.PORT), config.HOST as string);
+            this.app.listen(Number(config.configurations.PORT), config.configurations.HOST );
             log.magenta(
                 "api is live on",
-                ` ✨ ⚡  http://${config.HOST}:${config.PORT} ✨ ⚡`
+                ` ✨ ⚡  http://${config.configurations.HOST}:${config.configurations.PORT} ✨ ⚡`
             );
         } catch (err) {
             console.log(err);

@@ -6,7 +6,6 @@
 import { Request, Response, NextFunction } from "express";
 import { IFamily, IIndividual, } from "../types/types.js";
 import config from "../config.js"
-const { ACCOUNT_NOT_EXIST, INVALID_FILED_VALUE, MIN_FAMILY_BALANCE, MISSING_REQUIRED_FIELD } = config;
 import account_validation from "../account/account.validation.js";
 import validation_func from "../utils/validationFunc.js";
 import validation_service from "../utils/validationService.js";
@@ -18,17 +17,17 @@ class FamilyValidator {
         async validateFamilyModel(req: Request, res: Response, next: NextFunction): Promise<void> {
             let { owners, currency, balance = 0, context = null, agent_id } = req.body;
             if (!(owners && owners.length > 0)) {
-                throw new InformativeError(MISSING_REQUIRED_FIELD,`we must get list of owners`);
+                throw new InformativeError(config.errors.MISSING_REQUIRED_FIELD,`we must get list of owners`);
             }
             const tupelsValid: boolean = owners.every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
             if (!tupelsValid) {
-                throw new InformativeError(INVALID_FILED_VALUE,`not all tupels list are valid`)
+                throw new InformativeError(config.errors.INVALID_FILED_VALUE,`not all tupels list are valid`)
             }
             console.log(owners)
             owners = owners.map((pair: [number, number]) => [Number(pair[0]), Number(pair[1])])
             console.log(owners)
             account_validation.validateAccountMandatoryFields(currency as string, balance as number, agent_id as number);
-            validation_func.sumFamilyAmounts(owners, MIN_FAMILY_BALANCE);
+            validation_func.sumFamilyAmounts(owners, config.constants.MIN_FAMILY_BALANCE);
             const account = { currency, balance, status: true, type: "family", context, owners_id: [], agent_id };
             req.accounts = [account];
             next()
@@ -43,7 +42,7 @@ class FamilyValidator {
             accounts.map((account) => {
                 const owner = owners.find(own => own[0] == account.account_id)
                 if (!owner) {
-                    throw new InformativeError(ACCOUNT_NOT_EXIST,`not all account exsits in individual table`)
+                    throw new InformativeError(config.errors.ACCOUNT_NOT_EXIST,`not all account exsits in individual table`)
                 }
                 const amount = owner[1];
                 validation_service.allowTransfers([account], amount, 1000);
@@ -71,14 +70,14 @@ class FamilyValidator {
     async validateUpdateAccounts(req: Request, res: Response, next: NextFunction): Promise<void> {
         let { owners, account_id } = req.body;
         if ((account_id === "undefined") || typeof account_id !== "number") {
-            throw new InformativeError(INVALID_FILED_VALUE,`account id isnt accept`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,`account id isnt accept`)
         }
         if (!(owners && owners.length > 0)) {
-            throw new InformativeError(MISSING_REQUIRED_FIELD,`we must get list of owners`);
+            throw new InformativeError(config.errors.MISSING_REQUIRED_FIELD,`we must get list of owners`);
         }
         const tupelsValid: boolean = owners.every((owner: [number, number]) => (!(isNaN(Number(owner[0]))) && !(isNaN(Number(owner[1]))) && (Number(owner[1]) > 0 && typeof owner[0] === "number" && typeof owner[1] === "number")));
         if (!tupelsValid) {
-            throw new InformativeError(INVALID_FILED_VALUE,` not all tupels list are valid`)
+            throw new InformativeError(config.errors.INVALID_FILED_VALUE,` not all tupels list are valid`)
         }
         next()
     }

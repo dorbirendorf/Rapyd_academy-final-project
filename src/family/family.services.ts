@@ -10,7 +10,6 @@ import DB_FAMILY from "../family/family.db.js";
 import DB_INDIVIDUAL from "../individual/individual.db.js";
 import family_validator from "./family.validator.js";
 import config from "../config.js"
-const {ACCOUNT_STATUS_FIELD,INVALID_FILED_VALUE,MIN_FAMILY_BALANCE} = config;
 import validation_func from "../utils/validationFunc.js";
 import utils from "../utils/utils.js";
 import logger from "../utils/logger.js";
@@ -125,12 +124,12 @@ if (!familyAccount) {
     }
     if (family.status === "inactive") {
         throw new InformativeError(
-            INVALID_FILED_VALUE,`family ${family.account_id} accout is alreay close`
+            config.errors.INVALID_FILED_VALUE,`family ${family.account_id} accout is alreay close`
         );
     }
     if ((family.owners as IIndividual[]).length > 0) {
         throw new InformativeError(
-            ACCOUNT_STATUS_FIELD,` family ${family.account_id} still have owners`
+            config.errors.ACCOUNT_STATUS_FIELD,` family ${family.account_id} still have owners`
         );
     }
     await DB_ACCOUNT.updateAccountsStatus([Number(familyId)], false);
@@ -162,7 +161,7 @@ if (!familyAccount) {
             removeBalance = validation_func.sumFamilyAmounts(owners, family.balance, false); //should be >=0
         }
         if ((family.owners as IIndividual[]).length > owners.length) {   //remove part of family members
-            removeBalance = validation_func.sumFamilyAmounts(owners, family.balance - MIN_FAMILY_BALANCE, false); //should be >=5000
+            removeBalance = validation_func.sumFamilyAmounts(owners, family.balance - config.constants.MIN_FAMILY_BALANCE, false); //should be >=5000
         }
 
         const family_account = await this.execRemoveFromFamily(accounts,owners,family,removeBalance,format,familyId);
