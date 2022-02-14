@@ -1,11 +1,10 @@
-// /* eslint-disable prefer-const */
-// /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import DbHandler from "../utils/db.utils.js";
 import { sqlRes } from "../utils/db.utils.js";
 
 import { RowDataPacket } from "mysql2";
 import { db } from "../db/sql/sql.connection.js";
-import { IAccount, IFamily, IIndividual, IIndividualFromDB } from "../types/types.js";
+import { IAccount, IFamily, IFamilyFromDb, IIndividual, IIndividualFromDB } from "../types/types.js";
 import account_db from "../account/account.db.js";
 import logger from "../utils/logger.js";
 import parser from "../utils/parser.js";
@@ -31,7 +30,7 @@ class FamilyDb {
         try {
             logger.params("getFamilyAccountByIdShort", { accountId });
             const accountRes = await DbHandler.selectRowByIdWithJoin("account", "family", { primary_id: accountId }, "primary_id", "account_id");
-            const familyAccount = this.addOwners_idToFamily(parser.parseFamilyFromObj(accountRes[0] as IFamily))
+            const familyAccount = this.addOwners_idToFamily(parser.parseFamilyFromObj(accountRes[0] as IFamilyFromDb))
             logger.funcRet("getFamilyAccountByIdShort", familyAccount);
             return familyAccount;
         } catch (error) {
@@ -72,7 +71,7 @@ class FamilyDb {
         try {
             logger.params("getFamilyAccountByIdFull", { familyId });
             const accountRes = await DbHandler.selectRowByIdWithJoin("account", "family", { primary_id: familyId }, "primary_id", "account_id");
-            const familyAccount = this.addOwnersToFamily(parser.parseFamilyFromObj((accountRes)[0] as IFamily))
+            const familyAccount = this.addOwnersToFamily(parser.parseFamilyFromObj((accountRes)[0] as IFamilyFromDb))
             logger.funcRet("getFamilyAccountByIdFull", familyAccount);
             return familyAccount;
         } catch (error) {

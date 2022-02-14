@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import express from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
@@ -81,6 +77,6 @@ errorHanlers() {
 
 const api = new Api();
 
- api.startServer().then(()=>console.log("listning..."));
+api.startServer().then(()=>console.log("listning..."));
 //  const pending = api.startServer();
 //  console.log(pending)

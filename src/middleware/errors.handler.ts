@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/naming-convention */
-import log from "@ajar/marker";
-import {ErrorRequestHandler,NextFunction,Request,RequestHandler,Response} from "express";
+import {ErrorRequestHandler,NextFunction,Request,Response} from "express";
 import fs from "fs/promises";
 import { HttpError } from "../exceptions/httpError.js";
 import utils from "../utils/utils.js";
 import {httpResponseMessage} from "../types/types.js"
-
-const { White, Reset, Red } = log.constants;
-const { NODE_ENV } = process.env;
 
 const ERRLOGGERPATH = "./src/log/error.log";
 class ErrorHandlers

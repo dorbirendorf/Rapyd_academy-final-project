@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { IAccount, IIndividual, transferType } from "../types/types.js";
 import config from "../config.js"
 import logger from "./logger.js";

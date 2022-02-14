@@ -21,7 +21,7 @@ class IndividualRouter
 
 
 // CREATES A NEW INDIVIDUAL_ACOUNT
-this.router.post("/",raw(individual_validator.validateIndividualModel),raw( async (req:Request, res:Response) => {
+this.router.post("/",individual_validator.validateIndividualModel,raw( async (req:Request, res:Response) => {
   const id = await individual_service.createIndividualAccount(req.accounts[0] as Partial<IIndividual>);
   const ans = await individual_service.getIndividualByAccountId(id.toString());
   const resMessage= responseFactory.createResponse(ans,"Account created",201);
@@ -30,7 +30,7 @@ this.router.post("/",raw(individual_validator.validateIndividualModel),raw( asyn
 }) );
 
 // GET FULL INDIVIDUAL_ACOUNT BY ID
-this.router.get("/:id",raw(validtion_func.validateAccountId) ,raw( async (req:Request, res:Response) => {
+this.router.get("/:id",validtion_func.validateAccountId ,raw( async (req:Request, res:Response) => {
   const ans = await individual_service.getIndividualByAccountId(req.params.id);
   const resMessage= responseFactory.createResponse(ans,"Account found",201);
     res.status(resMessage.status).json(resMessage);

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import config from "../config.js"
 import { Request, Response, NextFunction } from "express";
 import logger from "./logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
-
+import errorFactory from "../exceptions/errorFactoryClass.js";
 class ValidationFunctions
 {
 
@@ -98,7 +97,7 @@ class ValidationFunctions
       throw err
    }
 }
- async  validateAccountId(req: Request, res: Response, next: NextFunction): Promise<void> {
+ validateAccountId(req: Request, res: Response, next: NextFunction): void {
    try {
       logger.params("validateAccountId",{})
 
@@ -109,9 +108,9 @@ class ValidationFunctions
       }
       logger.funcRet("validateAccountId", "void")
       next()
-   } catch (err) {
-      logger.error("validateAccountId", err as Error)
-      throw err
+   } catch (error) {
+      logger.error("validateAccountId", error as Error)
+      next(errorFactory.createError(error as InformativeError))
    }
 }
 }

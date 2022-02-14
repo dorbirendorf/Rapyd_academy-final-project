@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 import fs from "fs";
 import { NextFunction, RequestHandler, Request, Response } from "express";
 import utils from "../utils/utils.js";
