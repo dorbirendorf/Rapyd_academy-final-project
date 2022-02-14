@@ -31,10 +31,7 @@ class IndividualDb
       const orString = accounts_id.map(id => "account_id = " + id.toString()).join(" OR ")
       const [rows] = (await db.query(`SELECT * FROM individual JOIN account on individual.account_id = account.primary_id
    LEFT JOIN address on address.address_id = individual.address_id WHERE ${orString}`)) as RowDataPacket[][]
-
-      if (!(rows[0]) || rows.length != accounts_id.length) {
-         throw new Error("Data not found")
-      }
+      
       const individuals = (rows as IIndividualFromDB[]).map((account) => parser.parseIndividualFromObj(account))
       logger.funcRet("getAllIndividualsAccountsById", individuals);
       return individuals

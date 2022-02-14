@@ -7,7 +7,9 @@ import { IIndividual } from "../types/types.d.js";
 import validtion_func from "../utils/validationFunc.js";
 
 class IndividualValidator
-{ async  validateIndividualModel(req:Request,res:Response,next:NextFunction):Promise<void> {
+{ 
+    
+    async  validateIndividualModel(req:Request,res:Response,next:NextFunction):Promise<void> {
 
     const {first_name,last_name,currency,account_id,individual_id,email=null,address=null,balance=0,agent_id} = req.body;
     account_validation.validateAccountMandatoryFields(currency as string,balance as number,agent_id as number);
@@ -24,7 +26,6 @@ class IndividualValidator
     }    
 
     validtion_func.validEntityId(INDIVIDUAL_ID_LENGTH,individual_id as number);
-
     const account:Partial <IIndividual> = {first_name,last_name,currency,individual_id,email,address,balance,status:true,agent_id};
     req.accounts=[account];
     next()
