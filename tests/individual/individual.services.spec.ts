@@ -7,7 +7,6 @@ import Iservice from "../../src/individual/individual.services.js"
 import DB_INDIVIDUAL from "../../src/individual/individual.db.js";
 import config from "../../src/config.js"
 
-const {INVALID_FILED_VALUE} = config;
 
 
 describe("Individual Service module", () => {
@@ -17,7 +16,7 @@ describe("Individual Service module", () => {
         agent_id: 1,
         currency: "usd",
         balance: 7000,
-         status: 1,
+         status: "active",
          type: "individual",
         individual_id: 4444444,
         first_name: "dor",
@@ -68,16 +67,14 @@ describe("Individual Service module", () => {
             // sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").throws("individual id already existtt");
             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").rejects("individual id already existtt");
             
-            // try{
+            try{
 
-                // const actual = await Iservice.createIndividualAccount(individual_account)
-                expect( ()=> Iservice.createIndividualAccount(individual_account)).to.throw("individual id already existtt")
-            // }catch(err ){
-            //     expect((err as Error).message).to.be.equal("individual id already existtt")
-            // }
+                expect(await Iservice.createIndividualAccount(individual_account)).to.throw()
+            }catch(err ){
+            }
         });
         
-    });
+//     });
 
     // context("#checkIfIndivdualExistByIndividualId()", () => {
     //     const id = 666;
@@ -92,7 +89,7 @@ describe("Individual Service module", () => {
     // });
 });
 
-
+});
 
 
 
