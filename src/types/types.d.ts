@@ -13,7 +13,7 @@ export interface IAccount {
     currency: string;  
     balance: number;
     agent_id: number;
-    status: "active"|"inactive";
+    status: string;
     type:string;
 }
 
