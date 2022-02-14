@@ -53,11 +53,7 @@ async  execAddToFamily(individualIds:number[],accounts:IIndividual[] ,owners:[nu
  async  addIndividualsToFamilyAccount(familyId: number,owners: [number, number][],format: string): Promise<any> {
     try {
         logger.params("addIndividualsToFamilyAccount", { familyId, owners, format })
-       
         const family = await this.getFamilyAccountByIdShort(familyId);
-        if (!family) {
-            throw new Error("Data not found")
-        }
         const individualIds = utils.convertTupelsToArray(owners);
         const accounts: IIndividual[] = await DB_INDIVIDUAL.getAllIndividualsAccountsById(individualIds);
         if (!accounts||accounts.length === 0 || accounts.length < owners.length) {
@@ -109,7 +105,7 @@ if (!familyAccount) {
     }
 }
 
- async  closeFamilyAccount(familyId: number): Promise<any> {
+ async  closeFamilyAccount(familyId: number): Promise<void> {
     try{
     logger.params("closeFamilyAccount", { familyId });
 
@@ -171,7 +167,7 @@ if (!familyAccount) {
     }
 }
 
-async  getFamilyAccountById(familyId:number,format: string  ) {
+async getFamilyAccountById(familyId:number,format: string  ) {
     logger.params("private-getFamilyAccountById",{familyId,format})
     let ans =
         format === "full" ?
