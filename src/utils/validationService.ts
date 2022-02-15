@@ -1,4 +1,4 @@
-import { IAccount, IIndividual, transferType } from "../types/types.js";
+import { IAccount, IIndividual,IFamily, transferTypeWithLimitation } from "../types/types.js";
 import config from "../config.js"
 import logger from "./logger.js";
 import { InformativeError } from "../exceptions/InformativeError.js";
@@ -117,13 +117,27 @@ class ValidationService {
          throw err
       }
    }
-   checkLimitTransfer(type: transferType, amount: number, sourceId?: number, destId?: number): boolean {
+
+   checkIndividualBelongToFamily(individual:IIndividual,family:IFamily){
+      try{
+         logger.funcRet("checkIndividualBelongToFamily",{ individual,family})
+
+         if(family.owners_id?.every(owner => owner.account_id !== individual.account_id)){
+            throw new InformativeError(config.errors.TRANSFER_NOT_ALLOW,"The account doesn't belong to this family account")
+         }
+         logger.funcRet("checkIndividualBelongToFamily", "void")
+
+      }catch (error){
+         logger.error("checkIndividualBelongToFamily", error as Error)
+         throw error;
+      }
+   }
+
+   checkLimitTransfer(type: transferTypeWithLimitation, amount: number, sourceId?: number, destId?: number): boolean {
       try {
          logger.params("checkLimitTransfer", { type, amount, sourceId, destId })
-         console.log(type,config.flags);
          
          if (!config.flags[type]){
-            console.log("flag off..")
             logger.funcRet("checkLimitTransfer-flag is off", true)
             return true;
          }

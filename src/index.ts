@@ -15,6 +15,7 @@ import user_func from "./middleware/user_func.js";
 import auth from "./middleware/auth.js"
 import idempotencyMiddleware from "./middleware/idempotency.js";
 import raw from "./middleware/route.async.wrapper.js"
+import logger from "./utils/logger.js";
 
 // import cron from "node-cron";
 
@@ -77,6 +78,8 @@ errorHanlers() {
 
 const api = new Api();
 
- api.startServer().then(()=>console.log("listning..."));
+ api.startServer()
+ .then(()=>{logger.params("index",{undefined})})
+ .catch(err=>{logger.error("index",err as Error)})
 //  const pending = api.startServer();
 //  console.log(pending)

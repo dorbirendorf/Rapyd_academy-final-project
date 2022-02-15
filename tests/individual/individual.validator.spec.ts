@@ -5,7 +5,6 @@ import account_validation from "../../src/account/account.validation.js"
 import validtion_func from "../../src/utils/validationFunc.js"
 import {Request,Response,NextFunction} from 'express';
 import config from "../../src/config.js"
-const {MISSING_REQUIRED_FIELD} = config
 
 describe("individual validadator  ", () => {
 
@@ -58,7 +57,7 @@ describe("individual validadator  ", () => {
                 individualValidator.validateIndividualModel(req,res,next); 
             }catch(err){
 
-                expect((err as Error).message).to.equal(MISSING_REQUIRED_FIELD);
+                expect((err as Error).message).to.equal(config.errors.MISSING_REQUIRED_FIELD);
             }
         });
    
