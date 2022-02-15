@@ -69,7 +69,7 @@ describe("account service ", () => {
     ]  
     let business1 = {
       account_id :1,
-      currency: "USD",
+      currency: "ILS",
       balance: 200000, 
       agent_id: 2,
       status:"active",
@@ -79,7 +79,7 @@ describe("account service ", () => {
   }
   let business2 = {
    account_id :2,
-   currency: "USD",
+   currency: "ILS",
    balance: 400000, 
    agent_id: 2,
    status:"active",
@@ -166,6 +166,33 @@ describe("account service ", () => {
            }   
      })
     });
+    context("transferB2BFX ", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.transferB2BFX).to.be.a("Function");
+          });
+          it('should do transferB2BFX', async () => {
+              let getBusiness = sinon.stub(db_business,"getAllBusinessAccountById");
+              getBusiness.onFirstCall().resolves([business1]);
+              getBusiness.onSecondCall().resolves([business2]);
+              sinon.stub(utils,"getRate");
+              sinon.stub(account_validation,"validateTransferAccounts").resolves();
+              sinon.stub(account_service,"exectueTransfer").resolves("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+              let result =await account_service.transferB2BFX(transfer1);
+              expect(result).deep.equal("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+          })
+          it('should throw errow when account isnt exist', async() => {
+             try{
+           
+            let getBusiness = sinon.stub(db_business,"getAllBusinessAccountById");
+            getBusiness.onFirstCall().resolves([business1]);
+            getBusiness.onSecondCall().resolves(undefined);
+            expect( await account_service.transferB2BFX(transfer2)).to.throw()
+             }catch(e){
+                
+             }   
+       })
+      });
     });
     
 
