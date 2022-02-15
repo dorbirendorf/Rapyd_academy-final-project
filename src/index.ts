@@ -77,6 +77,6 @@ errorHanlers() {
 
 const api = new Api();
 
-await api.startServer().then(()=>console.log("listning..."));
+ api.startServer().then(()=>console.log("listning..."));
 //  const pending = api.startServer();
 //  console.log(pending)
