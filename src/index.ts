@@ -81,5 +81,3 @@ const api = new Api();
  api.startServer()
  .then(()=>{logger.params("index",{undefined})})
  .catch(err=>{logger.error("index",err as Error)})
-//  const pending = api.startServer();
-//  console.log(pending)
