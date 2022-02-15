@@ -1,13 +1,11 @@
 import { expect } from "chai";
 import * as sinon from "sinon";
-import  family_service  from "../../src/family/family.services.js";
+import  db_account  from "../../src/account/account.db.js";
 import db_family from "../../src/family/family.db.js";
 import db_individual from "../../src/individual/individual.db.js"
 import db_business from "../../src/business/business.db.js"
 import account_validation from "../../src/account/account.validation.js"
-
 import account_service from "../../src/account/account.services.js";
-import family_validator from "../../src/family/family.validator.js";
 import utils from "../../src/utils/utils.js";
 
 
@@ -25,38 +23,19 @@ describe("account service ", () => {
       destination: 2,
       amount: 100
     }
-    let family = {
-        "balance":0,
-        "currency":"EUR",
-        "account_id":52,
-        "agent_id": 1
-    }
-    let family1 = {
-        "account_id":53,
-        "currency": "EUR",
-        "balance": 8000,
-        "agent_id": 1,
-        "status": 1,
-        "type": "family",
-        "context": "travel",
-        "owners": []
-    }
+    // let family1 = {
+    //     "account_id":53,
+    //     "currency": "EUR",
+    //     "balance": 8000,
+    //     "agent_id": 1,
+    //     "status": 1,
+    //     "type": "family",
+    //     "context": "travel",
+    //     "owners": []
+    // }
     let individual_accounts = [
         {
             "account_id":1,
-            "currency" : "EUR",  
-            "balance": 12000,
-            "agent_id":2,
-            "status": true,
-            "type":"individual",
-            "individual_id":1,
-            "first_name": "Meir",
-             "last_name": "Shtarkman"
-            }
-    ]  
-    let individual_accounts2 = [
-        {
-            "account_id":2,
             "currency" : "EUR",  
             "balance": 12000,
             "agent_id":2,
@@ -87,58 +66,29 @@ describe("account service ", () => {
    company_id: 10,
    company_name: "go"
 }
-       let family_short = {
-            "account_id":52,
-            "currency": "EUR",
-            "balance": 8000,
-            "agent_id": 1,
-            "status": "active",
-            "type": "family",
-            "context": "travel",
-            "owners_id": [{ account_id: 1}]
-        }
-        let family_short2= {
-            "account_id":52,
-            "currency": "EUR",
-            "balance": 8001,
-            "agent_id": 1,
-            "status": "active",
-            "type": "family",
-            "context": "travel",
-            "owners_id": [{ account_id: 1},{ account_id: 2}]
-        }
-        let family_full = {
-            "account_id":52,
-            "currency": "EUR",
-            "balance": 5000,
-            "agent_id": 1,
-            "status": "active",
-            "type": "family",
-            "context": "travel",
-            "owners": individual_accounts      
-                }
-            let family_full2 = {
-                    "account_id":52,
-                    "currency": "EUR",
-                    "balance": 5000,
-                    "agent_id": 1,
-                    "status": "active",
-                    "type": "family",
-                    "context": "travel",
-                    "owners": []      
-                }
-              
-        let IndividualSBalance =[ [ 2, 11999 ], [ 52, 8001 ] ] ;
-        let close_family= {
-            "account_id":52,
-            "currency": "EUR",
-            "balance": 5000,
-            "agent_id": 1,
-            "status": 0,
-            "type": "family",
-            "context": "travel",
-            "owners": individual_accounts      
-                }
+const individual = {
+    account_id:2,
+   agent_id: 1,
+   currency: "usd",
+   balance: 1200000,
+    status: "active",
+    type: "individual",
+   individual_id: 4444444,
+   first_name: "dor",
+   last_name: "birendorf",
+};
+let family= {
+    "account_id":1,
+    "currency": "EUR",
+    "balance": 800001,
+    "agent_id": 1,
+    "status": "active",
+    "type": "family",
+    "context": "travel",
+    "owners_id": [{ account_id: 1},{ account_id: 2}]
+}
+
+ 
     context("transferB2B ", () => {
       beforeEach(()=>sinon.restore())
         it("should be function", () => {
@@ -166,6 +116,78 @@ describe("account service ", () => {
            }   
      })
     });
+    context("transferB2I ", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.transferB2B).to.be.a("Function");
+          });
+          it('should do transfer B2I', async () => {
+        sinon.stub(db_business,"getAllBusinessAccountById").resolves([business1]);
+        sinon.stub(db_individual,"getAllIndividualsAccountsById").resolves([individual]);
+  
+              sinon.stub(account_validation,"validateTransferAccounts").resolves();
+              sinon.stub(account_service,"exectueTransfer").resolves("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+              let result =await account_service.transferB2I(transfer1);
+              expect(result).deep.equal("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+          })
+          it('should throw errow when account isnt exist', async() => {
+             try{
+           
+                sinon.stub(db_business,"getAllBusinessAccountById").resolves([business1]);
+                sinon.stub(db_individual,"getAllIndividualsAccountsById").resolves([individual]);
+            expect( await account_service.transferB2I(transfer2)).to.throw()
+             }catch(e){
+                
+             }   
+       })
+      });
+      context("transferF2B", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.transferF2B).to.be.a("Function");
+          });
+          it('should do transfer F2B', async () => {        
+              sinon.stub(db_family,"getFamilyAccountByIdShort").resolves(family);
+        sinon.stub(db_business,"getAllBusinessAccountById").resolves([business1]);
+              sinon.stub(account_validation,"validateTransferAccounts").resolves();
+              sinon.stub(account_service,"exectueTransfer").resolves("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+              let result =await account_service.transferF2B(transfer1);
+              expect(result).deep.equal("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+          })
+          it('should throw errow when account isnt exist', async() => {
+             try{
+           
+                sinon.stub(db_family,"getFamilyAccountByIdShort").resolves(family);
+                sinon.stub(db_business,"getAllBusinessAccountById").resolves([business1]);
+            expect( await account_service.transferF2B(transfer2)).to.throw()
+             }catch(e){
+                
+             }   
+       })
+      });
+      context("transferI2F", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.transferI2F).to.be.a("Function");
+          });
+          it('should do transfer I2F', async () => {     
+            sinon.stub(db_individual,"getAllIndividualsAccountsById").resolves([individual]);
+              sinon.stub(db_family,"getFamilyAccountByIdShort").resolves(family);
+              sinon.stub(account_validation,"validateTransferAccounts").resolves();
+              sinon.stub(account_service,"exectueTransfer").resolves("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+              let result =await account_service.transferI2F(transfer1);
+              expect(result).deep.equal("source: ${srcId},balance: ${srcBalance},currency: ${srcCurr}, destination: ${destId},balance: ${destBalance},currency: ${destCurr}");
+          })
+          it('should throw errow when account isnt exist', async() => {
+             try{
+                sinon.stub(db_individual,"getAllIndividualsAccountsById").resolves([individual]);
+                sinon.stub(db_family,"getFamilyAccountByIdShort").resolves(family);
+            expect( await account_service.transferI2F(transfer2)).to.throw()
+             }catch(e){
+                
+             }   
+       })
+      });
     context("transferB2BFX ", () => {
         beforeEach(()=>sinon.restore())
           it("should be function", () => {
@@ -193,24 +215,41 @@ describe("account service ", () => {
              }   
        })
       });
+      context("exectueTransfer", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.exectueTransfer).to.be.a("Function");
+          });
+          it('should do exectueTransfer', async () => {
+              sinon.stub(db_account,"updateAccountsBalance");
+          
+              expect(await account_service.exectueTransfer (1,10000000, 2, "USD", "USD", 50,1000,1)).deep.equal("source: 1,balance: 9999000,currency: USD, destination: 2,balance: 1050,currency: USD");
+          })
+      });
+      context("updateAccountStatus", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.updateAccountStatus).to.be.a("Function");
+          });
+          it('should do exectueTransfer', async () => {
+              sinon.stub(db_account,"getAccountsById");
+              sinon.stub(account_validation,"validateStatusAccounts");
+              sinon.stub(db_account,"updateAccountsStatus").resolves();
+              expect(await account_service.updateAccountStatus([1,2],"active")).to.equal("acounts: 1,2 changed to status active");
+          })
+      });
+
+      context("getSecretKeyByAccessKey", () => {
+        beforeEach(()=>sinon.restore())
+          it("should be function", () => {
+              expect(account_service.getSecretKeyByAccessKey).to.be.a("Function");
+          });
+          it('should do getSecretKeyByAccessKey', async () => {
+              sinon.stub(db_account,"getSecretKeyByAccessKey").resolves({agent_id:1, secret:"secret"});
+              
+              expect(await account_service.getSecretKeyByAccessKey("access")).to.deep.equal({agent_id:1, secret:"secret"});
+          })
+      });
     });
     
 
-
-// class AccountService{
-//  async  transferB2B(payload: ITransfer): Promise<string> {
-//    try {
-//       let { source, destination, amount } = payload;
-//       let sourceTransfer = (await DB_BUSINESS.getAllBusinessAccountById([source]))[0];
-//       let destTransfer = (await DB_BUSINESS.getAllBusinessAccountById([destination]))[0];
-//       if (!sourceTransfer||!destTransfer) {
-//          throw new Error("Data not found")
-//      }
-//       accountValidation.validateTransferAccounts(sourceTransfer, destTransfer, amount, 10000,"B2B");      
-//       let ans = this.exectueTransfer(sourceTransfer.account_id, sourceTransfer.balance, destTransfer.account_id, sourceTransfer.currency, destTransfer.currency, destTransfer.balance, amount);
-//       return ans;
-//    } catch (error) {
-//       logger.error("transferB2B", error as Error);
-//       throw error;
-//    }
-// }
