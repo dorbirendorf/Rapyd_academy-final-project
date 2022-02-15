@@ -223,9 +223,7 @@ class AccountService {
             let accounts: IAccount[] = await DB_ACCOUNT.getAccountsById(
                 accountsId
             );
-            //if some of the accounts not exists throw error
             accountValidation.validateStatusAccounts(accounts, action);
-            //add function that update all list of statuses
             const status = action === "active" ? true : false;
             await DB_ACCOUNT.updateAccountsStatus(accountsId, status);
             return `acounts: ${String(accountsId)} changed to status ${action}`;

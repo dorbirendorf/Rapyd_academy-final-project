@@ -26,7 +26,6 @@ class IndividualService {
     async getIndividualByAccountId(accountId: string): Promise<IIndividual> {
         try {
             logger.params("getIndividualByAccountId", { accountId });
-            console.log(config);
             const individual = (
                 await DB_INDIVIDUAL.getAllIndividualsAccountsById([
                     Number(accountId),

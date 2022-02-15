@@ -96,7 +96,6 @@ class Parser {
             throw error;
         }
     }
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     ParseBusinessFromObj(obj: IBusinessFromDb): IBusiness {
         try {
             logger.params("ParseBusinessFromObj", { obj });

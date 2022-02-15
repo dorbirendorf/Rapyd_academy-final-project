@@ -170,7 +170,6 @@ class FamilyDb {
                 })
             );
             logger.funcRet("addIndividualsToFamilyAccount", res);
-            console.log(res);
             return res;
         } catch (error) {
             logger.error("addIndividualsToFamilyAccount", error as Error);

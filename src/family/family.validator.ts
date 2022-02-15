@@ -38,9 +38,6 @@ class FamilyValidator {
                     `not all tupels list are valid`
                 );
             }
-            // console.log(owners)
-            // owners = owners.map((pair: [number, number]) => [Number(pair[0]), Number(pair[1])])
-            // console.log(owners)
             account_validation.validateAccountMandatoryFields(
                 currency as string,
                 balance as number,

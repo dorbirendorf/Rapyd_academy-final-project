@@ -57,7 +57,6 @@ class BusinessValidator {
                 agent_id,
             };
             req.accounts = [account];
-            console.log("valid", account);
             next();
         } catch (error) {
             logger.error("validateBusinessModel", error as Error);

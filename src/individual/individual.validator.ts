@@ -53,7 +53,6 @@ class IndividualValidator {
                     `account_id must not be provided!`
                 );
             }
-            //console.log("INDIVIDUAL_ID_LENGTH",config.configurations.INDIVIDUAL_ID_LENGTH,config.constants.INDIVIDUAL_ID_LENGTH);
             validtion_func.validEntityId(
                 Number(config.constants.INDIVIDUAL_ID_LENGTH),
                 individual_id as number

@@ -124,7 +124,6 @@ class DbHandler {
                 Object.keys(objId)[0],
                 String(Object.values(objId)[0])
             );
-            console.log(columnString, tableName, whereString);
             const [rows] = await db.query(
                 `SELECT ${columnString} FROM ${tableName} WHERE ${whereString}`
             );

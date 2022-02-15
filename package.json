@@ -18,7 +18,13 @@
     "test-w": "SWC_NODE_PROJECT='./tsconfig.test.json' mocha --watch",
     "coverage": "rm -rf coverage && SWC_NODE_PROJECT='./tsconfig.test.json' nyc mocha",
     "t-i-service":"mocha ./tests/individual/individual.services.spec.ts",
-    "t-i-validator":"mocha ./tests/individual/individual.validator.spec.ts"
+    "t-i-validator":"mocha ./tests/business/business.validator.spec.ts",
+    "t-b-service":"mocha ./tests/business/business.service.spec.ts",
+    "t-b-validator":"mocha ./tests/business/business.validator.spec.ts",
+    "t-f-service":"mocha ./tests/family/family.services.spec.ts",
+    "t-f-validator":"mocha ./tests/family/family.validator.spec.ts",
+    "t-a-service":"mocha ./tests/account/account.services.spec.ts"
+
 
   },
   "keywords": [

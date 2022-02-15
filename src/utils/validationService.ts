@@ -205,7 +205,7 @@ class ValidationService {
                 destId,
             });
 
-            if (!config.flags[type]) {
+            if (!config.flags[String(type)]) {
                 logger.funcRet("checkLimitTransfer-flag is off", true);
                 return true;
             }
@@ -228,7 +228,7 @@ class ValidationService {
             if (amount > limitTransfer) {
                 throw new InformativeError(
                     config.errors.INVALID_AMOUNT_VALUE,
-                    `transfer is limited to ${limitTransfer}`
+                    `transfer is limited to ${String(limitTransfer)}`
                 );
             }
             logger.funcRet("checkLimitTransfer", true);

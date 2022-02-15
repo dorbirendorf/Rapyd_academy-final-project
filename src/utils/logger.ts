@@ -20,7 +20,6 @@ class Logger {
         const logText = `ERROR\n ${timeStamp} \n"${function_name}":\n${errorText}\n\n`;
         this.stream.write(logText);
     }
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     funcRet(function_name: string, returnValue: any): void {
         let timeStamp = utils.getTimeString();
         let returnValueString = JSON.stringify(returnValue, null, 2);

@@ -7,7 +7,6 @@ import { IExchange } from "../types/types.js";
 
 class Utils {
     generateID(): string {
-        // return Math.random().toString(32).slice(2);
         return uuid.v4();
     }
 
@@ -80,14 +79,3 @@ class Utils {
 
 const utils = new Utils();
 export default utils;
-// export async function backupDB() {
-//         console.log("backing up...");
-//         const p = exec(
-//             `docker exec mysql-db mysqldump -u root --password=qwerty ${DB_NAME} `
-//         );
-
-//         fetch("http://localhost:4040/backup", {
-//             method: "POST",
-//             body: p.stdout,
-//         });
-// }
