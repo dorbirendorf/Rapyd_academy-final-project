@@ -20,6 +20,7 @@
     "t-i-service":"mocha ./tests/individual/individual.services.spec.ts",
     "t-i-validator":"mocha ./tests/individual/individual.validator.spec.ts"
 
+
   },
   "keywords": [
     "typescript",

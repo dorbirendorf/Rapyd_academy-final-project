@@ -38,7 +38,7 @@ class FamilyValidator {
                     `not all tupels list are valid`
                 );
             }
-        
+
             account_validation.validateAccountMandatoryFields(
                 currency as string,
                 balance as number,

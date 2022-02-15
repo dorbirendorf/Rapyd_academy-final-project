@@ -37,59 +37,62 @@ describe("Individual Service module", () => {
     beforeEach(()=>sinon.restore())
 
 
-    // context("#getIndividualByAccountId()", () => {
-    //     const individual_id = "60"
+    context("#getIndividualByAccountId()", () => {
+        const individual_id = "60"
         
-    //     it("should return individual <seccess>", async () => {
+        it("should return individual <seccess>", async () => {
 
-    //         sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
-    //         const actual =await Iservice.getIndividualByAccountId(individual_id);
+            sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").resolves([individual_account]);
+            const actual =await Iservice.getIndividualByAccountId(individual_id);
 
-    //         expect(actual).to.deep.equal(individual_account);
-    //     });
+            expect(actual).to.deep.equal(individual_account);
+        });
+
+        it("should throw erorr if individual not exist<fail>", async () => {
+            try{
+                sinon.stub(DB_INDIVIDUAL, "getAllIndividualsAccountsById").throws("not found");
+                expect(await Iservice.getIndividualByAccountId(individual_id)).to.throw("not found")
+            }catch(err){}
+
+        });
         
-    // });
+    });
 
     context("#createIndividualAccount()", () => {
-    //     const newId=777
+        const newId=777
         
-    //     it("should return new individualId <seccess>",async () => {
+        it("should return new individualId <seccess>",async () => {
 
-    //         sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
-    //         sinon.stub(DB_INDIVIDUAL, "createIndividualAccount").resolves(newId);
+            sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").resolves();
+            sinon.stub(DB_INDIVIDUAL, "createIndividualAccount").resolves(newId);
             
-    //         const actual = await  Iservice.createIndividualAccount(individual_account);
-    //         expect(actual).to.deep.equal(newId);
-    //     });
+            const actual = await  Iservice.createIndividualAccount(individual_account);
+            expect(actual).to.deep.equal(newId);
+        });
 
         it("should throw error if individualId is taken <fail>",async () => {
 
-            // sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").throws("individual id already existtt");
             sinon.stub(Iservice, "checkIfIndivdualExistByIndividualId").rejects("individual id already existtt");
-            
             try{
-
                 expect(await Iservice.createIndividualAccount(individual_account)).to.throw()
-            }catch(err ){
-            }
+            }catch(err ){}
         });
         
-//     });
+    });
 
-    // context("#checkIfIndivdualExistByIndividualId()", () => {
-    //     const id = 666;
-        
-    //     it("should throw error if individualId is taken <fail>",async () => {
+    context("#checkIfIndivdualExistByIndividualId()", () => {
+        const id = 666;
+        it("should throw error if individualId is taken <fail>",async () => {
+            try{
+                sinon.stub(DB_INDIVIDUAL, "checkIfIndivdualExistByIndividualId").throws();
+                expect(await Iservice.checkIfIndivdualExistByIndividualId(id)).to.throw();
 
-    //         sinon.stub(DB_INDIVIDUAL, "checkIfIndivdualExistByIndividualId").throws();
-            
-    //         expect(Iservice.checkIfIndivdualExistByIndividualId(id)).to.throw();
-    //     });
+            }catch(err){}
+        });
         
-    // });
+    });
 });
 
-});
 
 
 
