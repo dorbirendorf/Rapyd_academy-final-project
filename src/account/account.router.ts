@@ -10,7 +10,6 @@ class AccountRouter {
     router: Router;
     constructor() {
         this.router = express.Router();
-        //ACTIVATE/DEACTIVATE ACCOUNT
         this.router.patch(
             "/",
             (req: Request, res: Response, next: NextFunction) => {

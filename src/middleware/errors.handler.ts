@@ -1,4 +1,4 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { ErrorRequestHandler, RequestHandler,NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
 import { HttpError } from "../exceptions/httpError.js";
 import utils from "../utils/utils.js";
@@ -46,12 +46,13 @@ class ErrorHandlers {
         }
         res.status(error.statusCode || 500).json(resMessage);
     }
+
+     not_found: RequestHandler = (req, res) => {
+        res.status(404).json({ status: `url: ${req.url} not found...` });
+    };
 }
 
-// export const not_found: RequestHandler = (req, res) => {
-//     log.info(`url: ${White}${req.url}${Reset}${Red} not found...`);
-//     res.status(404).json({ status: `url: ${req.url} not found...` });
-// };
+
 
 const error_handlers = new ErrorHandlers();
 export default error_handlers;

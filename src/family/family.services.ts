@@ -220,7 +220,6 @@ class FamilyService {
             let removeBalance = 0;
 
             if ((family.owners as IIndividual[]).length === owners.length) {
-                //remove all family memebers
                 removeBalance = validation_func.sumFamilyAmounts(
                     owners,
                     family.balance,

@@ -51,7 +51,7 @@ class Api {
 errorHanlers() {
     log.blue("setting error handlers...");
         // central error handling
-        
+        this.app.use("*",error_handlers.not_found)
         this.app.use(error_handlers.logError);
         this.app.use(error_handlers.sendErrorMessage);
     }
