@@ -52,7 +52,6 @@
 //         });
 //         it("should return the account_id if ok ", async () => {
 //             const accounts = await AccountDB.getAccountsById([1,2])
-//             console.log(accounts);
 //             expect(accounts.length).to.be.equal(2)
 //         });
 //         // it("should throw error if not ok ", () => {
@@ -70,7 +69,6 @@
 //         });
 //         it("should return number of account_id if ok ", async () => {
 //             const accounts = await AccountDB.createAccount({balance:2000,currency:"USD",agent_id:1,type:"individual",status:true},"individual")
-//             console.log(accounts);
 //             expect(accounts).to.be.equal(45)
 //         });
 //         // it("should throw error if not ok ", () => {

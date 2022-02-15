@@ -17,8 +17,6 @@ import idempotencyMiddleware from "./middleware/idempotency.js";
 import raw from "./middleware/route.async.wrapper.js"
 import logger from "./utils/logger.js";
 
-// import cron from "node-cron";
-
 class Api {
   
     private app: express.Application;
@@ -56,14 +54,11 @@ errorHanlers() {
         
         this.app.use(error_handlers.logError);
         this.app.use(error_handlers.sendErrorMessage);
-        // when no routes were matched...
-        //this.app.use("*", not_found);
     }
 
     // start the express api server
     async startServer(){
         try {
-            // connect to mySql
              await connectDb();
             this.app.listen(Number(config.configurations.PORT), config.configurations.HOST );
             log.magenta(
@@ -71,7 +66,7 @@ errorHanlers() {
                 ` ✨ ⚡  http://${config.configurations.HOST}:${config.configurations.PORT} ✨ ⚡`
             );
         } catch (err) {
-            console.log(err);
+            logger.error("index",err as Error)
         }
     }
 }
@@ -81,5 +76,3 @@ const api = new Api();
  api.startServer()
  .then(()=>{logger.params("index",{undefined})})
  .catch(err=>{logger.error("index",err as Error)})
-//  const pending = api.startServer();
-//  console.log(pending)

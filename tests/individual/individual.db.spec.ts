@@ -13,7 +13,6 @@
 //         });
 //         it("should return get all idndividuals account if ok ", async () => {
 //             const res = await getAllIndividualsAccountsById([2,4,6]);
-//             //console.log(res)
 //             expect(res.length).to.be.eqls(3)
 //         });
 //         // it("should throw error if not ok ", async () => {

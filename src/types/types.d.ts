@@ -92,7 +92,6 @@ export interface IBusiness extends IAccount {
     context?: string;
     address?: IAddress | null;
     address_id?: number | null;
-
 }
 
 export interface IBusinessFromReq extends IAccountFromReq {
@@ -101,7 +100,6 @@ export interface IBusinessFromReq extends IAccountFromReq {
     context?: string;
     address?: IAddress | null;
     address_id?: number | null;
-
 }
 
 export interface IBusinessFromDb extends IAccountFromDb {
@@ -125,11 +123,10 @@ export interface httpResponseMessage {
 }
 
 export interface Config {
-    configurations: { [key: string]: string }
-    errors: { [key: string]: string },
-    constants: { [key: string]: number },
-    flags: { [key: string]: boolean },
-
+    configurations: { [key: string]: string };
+    errors: { [key: string]: string };
+    constants: { [key: string]: number };
+    flags: { [key: string]: boolean };
 }
 export interface ITransfer {
     source: number;
@@ -139,11 +136,14 @@ export interface ITransfer {
 export type transferType = "B2B" | "B2I" | "F2B" | "I2F";
 export type transferTypeWithLimitation = "B2B" | "B2I" | "F2B";
 
-
 export interface IExchange {
-    rates: { [key: string]: number }
+    rates: { [key: string]: number };
 }
-export type AsyncReqHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
+export type AsyncReqHandler = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => Promise<void>;
 
 export interface IAgentKey {
     agent_id?: number;
@@ -159,4 +159,3 @@ declare global {
         }
     }
 }
-
