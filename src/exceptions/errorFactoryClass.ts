@@ -10,6 +10,7 @@ import { HttpDataNotFound } from "./HttpDataNotFoundError.js";
 import config from "../config.js"
 import { HttpChangeStatusFailed } from "./HttpChangeStatusFailed.js";
 import { InformativeError } from "./InformativeError.js";
+import { HttpUnAceptableTransfer } from "./HttpUnAcceptableTransfer.js";
 class httpErrorFactoryClass{
     createError(error:InformativeError):HttpError{
         const type = error.message
@@ -39,6 +40,9 @@ class httpErrorFactoryClass{
             } 
             case config.errors.ACCOUNT_STATUS_FIELD: { 
                 return new HttpChangeStatusFailed(description);
+            } 
+            case config.errors.TRANSFER_NOT_ALLOW: { 
+                return new HttpUnAceptableTransfer(description);
             } 
             default: { 
                return new HttpError(String(config.errors.SOMTHING_WENT_WRONG),500);
