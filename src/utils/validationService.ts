@@ -136,10 +136,8 @@ class ValidationService {
    checkLimitTransfer(type: transferTypeWithLimitation, amount: number, sourceId?: number, destId?: number): boolean {
       try {
          logger.params("checkLimitTransfer", { type, amount, sourceId, destId })
-         console.log(type,config.flags);
          
          if (!config.flags[type]){
-            console.log("flag off..")
             logger.funcRet("checkLimitTransfer-flag is off", true)
             return true;
          }
