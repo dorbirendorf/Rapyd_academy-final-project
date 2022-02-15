@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
@@ -34,10 +33,10 @@ class Api {
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(morgan("dev"));
-        this.app.use(user_func.addIdToReq);
+        this.app.use(raw((req:Request,res:Response,next:NextFunction)=>(user_func.addIdToReq(req,res,next))));
         this.app.use(user_func.logRequest());
         this.app.use(raw((req:Request,res:Response,next:NextFunction)=>(auth.auth(req,res,next))))
-        this.app.use(idempotencyMiddleware.idempotency);
+        this.app.use(raw((req:Request,res:Response,next:NextFunction)=>(idempotencyMiddleware.idempotency(req,res,next))));
     }
 
     routing() {
