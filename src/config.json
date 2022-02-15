@@ -27,7 +27,8 @@
         "INVALID_FILED_VALUE":"Invalid filed value",
         "MISSING_REQUIRED_FIELD":"Missing requiered field",
         "ACCOUNT_NOT_EXIST":"Account does not exist",
-        "ACCOUNT_ALREADY_EXIST":"only 1 individual Account per person is allowed"
+        "ACCOUNT_ALREADY_EXIST":"only 1 individual Account per person is allowed",
+        "TRANSFER_NOT_ALLOW":"Transfer not allowed"
     },
     "constants":{
         "INDIVIDUAL_ID_LENGTH": 7, 
